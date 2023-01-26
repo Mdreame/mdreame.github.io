@@ -1,4 +1,7 @@
-node_modules
-.deploy_git
-yarn.lock
+.DS_Store
+Thumbs.db
+db.json
+*.log
+node_modules/
 public/
+.deploy*/
