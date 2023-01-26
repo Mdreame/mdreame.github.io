@@ -1,3 +1,4 @@
 node_modules
 .deploy_git
 yarn.lock
+public/
