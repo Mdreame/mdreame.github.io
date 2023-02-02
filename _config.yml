@@ -62,5 +62,5 @@ ignore: null
 theme: icarus
 deploy:
   type: git
-  repo: https://github.com/mdreame/mdreame.github.io
+  repo: https://github.com/mdreame/mdreame.github.io 
   branch: gh-pages
