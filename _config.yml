@@ -4,6 +4,7 @@ description: '漫步者'
 keywords: null
 author: Mdreame
 language: zh-CN
+# language: en
 timezone: ''
 url: http://mdreame.github.io/
 permalink: ':year/:month/:day/:title/'
