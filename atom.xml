@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://mdreame.github.io</id>
+    <title>Mdreame</title>
+    <updated>2023-06-09T16:56:23.443Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://mdreame.github.io"/>
+    <link rel="self" href="https://mdreame.github.io/atom.xml"/>
+    <subtitle>如是而今</subtitle>
+    <logo>https://mdreame.github.io/images/avatar.png</logo>
+    <icon>https://mdreame.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2023, Mdreame</rights>
+    <entry>
+        <title type="html"><![CDATA[怎么使用Logseq官方同步功能]]></title>
+        <id>https://mdreame.github.io/post/zen-me-shi-yong-logseq-guan-fang-tong-bu-gong-neng/</id>
+        <link href="https://mdreame.github.io/post/zen-me-shi-yong-logseq-guan-fang-tong-bu-gong-neng/">
+        </link>
+        <updated>2023-06-09T15:57:27.000Z</updated>
+        <summary type="html"><![CDATA[<p>Logseq<a href="https://blog.logseq.com/how-to-setup-and-use-logseq-sync/">官方同步</a>功能目前还处于测试阶段，但付费订阅后可以解锁。此文以开通<a href="https://opencollective.com/logseq/contribute/backers-21161?ref=blog.logseq.com">Backer</a>方案来介绍如何在Windows和IOS之间实现同步。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Logseq<a href="https://blog.logseq.com/how-to-setup-and-use-logseq-sync/">官方同步</a>功能目前还处于测试阶段，但付费订阅后可以解锁。此文以开通<a href="https://opencollective.com/logseq/contribute/backers-21161?ref=blog.logseq.com">Backer</a>方案来介绍如何在Windows和IOS之间实现同步。</p>
+<!-- more -->
+<h2 id="订阅同步服务">订阅同步服务</h2>
+<h3 id="注册open-collective账户">注册open collective账户</h3>
+<p>Logseq是通过open collective平台来托管订阅服务的，首先需要注册open collective账户。注意要记住此处注册时填写的邮箱即后续登录Logseq的邮箱。</p>
+<h3 id="填写付款信息">填写付款信息</h3>
+<p>注册成功后，选<a href="https://opencollective.com/logseq/contribute/backers-21161?ref=blog.logseq.com">Backer</a>方案填写付款信息。</p>
+<figure data-type="image" tabindex="1"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202306100011931.png" alt="image-20230610001115740" loading="lazy"></figure>
+<p>填写选项：</p>
+<ul>
+<li>卡号：付款支持银联，也就是国内用户可直接使用银行卡号。</li>
+<li>有效期：随意，如<code>04/30</code>，表示有效期至2030年4月。</li>
+<li>CVC：随意三位数字</li>
+<li>地区：中国</li>
+</ul>
+<p>提交后就能在贡献列表中看见自己的账号。</p>
+<h2 id="windows">Windows</h2>
+<p>Logseq官方处理的蛮快，购买后稍等一会账号生效，就可以使用同步服务了。</p>
+<h3 id="备份数据">备份数据</h3>
+<ol>
+<li>在Logseq中打开所有笔记库（All graphs），找到要同步的仓库，点击右侧的<code>Unlink</code>。</li>
+</ol>
+<figure data-type="image" tabindex="2"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202306100022086.png" alt="image-20230610002228003" loading="lazy"></figure>
+<ol start="2">
+<li>
+<p>将笔记库文件夹复制到新的路径，然后在Logseq中重新添加。</p>
+</li>
+<li>
+<p>接下来开启同步服务：打开<code>设置</code>-<code>新功能</code>，点击<code>sync</code>按钮开启同步功能。接着点击<code>login</code>。</p>
+<figure data-type="image" tabindex="3"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202306100031258.png" alt="image-20230610003112172" loading="lazy"></figure>
+</li>
+<li>
+<p>第一次使用还没有账号，所以在弹出的窗口先注册。注册邮箱就是open collective账户邮箱，密码需要好好保存下来。确定之后，Logseq会发6位数验证码到该邮箱，填写验证后返回Logseq。</p>
+</li>
+<li>
+<p>随后就可以在Logseq顶部看到小云朵图标。点击该图标，即可同步本地笔记库到云端。注意此处密码也要妥善保存。之后等待同步完成即可。</p>
+<figure data-type="image" tabindex="4"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202306100036299.png" alt="image-20230610003653247" loading="lazy"></figure>
+</li>
+</ol>
+<h3 id="ios">IOS</h3>
+<p>IOS登录注册账号，点击所有笔记库即可看到Windows同步的笔记，即末尾带有小云朵的笔记库。如果没有，则刷新（refresh）稍等片刻。点击同步该笔记，会提示在上面第5步中填写的密码来解锁。</p>
+<figure data-type="image" tabindex="5"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202306100045770.png" alt="image-20230610004526720" loading="lazy"></figure>
+<p>之后便是同样等待同步完成了。</p>
+<p>另外需要注意目前测试阶段，存储有一定限制：</p>
+<ul>
+<li><strong>原程最大仓库数目:</strong> 10</li>
+<li><strong>每个笔记库最大存储:</strong> 10G（10 gigabyte）</li>
+<li><strong>每个资源最大大小:</strong> 100M（100 megabyte）</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[使用PicGo上传图片到图床]]></title>
+        <id>https://mdreame.github.io/post/shi-yong-picgo-shang-chuan-tu-pian-dao-tu-chuang/</id>
+        <link href="https://mdreame.github.io/post/shi-yong-picgo-shang-chuan-tu-pian-dao-tu-chuang/">
+        </link>
+        <updated>2023-06-05T03:13:53.000Z</updated>
+        <summary type="html"><![CDATA[<p>PicGo是一款开源软件，旨在帮助用户方便快速地将图片上传到云存储服务。支持类似腾讯云的专业云存储服务，也支持公开Github仓库作为图床。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>PicGo是一款开源软件，旨在帮助用户方便快速地将图片上传到云存储服务。支持类似腾讯云的专业云存储服务，也支持公开Github仓库作为图床。</p>
+<!-- more -->
+<h2 id="下载安装">下载安装</h2>
+<p>作者提供了多个<a href="https://picgo.github.io/PicGo-Doc/zh/guide/#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85">下载渠道</a>，可以根据网络环境择优下载安装。</p>
+<h2 id="配置">配置</h2>
+<p>Window客户端，以腾讯云COS为图床说明</p>
+<ol>
+<li>购买腾讯云对象存储服务</li>
+<li>进入<strong>对象存储</strong>管理控制台，选择<code>存储桶列表</code>-<code>创建存储桶</code>，记住自己创建的<strong>存储桶名称</strong>（xxxxxx-1234567890）和<strong>所属地域</strong>（ap-beijing）</li>
+<li>进入<a href="https://console.cloud.tencent.com/cam/capi">密钥管理</a>创建密钥，记住<strong>AppID</strong>、<strong>SecretId</strong>、<strong>SecretKey</strong></li>
+<li>在PicGo界面打开<strong>图床设置</strong>中的腾讯云COS设置，将1、2中的各项按名称依次填入；可自定义存储路径（路径后必须加<code>/</code>），这样可在存储桶内生成对应文件夹。<br>
+<img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202306051055629.png" alt="image-20230605105450873" loading="lazy"></li>
+<li>打开<strong>PicGo设置</strong>
+<ul>
+<li>打开上传后自动复制URL选项</li>
+<li>设置快捷键（<code>ctrl</code>+<code>shift</code>+<code>p</code>）。当按下快捷键时，PicGo会上传剪贴板的图片，然后返回图片链接到剪贴板。</li>
+<li>其他根据需求自选</li>
+</ul>
+</li>
+</ol>
+<h2 id="使用">使用</h2>
+<h3 id="如何上传">如何上传</h3>
+<ul>
+<li>可以将图片拖到PicGo上传，自动返回链接到剪贴板</li>
+<li>复制图片到剪贴板后，按快捷键自动上传，然后在需要的地方粘贴剪贴板链接</li>
+<li><a href="https://picgo.github.io/PicGo-Doc/zh/guide/advance.html#windows">命令行上传</a>：通过安装路径直接调用PicGo</li>
+</ul>
+<h3 id="场景">场景</h3>
+<ul>
+<li>与Typora联合使用。</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[老门东元宵灯会]]></title>
+        <id>https://mdreame.github.io/post/老门东元宵灯会/</id>
+        <link href="https://mdreame.github.io/post/老门东元宵灯会/">
+        </link>
+        <updated>2023-02-06T13:00:04.000Z</updated>
+        <summary type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062113117.jpg" alt="安德门往中华门地铁" loading="lazy"></figure>
+<p>十五元宵灯会，早已决定去找灯谜。疫情解封，今年的人流格外多。因此，公交改道，夫子庙附近的地铁站点都临时关闭，机动车辆禁止通行。官方交通疏散和安保工作做得蛮不错。我从安德门步行两站路去往门东。</p>
+]]></summary>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062113117.jpg" alt="安德门往中华门地铁" loading="lazy"></figure>
+<p>十五元宵灯会，早已决定去找灯谜。疫情解封，今年的人流格外多。因此，公交改道，夫子庙附近的地铁站点都临时关闭，机动车辆禁止通行。官方交通疏散和安保工作做得蛮不错。我从安德门步行两站路去往门东。</p>
+<!-- more -->
+<figure data-type="image" tabindex="2"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062121980.jpg" alt="中华门正门" loading="lazy"></figure>
+<p>很远就看到城墙上“第37届秦淮灯会”字样，同去年没什么区别。</p>
+<figure data-type="image" tabindex="3"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062124949.jpg" alt="外河" loading="lazy"></figure>
+<p>这树上的霓虹色彩看着别扭得很，对面是有些古意的城墙，你隔这边弄赛博风，这就不对味儿......不如多挂些灯笼。后面大报恩寺琉璃塔也换装了。</p>
+<figure data-type="image" tabindex="4"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062130883.jpg" alt="南京城墙博物馆" loading="lazy"></figure>
+<p>穿过中华门就是老门东。如今在门口新建了一个南京城墙博物馆。人很多，就没进去。</p>
+<figure data-type="image" tabindex="5"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062129106.jpg" alt="西湖里" loading="lazy"></figure>
+<p>跟着人潮走，到了西湖里。以往都是从靠中华门侧城墙那条路进去，现今只当作出口，便要绕一圈。有人卖头戴的兔耳朵彩灯，10元一个，15两个。</p>
+<p>再往前走看到有人煮酒，不过是红酒，空气中飘着奇怪的味道。</p>
+<figure data-type="image" tabindex="6"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062129853.jpg" alt="西湖里" loading="lazy"></figure>
+<p>初中的时候就很喜欢辛弃疾的《青玉案·元夕》：</p>
+<blockquote>
+<p>东风夜放花千树，更吹落、星如雨。宝马雕车香满路。凤箫声动，玉壶光转，一夜鱼龙舞。<br>
+蛾儿雪柳黄金缕，笑语盈盈暗香去。众里寻他千百度，蓦然回首，那人却在，灯火阑珊处。</p>
+</blockquote>
+<p>常在本子上抄，一遍遍也不嫌烦。就是想象不出来“凤箫声动，玉壶光转”是怎样的情景。香味是有的，不过是酒香。“宝马”也偶尔见到，但是总没有一夜鱼龙舞的气氛。</p>
+<figure data-type="image" tabindex="7"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062129651.jpg" alt="西湖里" loading="lazy"></figure>
+<figure data-type="image" tabindex="8"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062111338.jpg" alt="灯市" loading="lazy"></figure>
+<p>灯市只允许单向通行，望而却步。</p>
+<figure data-type="image" tabindex="9"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062131865.jpg" alt="彩票店" loading="lazy"></figure>
+<p>连彩票店都排队。一侧的亭子和连廊中，一位阿姨刮得沉醉。</p>
+<figure data-type="image" tabindex="10"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062132878.jpg" alt="汉服姑娘" loading="lazy"></figure>
+<figure data-type="image" tabindex="11"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062132476.jpg" alt="南京大排档门东店" loading="lazy"></figure>
+<p>去年见到一群小姑娘着汉服在这拍照，蛮好看。</p>
+<figure data-type="image" tabindex="12"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062132250.jpg" alt="十五月圆" loading="lazy"></figure>
+<p>可惜没有灯谜，好歹也寻了他千百度，劲头没了就离开了。一人形单孤影，两地月不同明。兴致寥寥，但少闲人耳。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ChatGPT注册与使用]]></title>
+        <id>https://mdreame.github.io/post/ChatGPT注册与使用/</id>
+        <link href="https://mdreame.github.io/post/ChatGPT注册与使用/">
+        </link>
+        <updated>2023-02-02T23:14:30.000Z</updated>
+        <summary type="html"><![CDATA[<p>之前使用的是gpt镜像，一段时间就不可用了，还是注册官网比较稳定。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>之前使用的是gpt镜像，一段时间就不可用了，还是注册官网比较稳定。</p>
+<!-- more -->
+<figure data-type="image" tabindex="1"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302031959912.png" alt="ChatGPT界面" loading="lazy"></figure>
+<blockquote>
+<p>ChatGPT是由人工智能研究实验室<a href="https://openai.com/">OpenAI</a>在2022年11月30日发布的全新聊天机器人模型，一款人工智能技术驱动的自然语言处理工具。它能够通过学习和理解人类的语言来进行对话，还能根据聊天的上下文进行互动，真正像人类一样来聊天交流，甚至能完成撰写邮件、视频脚本、文案、翻译、代码等任务。    ----<a href="https://baike.baidu.com/item/ChatGPT/62446358">百度百科</a></p>
+</blockquote>
+<h2 id="注册">注册</h2>
+<p>打开<a href="https://chat.openai.com/chat">ChatGPT</a>，会提示注册。</p>
+<p>如果显示<code>OpenAI‘s services are not available in your country</code>，则表明中国境内都被屏蔽了，不可使用。需要科学上网改变ip地址。见👉<a href="https://cloud.tencent.com/developer/article/2190198">OpenAI‘s services are not available in your country 完美解决方案 - 腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+<p>如果仍不可行，可参照<a href="https://readdevdocs.com/blog/makemoney/%E4%B8%AD%E5%9B%BD%E5%8C%BA%E6%B3%A8%E5%86%8COpenAI%E8%B4%A6%E5%8F%B7%E8%AF%95%E7%94%A8ChatGPT%E6%8C%87%E5%8D%97.html#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87">中国区注册OpenAI账号试用ChatGPT指南 | Read dev Docs 博客</a>。</p>
+<p>只要注册成功并进入界面，之后无需科学上网即可使用。</p>
+<h2 id="使用">使用</h2>
+<p>直接在页面底部输入栏对话即可。在左侧可以同时创建多个对话窗口。</p>
+<h3 id="chatgpt懂不懂思念">ChatGPT懂不懂思念</h3>
+<figure data-type="image" tabindex="2"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302030954013.png" alt="" loading="lazy"></figure>
+<p>网上是伤心者众吗？哈哈，笑死了😂🤣😆。</p>
+<h3 id="数据拟合测试">数据拟合测试</h3>
+<p>首先给定公式，然后提供数据，请求gpt生成测试代码。</p>
+<figure data-type="image" tabindex="3"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302031059836.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302031100739.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="5"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302031101017.png" alt="提供B的数据" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302031102720.png" alt="提供y的数据" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302031102121.png" alt="请求拟合" loading="lazy"></figure>
+<figure data-type="image" tabindex="8"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302031103376.png" alt="生成matlab代码" loading="lazy"></figure>
+<figure data-type="image" tabindex="9"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302031104765.png" alt="变限积分拟合" loading="lazy"></figure>
+<figure data-type="image" tabindex="10"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302031105904.png" alt="生成完整代码" loading="lazy"></figure>
+<p>最后生成的代码如下：</p>
+<pre><code class="language-matlab">clear all
+clc
+
+% 定义常量C
+C = 1;
+
+% 定义常量B数组
+B = [328 338 348 363 378 393 408 423 438 453 468 486 498 514 528 545 564 578 593 608];
+
+% 定义y数组
+y = [23.61872 23.72788 23.78942 24.0004 24.21821 24.37258 24.5136 24.67936 24.835 24.947 25.019 25.21346 25.31057 25.44604 25.56994 25.7252 25.86169 25.96159 26.05716 26.14056];
+
+% 计算积分部分的数组
+integral_part = zeros(1, length(B));
+for i = 1:length(B)
+    fun = @(x) (x.^6).*exp(x)./((exp(x) - 1).^2);
+    integral_part(i) = integral(fun, 0, C/B(i));
+end
+
+% 构建矩阵X
+X = [ones(length(B), 1) B'.^(-7) integral_part'];
+
+% 构建系数矩阵beta
+beta = (X' * X) \ (X' * y');
+
+% 计算y0和A0
+y0 = beta(1);
+A0 = beta(2);
+
+% 输出拟合结果
+fprintf('y0 = %f\nA0 = %f\nC = %f\n', y0, A0, C);
+
+</code></pre>
+<p>放在matlab中运行没报错，但拟合变形了。因为只想做一个简单的测试，后续便没有再改动了。不过chatgpt的能力由此可见一斑，想象力有很大的发挥空间。</p>
+<h2 id="chatgpt镜像">ChatGPT镜像</h2>
+<p>以下镜像列表及相关应用为备用，使用体验不太好且可能随时失效。</p>
+<ul>
+<li><a href="http://chat.h2ai.cn/home">ChatGPT演示版 (h2ai.cn)</a></li>
+<li><a href="https://ai6.top/">ChatGPT国内版 - ai6.top</a></li>
+<li><a href="https://chatgpt.sbaliyun.com/">Ai Chat公益版 (sbaliyun.com)</a></li>
+<li>ChatGPT智能对话（小程序）</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[测试样式]]></title>
+        <id>https://mdreame.github.io/post/测试样式/</id>
+        <link href="https://mdreame.github.io/post/测试样式/">
+        </link>
+        <updated>2023-01-31T14:04:30.000Z</updated>
+        <summary type="html"><![CDATA[<p>音频、视频样式测试。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>音频、视频样式测试。</p>
+<!-- more -->
+<h2 id="脚注">脚注</h2>
+<p>脚注不能正常解析，用链接代替。 👉JK 罗琳在哈佛大学的<a href="https://news.harvard.edu/gazette/story/2008/06/text-of-j-k-rowling-speech/">演讲文本</a>。</p>
+<h2 id="音频">音频</h2>
+<p style="text-align:center;">
+    <iframe rame frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1300903694&auto=1&height=66"></iframe>
+</p>
+## 视频
+<p style="display: flex;flex-direction: column;">
+<iframe src="//player.bilibili.com/player.html?aid=12788181&bvid=BV1fx411W7hp&cid=21022759&page=1" scrolling="no" border="0" frameborder="no"   framespacing="0" allowfullscreen="true"> </iframe>
+</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[麻溜地滚蛋了]]></title>
+        <id>https://mdreame.github.io/post/麻溜地滚蛋了/</id>
+        <link href="https://mdreame.github.io/post/麻溜地滚蛋了/">
+        </link>
+        <updated>2023-01-29T12:43:04.000Z</updated>
+        <summary type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301292125324.JPG" alt="" loading="lazy"></figure>
+<p>年拜完了，家里开始清静下来。与父母独自相处的时间变多，小摩擦也变多，我就感到是时候走了。</p>
+]]></summary>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301292125324.JPG" alt="" loading="lazy"></figure>
+<p>年拜完了，家里开始清静下来。与父母独自相处的时间变多，小摩擦也变多，我就感到是时候走了。</p>
+<!-- more -->
+<p style="text-align:center;">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=283116&auto=1&height=66"></iframe>
+</p>
+<figure data-type="image" tabindex="2"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301292122009.JPG" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301292123710.JPG" alt="" loading="lazy"></figure>
+<p>这么大的年纪依然害怕家里气氛紧张。自小在楼上睡，很多个日夜都能听到争吵。有时会屏息听脚步声。步子急促和缓慢踩在地砖上的声音是不一样的。隐约能听出何时是在生气，何时心情不错。最害怕的是上楼梯的声音，似来索命的一样。总之，虽然自幼有一个小房间，可是却无时不被恐惧所占据，只觉得这个地方并不完全属于我。时至今日，他们找我都不是次次都要先敲门。我作为一个完整的社会人格的自我边界是始终缺了个口子的，从这个口子里又涌出来多少虚荣懦弱的举动，像浪潮将我卷没。即便今天，我依然不能说可以不受影响，只是开始能理解并接受了。</p>
+<figure data-type="image" tabindex="4"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301292123573.JPG" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="5"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301292125704.JPG" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301292125391.JPG" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301292126629.JPG" alt="" loading="lazy"></figure>
+<p>高铁上小朋友要吃榴莲糖。她问奶奶这个糖臭不臭。奶奶说香，她说我也感觉香！我一路白眼，忍着没吐……</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[临行小聚]]></title>
+        <id>https://mdreame.github.io/post/临行小聚/</id>
+        <link href="https://mdreame.github.io/post/临行小聚/">
+        </link>
+        <updated>2023-01-28T11:59:44.000Z</updated>
+        <summary type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301282008352.JPG" alt="" loading="lazy"></figure>
+<p>初七与纪云约了去望江玩一下，其他人都出门了。说玩望江也没什么好玩的，随便逛逛，主要是见一面。</p>
+]]></summary>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301282008352.JPG" alt="" loading="lazy"></figure>
+<p>初七与纪云约了去望江玩一下，其他人都出门了。说玩望江也没什么好玩的，随便逛逛，主要是见一面。</p>
+<!-- more -->
+<p>我坐车到钟楼，然后走到世纪华联发现纪云没到，同他视频才知他也是从县医院往这边走。于是开玩笑说就这样相向而行，碰不到就打个圈回去算了 😂。</p>
+<h2 id="雷池市场">雷池市场</h2>
+<p>索性在农行门口遇见，见面第一件事就是给我一根烟。他还是没变，总想给我搞点新花样。又或许，他已经养成了见面给人一根烟的习惯，而许久不见他恰不知道我的习惯有否改变，所以才做一番试探。这样一番拉扯着实搞笑。</p>
+<figure data-type="image" tabindex="2"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301282024868.JPG" alt="" loading="lazy"></figure>
+<p>发现望江竟然也有网红孵化的业务。</p>
+<h2 id="青林寺">青林寺</h2>
+<p>市场晃到头就是青林寺。儿时同妈妈上街常经过这里，也依稀只记得一次妈妈买了香火上贡。这次进去才知道里面很大，而且还求了一支姻缘签。</p>
+<figure data-type="image" tabindex="3"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301282024376.JPG" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301282035883.jpg" alt="" loading="lazy"></figure>
+<p>虽然词有些敷衍，但毕竟讨了个好彩头。我同纪云说现在正犹豫要不要去广州，这签能给我增添几分动力呢？我不知道。</p>
+<h2 id="云珠广场">云珠广场</h2>
+<p>纪云在望江初中旁的流浪书店买了一本《世说新语》，然后顺便逛了望初。之后便打车到云珠广场吃饭，挑了一家重庆刘一手火锅，吃起来一般般。云珠广场也没有想象的好。</p>
+<figure data-type="image" tabindex="5"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301282011286.JPG" alt="" loading="lazy"></figure>
+<p>又路过老乡鸡，想念汪汪女士。</p>
+<p>看了看华为手机，再去世纪华联逛了一下就同他坐车到车站。</p>
+<p>现在写东西已经没有了耐心，文笔不堪直视，思路也不清晰。😥</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[江边同游]]></title>
+        <id>https://mdreame.github.io/post/江边同游/</id>
+        <link href="https://mdreame.github.io/post/江边同游/">
+        </link>
+        <updated>2023-01-26T09:41:12.000Z</updated>
+        <summary type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742920.jpg" alt="" loading="lazy"></figure>
+<p>娘娘树沙滩一玩</p>
+<p>日融沙暖与携游，轻履阔看玉带洲。<br>
+一线鸢牵无穷碧，西飞雁引水东流。<br>
+人生自是少称意，今日凭风洗旧愁。<br>
+便似万千共流水，宛转分合几碰头？</p>
+]]></summary>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742920.jpg" alt="" loading="lazy"></figure>
+<p>娘娘树沙滩一玩</p>
+<p>日融沙暖与携游，轻履阔看玉带洲。<br>
+一线鸢牵无穷碧，西飞雁引水东流。<br>
+人生自是少称意，今日凭风洗旧愁。<br>
+便似万千共流水，宛转分合几碰头？</p>
+<!-- more -->
+<p><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742927.jpg" alt="" loading="lazy"><br>
+<img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742928.jpg" alt="" loading="lazy"><br>
+<img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742926.jpg" alt="" loading="lazy"><br>
+<img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742925.jpg" alt="" loading="lazy"><br>
+<img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742924.jpg" alt="" loading="lazy"><br>
+<img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742923.jpg" alt="" loading="lazy"><br>
+<img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742922.jpg" alt="" loading="lazy"><br>
+<img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742921.jpg" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[用PicGo为Hexo博客添加腾讯云COS图床服务]]></title>
+        <id>https://mdreame.github.io/post/用PicGo为Hexo博客添加腾讯云COS图床服务/</id>
+        <link href="https://mdreame.github.io/post/用PicGo为Hexo博客添加腾讯云COS图床服务/">
+        </link>
+        <updated>2023-01-26T07:11:24.000Z</updated>
+        <summary type="html"><![CDATA[<p>有个在线图床还是要舒服很多的！</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>有个在线图床还是要舒服很多的！</p>
+<!-- more -->
+<h2 id="picgo">PicGo</h2>
+<p><a href="https://picgo.github.io/PicGo-Doc/zh/guide/">PicGo</a>是开源免费的图片上传和管理工具，可以快速将图片保存到第三方服务，并自动生成剪贴板链接。</p>
+<h3 id="下载">下载</h3>
+<p>下载最新正式版<a href="https://github.com/Molunerfinn/PicGo">安装包</a>并安装完毕。</p>
+<h2 id="腾讯云-cos">腾讯云 COS</h2>
+<p><a href="https://cloud.tencent.com/act/pro/cos#%E6%96%B0%E7%94%A8%E6%88%B7%E4%B8%93%E4%BA%AB%E7%A4%BC%E5%8C%85">腾讯云 COS</a></p>
+<h3 id="购买-cos-服务并创建桶">购买 COS 服务并创建桶</h3>
+<p>购买 COS 后，进入控制台创建存储桶，基本填写如下：<br>
+<img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261521489.png" alt="" loading="lazy"></p>
+<p>后续配置依个人情况选择。创建成功后，需要新建密钥，获取<code>SecretId</code>、<code>SecretKey</code>、<code>APPID</code>以及存储桶信息。</p>
+<h3 id="在-picgo-中配置腾讯云服务">在 PicGo 中配置腾讯云服务</h3>
+<p>回到 PicGo<code>图床设置</code>--<code>腾讯云COS</code>，将上述信息依次填入。</p>
+<figure data-type="image" tabindex="1"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261532030.png" alt="" loading="lazy"></figure>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/119250383">使用 PicGo+腾讯云对象存储 COS 作为图床</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/489236769">使用 GitHub 作为 PicGo 图床</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/350598351">GitHub+picGo+CDN 搭建免费图床</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/489236769">GitHub+PicGo+Typora</a></li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[扫年]]></title>
+        <id>https://mdreame.github.io/post/扫年/</id>
+        <link href="https://mdreame.github.io/post/扫年/">
+        </link>
+        <updated>2023-01-20T14:27:57.000Z</updated>
+        <summary type="html"><![CDATA[<p>这两天都是我做饭，不知道为什么爸爸吃一碗就放了筷子，平时得多吃一会。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>这两天都是我做饭，不知道为什么爸爸吃一碗就放了筷子，平时得多吃一会。</p>
+<!-- more -->
+<figure data-type="image" tabindex="1"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261537997.jpg" alt="" loading="lazy"></figure>
+<p>昨晚洗碗后就开始包蛋饺。每年只要有空我都会做一点，顺便送点给爷爷。今年的肉和蛋配得刚刚好，三十个鸡蛋包了四十个蛋饺。过程蛮顺利的，只是用灶台做火候不好控制，容易焦了皮。</p>
+<p>上午打扫卫生，又打开网易云伴奏。播放到一首去年年底做清洁时听的歌，感觉时间就像手风琴一样，悠扬地展开了播放列表，里面唱得是一年年琐细的时光。繁忙急促的脚步声、积满灰尘的楼梯扶手，还有歪头凝望枯黄落叶的窗台，一一循着歌声找了回来。我拖着地，心中无比富足，再一次感受到了时光的厚度。</p>
+<p>去年失了火后，房间装修铺的是木地板，妈妈就格外小心，叮嘱不要用湿拖把，否则木地板容易发翘。我其实蛮喜欢打扫卫生，做一点清洁人感觉非常好，里外都舒畅了些。后来听到锣鼓声，是梦楠今天出殡。汽车将路堵得动弹不得，像是在为她母亲挽留。梦楠昨天才走，她妈妈哭晕了过去，今天看见也还是有人掺着走路。梦楠爸爸应该没有来得及见她最后一面。沈老师是梦楠二伯，也是我和她小学的语文老师。看见他面容憔悴，估计也是身心疲惫，毕竟他一直在预着。</p>
+<p>梦楠的病因是乳腺癌，不清楚怎么晚期了。跟姐姐提起她的事，她说太可惜了，还有个一岁多的孩子，提到了毕淑敏的《拯救乳房》一书。我看时间是09年出版的，然而这么些年后乳腺癌致死依然不少见，只能说医学常识普及工作做得不好，而且女性本身也没有认识到自己身体的重要性，总是羞于谈论自己。我不喜欢这样，但是我也不知道该怎么办。我会去了解月经，会找资料判断卫生棉条对人体的危害性，我不止一次想同汪汪问起这些，但又觉得不大合适。记得上次网上关于计划生育时女性体内还有节育环的事上了热门，我问妈妈她觉得我无端问这些干嘛。我也才知道，她那年去上海就取掉了，此前为妇科病困了好久。我不免心里对这样没有一点人道的政策和治理逻辑感到内在生理性的恶心。</p>
+<p>💩🤢🤧</p>
+<p>不过姐姐跳出农村传统观念的束缚，我感到很高兴。</p>
+<p>今天中午，两个舅舅来了。我掌勺，正好蛋饺给他们尝个鲜，与金针菇一起煮了个火锅，又做了丐版地三鲜、韭黄鸡蛋、芹菜芽炒千张。小露一手，被夸了一下，心里都乐开了花😁。</p>
+<p>晚上又做了鱼面，不过失败了。原来看《风味人间4》第5集中，人用鱼肉和山芋粉揉好一起拍打成纸一样薄，自己做了才知道不是那么容易的。于是又掺了面粉，干脆做手擀面了。口感一般，汤倒很鲜。我明天还要再试一遍。</p>
+<p>天天都会想汪汪女士在做什么。</p>
+<p>降温了。</p>
+]]></content>
+    </entry>
+</feed>

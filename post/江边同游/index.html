@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="keywords" content="Gridea静态个人博客">
+<meta name="description" content="如是而今">
+<meta name="theme-color" content="#000">
+<title>江边同游 | Mdreame</title>
+<link rel="shortcut icon" href="/favicon.ico?v=1686329777702">
+<link rel="stylesheet" href="/media/css/gemini.css">
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link
+  href="//fonts.loli.net/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+  rel="stylesheet" type="text/css">
+
+<link href="/media/hljs/styles/default.css"
+  rel="stylesheet">
+
+<link rel="stylesheet" href="/styles/main.css">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script src="/media/js/jquery.js"></script>
+<script src="/media/hljs/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+  integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+  integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+  integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"></script>
+
+
+
+
+
+
+  <meta name="description" content="江边同游" />
+  <meta name="keywords" content="小诗" />
+</head>
+
+<body>
+  <div class="head-top-line"></div>
+  <div class="header-box">
+    
+<div class="gemini">
+  <header class="header  ">
+    <div class="blog-header box-shadow-wrapper bg-color " id="header">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-meta">       
+        <div class="site-title">
+          
+            <a href="/" class="brand">
+              <span>Mdreame</span>
+            </a>  
+          
+        </div>
+        
+          <p class="subtitle">如是而今</p>
+        
+      </div>
+      <nav class="site-nav" id="site_nav">
+        <ul id="nav_ul">
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/" target="_self">
+                  <i class="fa fa-globe"></i> 首页
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/archives" target="_self">
+                  <i class="fa fa-globe"></i> 归档
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/tags" target="_self">
+                  <i class="fa fa-globe"></i> 标签
+                </a>
+              
+            </li>
+          
+          
+          
+            <li id="fa_search" class="nav-item">
+              <a href="javascript:void(0);">
+                <i class="fa fa-search"></i> <span class="language" data-lan="search">搜索</span>
+              </a>
+            </li>
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+  </div>
+  <div class="main-continer">
+    
+    <div
+      class="section-layout gemini ">
+      <div class="section-layout-wrapper">
+        
+
+<div class="sidebar">
+  
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active language" data-lan="index">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item language" data-lan="preview">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body gemini" id="sidebar_body">
+        
+          
+            
+<div class="sidebar-wrapper box-shadow-wrapper bg-color">
+  <div class="sidebar-item">
+    <img class="site-author-image right-motion" src="/images/avatar.png"/>
+    <p class="site-author-name">Mdreame</p>
+    
+  </div>
+  <div class="sidebar-item side-item-stat right-motion">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        
+        <span class="site-item-stat-count">17</span>
+        <span class="site-item-stat-name language" data-lan="article">文章</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">18</span>
+        <span class="site-item-stat-name language" data-lan="tag">标签</span>
+      </a>
+    </div>
+  </div>
+  
+    
+  
+  
+
+  
+
+
+
+</div>
+          
+        
+      </div>
+    </div>
+  
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    jQuery.Velocity(hideElement, 'stop');
+    jQuery.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        jQuery.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+  }
+
+  postToc && postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  if (sidebarBody) {
+    if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+      let hasFix = false;
+      let scrollEl = document.querySelector('.main-continer');
+      let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+      window.addEventListener('scroll', function(e) {
+        if (document.scrollingElement.scrollTop >= limitTop) {
+          if (!hasFix) {
+            sidebar.classList.add('sidebar-fixed');
+            hasFix = true;
+          }
+        } else {
+          if (hasFix) {
+            sidebar.classList.remove('sidebar-fixed');
+            hasFix = false;
+          }
+        }
+      });
+    }
+  }
+  
+</script>
+        <div class="section-box box-shadow-wrapper">
+          <div class="section bg-color post post-page">
+            <section class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://mdreame.github.io/post/江边同游/"> 江边同游 </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span class="language" data-lan="publish">发布于</span>
+      <span class="publish-time" data-t="2023-01-26 17:41:12">2023-01-26</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-folder-o"></i>
+      <span class="pc-show language" data-lan="category-in">标签:</span>
+       
+      <a href="https://mdreame.github.io/tag/xsZZy7yfh2/">
+        <span>小诗</span>
+      </a>
+       
+    </span>
+    <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span
+        >1<span class="language" data-lan="minute"
+          >分钟</span
+        ></span
+      >
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span
+        >63<span class="pc-show language" data-lan="words"
+          >字数</span
+        ></span
+      >
+    </span>
+    
+  </div>
+</section>
+
+            <div class="post-body next-md-body" id="post_body">
+              <figure data-type="image" tabindex="1"><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742920.jpg" alt="" loading="lazy"></figure>
+<p>娘娘树沙滩一玩</p>
+<p>日融沙暖与携游，轻履阔看玉带洲。<br>
+一线鸢牵无穷碧，西飞雁引水东流。<br>
+人生自是少称意，今日凭风洗旧愁。<br>
+便似万千共流水，宛转分合几碰头？</p>
+<!-- more -->
+<p><img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742927.jpg" alt="" loading="lazy"><br>
+<img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742928.jpg" alt="" loading="lazy"><br>
+<img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742926.jpg" alt="" loading="lazy"><br>
+<img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742925.jpg" alt="" loading="lazy"><br>
+<img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742924.jpg" alt="" loading="lazy"><br>
+<img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742923.jpg" alt="" loading="lazy"><br>
+<img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742922.jpg" alt="" loading="lazy"><br>
+<img src="https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742921.jpg" alt="" loading="lazy"></p>
+
+            </div>
+            
+            
+              <div class="post-footer">
+  <!-- <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong class="language" data-lan="author">本文作者：</strong>
+      Mdreame
+    </li>
+    <li class="post-copyright-link">
+      <strong class="language" data-lan="link">本文链接：</strong>
+      <a href="https://mdreame.github.io/post/江边同游/" title="江边同游">https://mdreame.github.io/post/江边同游/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong class="language" data-lan="copyright">版权声明： </strong>
+      本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i> BY-NC-SA</a> 许可协议。转载请注明出处！
+    </li>
+  </ul> -->
+  <div class="tags">
+    
+      <a href="https://mdreame.github.io/tag/xsZZy7yfh2/"># 小诗</a>
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+        <i class="fa fa-chevron-left"></i>
+        <a class="nav-pc-next" title="临行小聚" href="https://mdreame.github.io/post/临行小聚/">临行小聚</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="临行小聚" href="https://mdreame.github.io/post/临行小聚/">上一篇</a>
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" title="用PicGo为Hexo博客添加腾讯云COS图床服务" href="https://mdreame.github.io/post/用PicGo为Hexo博客添加腾讯云COS图床服务/">用PicGo为Hexo博客添加腾讯云COS图床服务</a>
+        <a class="nav-mobile-next" title="用PicGo为Hexo博客添加腾讯云COS图床服务" href="https://mdreame.github.io/post/用PicGo为Hexo博客添加腾讯云COS图床服务/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
+      
+    </div>
+  </div>
+</div>
+            
+            
+  
+    
+      <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '87d5c82b9751c13d57a8',
+    clientSecret: '95d618a99a572abeda34c21ce415dca28fa97617',
+    repo: 'blog-comments',
+    owner: 'mdreame',
+    admin: ['mdreame'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+</script>
+    
+    
+  
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-box">
+  <footer class="footer">
+    <center id="runTimeBox">
+      已运行:<span id="run_time"></span>
+    </center>
+    <span id="busuanzi_container_site_pv">浏览数:<span id="busuanzi_value_site_pv"></span> 次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">访客数:<span id="busuanzi_value_site_uv"></span> 人</span>
+
+    <script>
+      BirthDay = new Date('');
+      if (BirthDay.getTime()) {
+        function runTime() {
+          str = "";
+          today = new Date();
+          timeold = today.getTime() - BirthDay.getTime();
+          msPerDay = 24 * 60 * 60 * 1000;
+          e_daysold = timeold / msPerDay;
+          daysold = Math.floor(e_daysold);
+          str += daysold + "天";
+          return str;
+        }
+        setInterval(function () {
+          $("#run_time").html(runTime());
+        }, 1000);
+      } else {
+        document.querySelector('.footer').removeChild(document.querySelector('#runTimeBox'));
+      }
+    </script>
+    <div class="poweredby">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+  </footer>
+  
+    
+        <div class="gemini back-to-top" id="back_to_top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span class="scrollpercent"> <span id="back_to_top_text">0</span>% </span>
+            
+        </div>
+        
+                  
+                        
+</div>
+<script>
+  let sideBarOpen = "sidebar-open";
+  let body = document.body;
+  let back2Top = document.querySelector("#back_to_top"),
+    back2TopText = document.querySelector("#back_to_top_text"),
+    drawerBox = document.querySelector("#drawer_box"),
+    rightSideBar = document.querySelector(".sidebar"),
+    viewport = document.querySelector("body");
+
+  function scrollAnimation(currentY, targetY) {
+    let needScrollTop = targetY - currentY;
+    let _currentY = currentY;
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10);
+      _currentY += dist;
+      window.scrollTo(_currentY, currentY);
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY);
+      } else {
+        window.scrollTo(_currentY, targetY);
+      }
+    }, 1);
+  }
+
+  back2Top.addEventListener("click", function (e) {
+    scrollAnimation(document.scrollingElement.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+
+  window.addEventListener("scroll", function (e) {
+    let percent =
+      (document.scrollingElement.scrollTop /
+        (document.scrollingElement.scrollHeight -
+          document.scrollingElement.clientHeight)) *
+      100;
+    if (percent > 1 && !back2Top.classList.contains("back-top-active")) {
+      back2Top.classList.add("back-top-active");
+    }
+    if (percent == 0) {
+      back2Top.classList.remove("back-top-active");
+    }
+    if (back2TopText) {
+      back2TopText.textContent = Math.floor(percent);
+    }
+  });
+
+  let hasCacu = false;
+  window.addEventListener("resize", function (e) {
+    calcuHeight();
+  });
+
+  function calcuHeight() {
+    // 动态调整站点概览高度
+    if (
+      (!hasCacu && back2Top.classList.contains("pisces")) ||
+      back2Top.classList.contains("gemini")
+    ) {
+      let sideBar = document.querySelector(".sidebar");
+      let navUl = document.querySelector("#site_nav");
+      sideBar.style =
+        "margin-top:" + (navUl.offsetHeight + navUl.offsetTop + 15) + "px;";
+      hasCacu = true;
+    }
+  }
+  calcuHeight();
+
+  let open = false,
+    MOTION_TIME = 300,
+    RIGHT_MOVE_DIS = "320px";
+
+  if (drawerBox) {
+    let rightMotions = document.querySelectorAll(".right-motion");
+    let right = drawerBox.classList.contains("right");
+
+    let transitionDir = right
+      ? "transition.slideRightIn"
+      : "transition.slideLeftIn";
+
+    let openProp, closeProp;
+    if (right) {
+      openProp = {
+        paddingRight: RIGHT_MOVE_DIS,
+      };
+      closeProp = {
+        paddingRight: "0px",
+      };
+    } else {
+      openProp = {
+        paddingLeft: RIGHT_MOVE_DIS,
+      };
+      closeProp = {
+        paddingLeft: "0px",
+      };
+    }
+
+    drawerBox.onclick = function () {
+      open = !open;
+      jQuery.Velocity(rightSideBar, "stop");
+      jQuery.Velocity(viewport, "stop");
+      jQuery.Velocity(rightMotions, "stop");
+      if (open) {
+        jQuery.Velocity(
+          rightSideBar,
+          {
+            width: RIGHT_MOVE_DIS,
+          },
+          {
+            duration: MOTION_TIME,
+            begin: function () {
+              jQuery.Velocity(rightMotions, transitionDir, {});
+            },
+          }
+        );
+        jQuery.Velocity(viewport, openProp, {
+          duration: MOTION_TIME,
+        });
+      } else {
+        jQuery.Velocity(
+          rightSideBar,
+          {
+            width: "0px",
+          },
+          {
+            duration: MOTION_TIME,
+            begin: function () {
+              jQuery.Velocity(rightMotions, {
+                opacity: 0,
+              });
+            },
+          }
+        );
+        jQuery.Velocity(viewport, closeProp, {
+          duration: MOTION_TIME,
+        });
+      }
+      for (let i = 0; i < drawerBox.children.length; i++) {
+        drawerBox.children[i].classList.toggle("muse-line");
+      }
+      drawerBox.classList.toggle(sideBarOpen);
+    };
+  }
+
+  // 链接跳转
+  let newWindow = "false";
+  if (newWindow === "true") {
+    let links = document.querySelectorAll(".post-body a");
+    links.forEach((item) => {
+      if (!item.classList.contains("btn")) {
+        item.setAttribute("target", "_blank");
+      }
+    });
+  }
+
+  let faSearch = document.querySelector("#fa_search");
+  faSearch &&
+    faSearch.addEventListener("click", function () {
+      document.querySelector("#search_mask").style = "";
+    });
+
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
+
+  // 离开当前页title变化
+  var leaveTitle = "";
+  var normal_title = document.title;
+  if (leaveTitle) {
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState == "hidden") {
+        normal_title = document.title;
+        document.title = leaveTitle;
+      } else {
+        document.title = normal_title;
+      }
+    });
+  }
+</script>
+
+<link rel="stylesheet" href="/media/css/jquery.fancybox.css" />
+<script src="/media/js/jquery.fancybox.js"></script>
+
+<script>
+  let images = document.querySelectorAll(".section img");
+  images.forEach((image) => {
+    var parent = image.parentElement;
+    var next = image.nextElementSibling;
+    parent.removeChild(image);
+    var aelem = document.createElement("a");
+    aelem.href = image.src;
+    aelem.dataset["fancybox"] = "images";
+    aelem.dataset["rel"] = "fancybox-button";
+    aelem.classList.add("fancybox");
+    aelem.appendChild(image);
+    parent.insertBefore(aelem, next);
+  });
+</script>
+    <div class="reward-mask" style="display: none;">
+  <div class="reward-relative">
+    <span class="close" aria-hidden="true">x</span>
+    <div class="reward-body">
+      <h2>感谢您的支持，我会继续努力的!</h2>
+      <div class="reward-img-box">
+        <div style="position: relative; width: 140px; height: 140px;">
+          
+          
+          
+        </div>
+      </div>
+      <p class="reward-word">扫码打赏，你说多少就多少</p>
+      <p class="reward-tip"> </p>
+    </div>
+    <div class="bottom">
+      
+      
+    </div>
+  </div>
+</div>
+<style>
+  .reward-mask {
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #00000054;
+  }
+
+  .reward-relative {
+    position: relative;
+    width: 480px;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: #fff;
+    top: 50%;
+    margin-top: -205px;
+  }
+
+  .reward-relative .close {
+    position: absolute;
+    right: 10px;
+    font-weight: normal;
+    font-size: 16px;
+    color: #929292;
+  }
+
+  .reward-body {
+    padding: 40px 20px 20px;
+  }
+
+  .bottom {
+    display: flex;
+  }
+
+  .reward-btn {
+    text-align: center;
+  }
+
+  .reward-btn-text {
+    display: inline-block;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    background-color: #ff9734;
+    color: #FFF;
+    margin-top: 20px;
+  }
+
+  .pay-text {
+    margin-top: 10px;
+    padding: 10px;
+    flex: 1;
+    transition: all .2s linear;
+  }
+
+  .pay-text:hover {
+    background-color: #a5a5a536;
+  }
+
+  .reward-body h2 {
+    padding-top: 10px;
+    text-align: center;
+    color: #a3a3a3;
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0 0 20px;
+  }
+
+  .reward-body h2:after,
+  .reward-body h2:before {
+    font-family: Arial, Helvetica, sans-serif;
+    background: 0 0;
+    width: 0;
+    height: 0;
+    font-style: normal;
+    color: #eee;
+    font-size: 80px;
+    position: absolute;
+    top: 20px;
+  }
+
+  .reward-body h2:before {
+    content: '\201c';
+    left: 50px;
+  }
+
+  .reward-body h2:after {
+    content: '\201d';
+    right: 80px;
+  }
+
+  .reward-img-box {
+    display: inline-block;
+    padding: 10px;
+    border: 6px solid #ea5f00;
+    margin: 0 auto;
+    border-radius: 3px;
+    position: relative;
+  }
+
+  .reward-img {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .reward-relative {
+      height: 100%;
+      top: 0px;
+      margin-top: 0;
+      width: auto;
+    }
+
+    .reward-relative .bottom {
+      flex-direction: column;
+    }
+
+    .reward-relative .pay-text {
+      width: 80%;
+      margin: 5px auto;
+      border: 1px solid silver;
+      padding: 6px;
+      border-radius: 4px;
+    }
+
+    .reward-body h2:after {
+      right: 40px;
+    }
+
+    .reward-body h2:after,
+    .reward-body h2:before {
+      font-size: 60px;
+    }
+
+    .reward-body h2:before {
+      left: 20px;
+    }
+  }
+</style>
+<script>
+  !function () {
+    var mask = document.querySelector('.reward-mask');
+    let close = document.querySelector('.reward-relative .close');
+    let rewardBtn = document.querySelector('.reward-btn');
+
+    let zfb = document.querySelector('#zfb'),
+      wx = document.querySelector('#wx'),
+      zfbBtn = document.querySelector('#zfbBtn'),
+      wxBtn = document.querySelector('#wxBtn');
+
+    if (zfbBtn && wxBtn) {
+      zfbBtn.addEventListener('click', () => {
+        jQuery.Velocity(zfb, 'transition.slideLeftIn', {
+          duration: 400
+        });
+        jQuery.Velocity(wx, 'transition.slideRightOut', {
+          display: 'none',
+          duration: 400
+        });
+      });
+
+      wxBtn.addEventListener('click', () => {
+        jQuery.Velocity(wx, 'transition.slideRightIn', {
+          duration: 400
+        });
+        jQuery.Velocity(zfb, 'transition.slideLeftOut', {
+          display: 'none',
+          duration: 400
+        });
+      });
+    }
+
+    rewardBtn.addEventListener('click', (e) => {
+      jQuery.Velocity(mask, 'transition.slideDownIn', {
+        duration: 400
+      })
+    });
+
+    close.addEventListener('click', (e) => {
+      e.preventDefault();
+      jQuery.Velocity(mask, 'transition.slideUpOut', {
+        duration: 400
+      })
+    })
+  }()
+</script>
+
+  </div>
+</body>
+
+  <div class="search-mask" id="search_mask" style="display: none;">
+  <div class="search-box">
+    <div class="search-title">
+      <i class="fa fa-search"></i>
+      <div class="input-box">
+        <input id="search" type="text" class="language" data-lan="search" placeholder="搜索">
+      </div>
+      <i id="close" class="fa fa-times-circle"></i>
+    </div>
+    <div class="stat-box">
+      <span id="stat_count">0</span><span class="language" data-lan="stat">条相关条目，使用了</span><span id="stat_times">0</span><span class="language" data-lan="stat-time">毫秒</span>
+      <hr>
+    </div>
+    <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://mdreame.github.io/post/zen-me-shi-yong-logseq-guan-fang-tong-bu-gong-neng/"" data-c="
+          &lt;p&gt;Logseq&lt;a href=&#34;https://blog.logseq.com/how-to-setup-and-use-logseq-sync/&#34;&gt;官方同步&lt;/a&gt;功能目前还处于测试阶段，但付费订阅后可以解锁。此文以开通&lt;a href=&#34;https://opencollective.com/logseq/contribute/backers-21161?ref=blog.logseq.com&#34;&gt;Backer&lt;/a&gt;方案来介绍如何在Windows和IOS之间实现同步。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h2 id=&#34;订阅同步服务&#34;&gt;订阅同步服务&lt;/h2&gt;
+&lt;h3 id=&#34;注册open-collective账户&#34;&gt;注册open collective账户&lt;/h3&gt;
+&lt;p&gt;Logseq是通过open collective平台来托管订阅服务的，首先需要注册open collective账户。注意要记住此处注册时填写的邮箱即后续登录Logseq的邮箱。&lt;/p&gt;
+&lt;h3 id=&#34;填写付款信息&#34;&gt;填写付款信息&lt;/h3&gt;
+&lt;p&gt;注册成功后，选&lt;a href=&#34;https://opencollective.com/logseq/contribute/backers-21161?ref=blog.logseq.com&#34;&gt;Backer&lt;/a&gt;方案填写付款信息。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202306100011931.png&#34; alt=&#34;image-20230610001115740&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;填写选项：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;卡号：付款支持银联，也就是国内用户可直接使用银行卡号。&lt;/li&gt;
+&lt;li&gt;有效期：随意，如&lt;code&gt;04/30&lt;/code&gt;，表示有效期至2030年4月。&lt;/li&gt;
+&lt;li&gt;CVC：随意三位数字&lt;/li&gt;
+&lt;li&gt;地区：中国&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;提交后就能在贡献列表中看见自己的账号。&lt;/p&gt;
+&lt;h2 id=&#34;windows&#34;&gt;Windows&lt;/h2&gt;
+&lt;p&gt;Logseq官方处理的蛮快，购买后稍等一会账号生效，就可以使用同步服务了。&lt;/p&gt;
+&lt;h3 id=&#34;备份数据&#34;&gt;备份数据&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;在Logseq中打开所有笔记库（All graphs），找到要同步的仓库，点击右侧的&lt;code&gt;Unlink&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202306100022086.png&#34; alt=&#34;image-20230610002228003&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;将笔记库文件夹复制到新的路径，然后在Logseq中重新添加。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;接下来开启同步服务：打开&lt;code&gt;设置&lt;/code&gt;-&lt;code&gt;新功能&lt;/code&gt;，点击&lt;code&gt;sync&lt;/code&gt;按钮开启同步功能。接着点击&lt;code&gt;login&lt;/code&gt;。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202306100031258.png&#34; alt=&#34;image-20230610003112172&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;第一次使用还没有账号，所以在弹出的窗口先注册。注册邮箱就是open collective账户邮箱，密码需要好好保存下来。确定之后，Logseq会发6位数验证码到该邮箱，填写验证后返回Logseq。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;随后就可以在Logseq顶部看到小云朵图标。点击该图标，即可同步本地笔记库到云端。注意此处密码也要妥善保存。之后等待同步完成即可。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202306100036299.png&#34; alt=&#34;image-20230610003653247&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;ios&#34;&gt;IOS&lt;/h3&gt;
+&lt;p&gt;IOS登录注册账号，点击所有笔记库即可看到Windows同步的笔记，即末尾带有小云朵的笔记库。如果没有，则刷新（refresh）稍等片刻。点击同步该笔记，会提示在上面第5步中填写的密码来解锁。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;5&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202306100045770.png&#34; alt=&#34;image-20230610004526720&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;之后便是同样等待同步完成了。&lt;/p&gt;
+&lt;p&gt;另外需要注意目前测试阶段，存储有一定限制：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;原程最大仓库数目:&lt;/strong&gt; 10&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;每个笔记库最大存储:&lt;/strong&gt; 10G（10 gigabyte）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;每个资源最大大小:&lt;/strong&gt; 100M（100 megabyte）&lt;/li&gt;
+&lt;/ul&gt;
+">怎么使用Logseq官方同步功能</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://mdreame.github.io/post/shi-yong-picgo-shang-chuan-tu-pian-dao-tu-chuang/"" data-c="
+          &lt;p&gt;PicGo是一款开源软件，旨在帮助用户方便快速地将图片上传到云存储服务。支持类似腾讯云的专业云存储服务，也支持公开Github仓库作为图床。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h2 id=&#34;下载安装&#34;&gt;下载安装&lt;/h2&gt;
+&lt;p&gt;作者提供了多个&lt;a href=&#34;https://picgo.github.io/PicGo-Doc/zh/guide/#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85&#34;&gt;下载渠道&lt;/a&gt;，可以根据网络环境择优下载安装。&lt;/p&gt;
+&lt;h2 id=&#34;配置&#34;&gt;配置&lt;/h2&gt;
+&lt;p&gt;Window客户端，以腾讯云COS为图床说明&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;购买腾讯云对象存储服务&lt;/li&gt;
+&lt;li&gt;进入&lt;strong&gt;对象存储&lt;/strong&gt;管理控制台，选择&lt;code&gt;存储桶列表&lt;/code&gt;-&lt;code&gt;创建存储桶&lt;/code&gt;，记住自己创建的&lt;strong&gt;存储桶名称&lt;/strong&gt;（xxxxxx-1234567890）和&lt;strong&gt;所属地域&lt;/strong&gt;（ap-beijing）&lt;/li&gt;
+&lt;li&gt;进入&lt;a href=&#34;https://console.cloud.tencent.com/cam/capi&#34;&gt;密钥管理&lt;/a&gt;创建密钥，记住&lt;strong&gt;AppID&lt;/strong&gt;、&lt;strong&gt;SecretId&lt;/strong&gt;、&lt;strong&gt;SecretKey&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;在PicGo界面打开&lt;strong&gt;图床设置&lt;/strong&gt;中的腾讯云COS设置，将1、2中的各项按名称依次填入；可自定义存储路径（路径后必须加&lt;code&gt;/&lt;/code&gt;），这样可在存储桶内生成对应文件夹。&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202306051055629.png&#34; alt=&#34;image-20230605105450873&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
+&lt;li&gt;打开&lt;strong&gt;PicGo设置&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;打开上传后自动复制URL选项&lt;/li&gt;
+&lt;li&gt;设置快捷键（&lt;code&gt;ctrl&lt;/code&gt;+&lt;code&gt;shift&lt;/code&gt;+&lt;code&gt;p&lt;/code&gt;）。当按下快捷键时，PicGo会上传剪贴板的图片，然后返回图片链接到剪贴板。&lt;/li&gt;
+&lt;li&gt;其他根据需求自选&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;使用&#34;&gt;使用&lt;/h2&gt;
+&lt;h3 id=&#34;如何上传&#34;&gt;如何上传&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;可以将图片拖到PicGo上传，自动返回链接到剪贴板&lt;/li&gt;
+&lt;li&gt;复制图片到剪贴板后，按快捷键自动上传，然后在需要的地方粘贴剪贴板链接&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://picgo.github.io/PicGo-Doc/zh/guide/advance.html#windows&#34;&gt;命令行上传&lt;/a&gt;：通过安装路径直接调用PicGo&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;场景&#34;&gt;场景&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;与Typora联合使用。&lt;/li&gt;
+&lt;/ul&gt;
+">使用PicGo上传图片到图床</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://mdreame.github.io/post/老门东元宵灯会/"" data-c="
+          &lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062113117.jpg&#34; alt=&#34;安德门往中华门地铁&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;十五元宵灯会，早已决定去找灯谜。疫情解封，今年的人流格外多。因此，公交改道，夫子庙附近的地铁站点都临时关闭，机动车辆禁止通行。官方交通疏散和安保工作做得蛮不错。我从安德门步行两站路去往门东。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062121980.jpg&#34; alt=&#34;中华门正门&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;很远就看到城墙上“第37届秦淮灯会”字样，同去年没什么区别。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062124949.jpg&#34; alt=&#34;外河&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;这树上的霓虹色彩看着别扭得很，对面是有些古意的城墙，你隔这边弄赛博风，这就不对味儿......不如多挂些灯笼。后面大报恩寺琉璃塔也换装了。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062130883.jpg&#34; alt=&#34;南京城墙博物馆&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;穿过中华门就是老门东。如今在门口新建了一个南京城墙博物馆。人很多，就没进去。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;5&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062129106.jpg&#34; alt=&#34;西湖里&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;跟着人潮走，到了西湖里。以往都是从靠中华门侧城墙那条路进去，现今只当作出口，便要绕一圈。有人卖头戴的兔耳朵彩灯，10元一个，15两个。&lt;/p&gt;
+&lt;p&gt;再往前走看到有人煮酒，不过是红酒，空气中飘着奇怪的味道。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;6&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062129853.jpg&#34; alt=&#34;西湖里&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;初中的时候就很喜欢辛弃疾的《青玉案·元夕》：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;东风夜放花千树，更吹落、星如雨。宝马雕车香满路。凤箫声动，玉壶光转，一夜鱼龙舞。&lt;br&gt;
+蛾儿雪柳黄金缕，笑语盈盈暗香去。众里寻他千百度，蓦然回首，那人却在，灯火阑珊处。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;常在本子上抄，一遍遍也不嫌烦。就是想象不出来“凤箫声动，玉壶光转”是怎样的情景。香味是有的，不过是酒香。“宝马”也偶尔见到，但是总没有一夜鱼龙舞的气氛。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;7&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062129651.jpg&#34; alt=&#34;西湖里&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;8&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062111338.jpg&#34; alt=&#34;灯市&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;灯市只允许单向通行，望而却步。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;9&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062131865.jpg&#34; alt=&#34;彩票店&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;连彩票店都排队。一侧的亭子和连廊中，一位阿姨刮得沉醉。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;10&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062132878.jpg&#34; alt=&#34;汉服姑娘&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;11&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062132476.jpg&#34; alt=&#34;南京大排档门东店&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;去年见到一群小姑娘着汉服在这拍照，蛮好看。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;12&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302062132250.jpg&#34; alt=&#34;十五月圆&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;可惜没有灯谜，好歹也寻了他千百度，劲头没了就离开了。一人形单孤影，两地月不同明。兴致寥寥，但少闲人耳。&lt;/p&gt;
+">老门东元宵灯会</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://mdreame.github.io/post/ChatGPT注册与使用/"" data-c="
+          &lt;p&gt;之前使用的是gpt镜像，一段时间就不可用了，还是注册官网比较稳定。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302031959912.png&#34; alt=&#34;ChatGPT界面&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ChatGPT是由人工智能研究实验室&lt;a href=&#34;https://openai.com/&#34;&gt;OpenAI&lt;/a&gt;在2022年11月30日发布的全新聊天机器人模型，一款人工智能技术驱动的自然语言处理工具。它能够通过学习和理解人类的语言来进行对话，还能根据聊天的上下文进行互动，真正像人类一样来聊天交流，甚至能完成撰写邮件、视频脚本、文案、翻译、代码等任务。    ----&lt;a href=&#34;https://baike.baidu.com/item/ChatGPT/62446358&#34;&gt;百度百科&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;注册&#34;&gt;注册&lt;/h2&gt;
+&lt;p&gt;打开&lt;a href=&#34;https://chat.openai.com/chat&#34;&gt;ChatGPT&lt;/a&gt;，会提示注册。&lt;/p&gt;
+&lt;p&gt;如果显示&lt;code&gt;OpenAI‘s services are not available in your country&lt;/code&gt;，则表明中国境内都被屏蔽了，不可使用。需要科学上网改变ip地址。见👉&lt;a href=&#34;https://cloud.tencent.com/developer/article/2190198&#34;&gt;OpenAI‘s services are not available in your country 完美解决方案 - 腾讯云开发者社区-腾讯云 (tencent.com)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果仍不可行，可参照&lt;a href=&#34;https://readdevdocs.com/blog/makemoney/%E4%B8%AD%E5%9B%BD%E5%8C%BA%E6%B3%A8%E5%86%8COpenAI%E8%B4%A6%E5%8F%B7%E8%AF%95%E7%94%A8ChatGPT%E6%8C%87%E5%8D%97.html#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87&#34;&gt;中国区注册OpenAI账号试用ChatGPT指南 | Read dev Docs 博客&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;只要注册成功并进入界面，之后无需科学上网即可使用。&lt;/p&gt;
+&lt;h2 id=&#34;使用&#34;&gt;使用&lt;/h2&gt;
+&lt;p&gt;直接在页面底部输入栏对话即可。在左侧可以同时创建多个对话窗口。&lt;/p&gt;
+&lt;h3 id=&#34;chatgpt懂不懂思念&#34;&gt;ChatGPT懂不懂思念&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302030954013.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;网上是伤心者众吗？哈哈，笑死了😂🤣😆。&lt;/p&gt;
+&lt;h3 id=&#34;数据拟合测试&#34;&gt;数据拟合测试&lt;/h3&gt;
+&lt;p&gt;首先给定公式，然后提供数据，请求gpt生成测试代码。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302031059836.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302031100739.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;5&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302031101017.png&#34; alt=&#34;提供B的数据&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;6&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302031102720.png&#34; alt=&#34;提供y的数据&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;7&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302031102121.png&#34; alt=&#34;请求拟合&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;8&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302031103376.png&#34; alt=&#34;生成matlab代码&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;9&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302031104765.png&#34; alt=&#34;变限积分拟合&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;10&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202302031105904.png&#34; alt=&#34;生成完整代码&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;最后生成的代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-matlab&#34;&gt;clear all
+clc
+
+% 定义常量C
+C = 1;
+
+% 定义常量B数组
+B = [328 338 348 363 378 393 408 423 438 453 468 486 498 514 528 545 564 578 593 608];
+
+% 定义y数组
+y = [23.61872 23.72788 23.78942 24.0004 24.21821 24.37258 24.5136 24.67936 24.835 24.947 25.019 25.21346 25.31057 25.44604 25.56994 25.7252 25.86169 25.96159 26.05716 26.14056];
+
+% 计算积分部分的数组
+integral_part = zeros(1, length(B));
+for i = 1:length(B)
+    fun = @(x) (x.^6).*exp(x)./((exp(x) - 1).^2);
+    integral_part(i) = integral(fun, 0, C/B(i));
+end
+
+% 构建矩阵X
+X = [ones(length(B), 1) B&#39;.^(-7) integral_part&#39;];
+
+% 构建系数矩阵beta
+beta = (X&#39; * X) \ (X&#39; * y&#39;);
+
+% 计算y0和A0
+y0 = beta(1);
+A0 = beta(2);
+
+% 输出拟合结果
+fprintf(&#39;y0 = %f\nA0 = %f\nC = %f\n&#39;, y0, A0, C);
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;放在matlab中运行没报错，但拟合变形了。因为只想做一个简单的测试，后续便没有再改动了。不过chatgpt的能力由此可见一斑，想象力有很大的发挥空间。&lt;/p&gt;
+&lt;h2 id=&#34;chatgpt镜像&#34;&gt;ChatGPT镜像&lt;/h2&gt;
+&lt;p&gt;以下镜像列表及相关应用为备用，使用体验不太好且可能随时失效。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://chat.h2ai.cn/home&#34;&gt;ChatGPT演示版 (h2ai.cn)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://ai6.top/&#34;&gt;ChatGPT国内版 - ai6.top&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://chatgpt.sbaliyun.com/&#34;&gt;Ai Chat公益版 (sbaliyun.com)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;ChatGPT智能对话（小程序）&lt;/li&gt;
+&lt;/ul&gt;
+">ChatGPT注册与使用</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://mdreame.github.io/post/测试样式/"" data-c="
+          &lt;p&gt;音频、视频样式测试。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h2 id=&#34;脚注&#34;&gt;脚注&lt;/h2&gt;
+&lt;p&gt;脚注不能正常解析，用链接代替。 👉JK 罗琳在哈佛大学的&lt;a href=&#34;https://news.harvard.edu/gazette/story/2008/06/text-of-j-k-rowling-speech/&#34;&gt;演讲文本&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;音频&#34;&gt;音频&lt;/h2&gt;
+&lt;p style=&#34;text-align:center;&#34;&gt;
+    &lt;iframe rame frameborder=&#34;no&#34; border=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; width=330 height=86 src=&#34;//music.163.com/outchain/player?type=2&amp;id=1300903694&amp;auto=1&amp;height=66&#34;&gt;&lt;/iframe&gt;
+&lt;/p&gt;
+## 视频
+&lt;p style=&#34;display: flex;flex-direction: column;&#34;&gt;
+&lt;iframe src=&#34;//player.bilibili.com/player.html?aid=12788181&amp;bvid=BV1fx411W7hp&amp;cid=21022759&amp;page=1&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34;   framespacing=&#34;0&#34; allowfullscreen=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;/p&gt;
+">测试样式</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://mdreame.github.io/post/麻溜地滚蛋了/"" data-c="
+          &lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301292125324.JPG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;年拜完了，家里开始清静下来。与父母独自相处的时间变多，小摩擦也变多，我就感到是时候走了。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p style=&#34;text-align:center;&#34;&gt;
+&lt;iframe frameborder=&#34;no&#34; border=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; width=330 height=86 src=&#34;//music.163.com/outchain/player?type=2&amp;id=283116&amp;auto=1&amp;height=66&#34;&gt;&lt;/iframe&gt;
+&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301292122009.JPG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301292123710.JPG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;这么大的年纪依然害怕家里气氛紧张。自小在楼上睡，很多个日夜都能听到争吵。有时会屏息听脚步声。步子急促和缓慢踩在地砖上的声音是不一样的。隐约能听出何时是在生气，何时心情不错。最害怕的是上楼梯的声音，似来索命的一样。总之，虽然自幼有一个小房间，可是却无时不被恐惧所占据，只觉得这个地方并不完全属于我。时至今日，他们找我都不是次次都要先敲门。我作为一个完整的社会人格的自我边界是始终缺了个口子的，从这个口子里又涌出来多少虚荣懦弱的举动，像浪潮将我卷没。即便今天，我依然不能说可以不受影响，只是开始能理解并接受了。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301292123573.JPG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;5&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301292125704.JPG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;6&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301292125391.JPG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;7&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301292126629.JPG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;高铁上小朋友要吃榴莲糖。她问奶奶这个糖臭不臭。奶奶说香，她说我也感觉香！我一路白眼，忍着没吐……&lt;/p&gt;
+">麻溜地滚蛋了</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://mdreame.github.io/post/临行小聚/"" data-c="
+          &lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301282008352.JPG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;初七与纪云约了去望江玩一下，其他人都出门了。说玩望江也没什么好玩的，随便逛逛，主要是见一面。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;我坐车到钟楼，然后走到世纪华联发现纪云没到，同他视频才知他也是从县医院往这边走。于是开玩笑说就这样相向而行，碰不到就打个圈回去算了 😂。&lt;/p&gt;
+&lt;h2 id=&#34;雷池市场&#34;&gt;雷池市场&lt;/h2&gt;
+&lt;p&gt;索性在农行门口遇见，见面第一件事就是给我一根烟。他还是没变，总想给我搞点新花样。又或许，他已经养成了见面给人一根烟的习惯，而许久不见他恰不知道我的习惯有否改变，所以才做一番试探。这样一番拉扯着实搞笑。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301282024868.JPG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;发现望江竟然也有网红孵化的业务。&lt;/p&gt;
+&lt;h2 id=&#34;青林寺&#34;&gt;青林寺&lt;/h2&gt;
+&lt;p&gt;市场晃到头就是青林寺。儿时同妈妈上街常经过这里，也依稀只记得一次妈妈买了香火上贡。这次进去才知道里面很大，而且还求了一支姻缘签。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301282024376.JPG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301282035883.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;虽然词有些敷衍，但毕竟讨了个好彩头。我同纪云说现在正犹豫要不要去广州，这签能给我增添几分动力呢？我不知道。&lt;/p&gt;
+&lt;h2 id=&#34;云珠广场&#34;&gt;云珠广场&lt;/h2&gt;
+&lt;p&gt;纪云在望江初中旁的流浪书店买了一本《世说新语》，然后顺便逛了望初。之后便打车到云珠广场吃饭，挑了一家重庆刘一手火锅，吃起来一般般。云珠广场也没有想象的好。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;5&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301282011286.JPG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;又路过老乡鸡，想念汪汪女士。&lt;/p&gt;
+&lt;p&gt;看了看华为手机，再去世纪华联逛了一下就同他坐车到车站。&lt;/p&gt;
+&lt;p&gt;现在写东西已经没有了耐心，文笔不堪直视，思路也不清晰。😥&lt;/p&gt;
+">临行小聚</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://mdreame.github.io/post/江边同游/"" data-c="
+          &lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742920.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;娘娘树沙滩一玩&lt;/p&gt;
+&lt;p&gt;日融沙暖与携游，轻履阔看玉带洲。&lt;br&gt;
+一线鸢牵无穷碧，西飞雁引水东流。&lt;br&gt;
+人生自是少称意，今日凭风洗旧愁。&lt;br&gt;
+便似万千共流水，宛转分合几碰头？&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742927.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742928.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742926.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742925.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742924.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742923.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742922.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261742921.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+">江边同游</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://mdreame.github.io/post/用PicGo为Hexo博客添加腾讯云COS图床服务/"" data-c="
+          &lt;p&gt;有个在线图床还是要舒服很多的！&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h2 id=&#34;picgo&#34;&gt;PicGo&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://picgo.github.io/PicGo-Doc/zh/guide/&#34;&gt;PicGo&lt;/a&gt;是开源免费的图片上传和管理工具，可以快速将图片保存到第三方服务，并自动生成剪贴板链接。&lt;/p&gt;
+&lt;h3 id=&#34;下载&#34;&gt;下载&lt;/h3&gt;
+&lt;p&gt;下载最新正式版&lt;a href=&#34;https://github.com/Molunerfinn/PicGo&#34;&gt;安装包&lt;/a&gt;并安装完毕。&lt;/p&gt;
+&lt;h2 id=&#34;腾讯云-cos&#34;&gt;腾讯云 COS&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://cloud.tencent.com/act/pro/cos#%E6%96%B0%E7%94%A8%E6%88%B7%E4%B8%93%E4%BA%AB%E7%A4%BC%E5%8C%85&#34;&gt;腾讯云 COS&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;购买-cos-服务并创建桶&#34;&gt;购买 COS 服务并创建桶&lt;/h3&gt;
+&lt;p&gt;购买 COS 后，进入控制台创建存储桶，基本填写如下：&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261521489.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;p&gt;后续配置依个人情况选择。创建成功后，需要新建密钥，获取&lt;code&gt;SecretId&lt;/code&gt;、&lt;code&gt;SecretKey&lt;/code&gt;、&lt;code&gt;APPID&lt;/code&gt;以及存储桶信息。&lt;/p&gt;
+&lt;h3 id=&#34;在-picgo-中配置腾讯云服务&#34;&gt;在 PicGo 中配置腾讯云服务&lt;/h3&gt;
+&lt;p&gt;回到 PicGo&lt;code&gt;图床设置&lt;/code&gt;--&lt;code&gt;腾讯云COS&lt;/code&gt;，将上述信息依次填入。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261532030.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/119250383&#34;&gt;使用 PicGo+腾讯云对象存储 COS 作为图床&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/489236769&#34;&gt;使用 GitHub 作为 PicGo 图床&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/350598351&#34;&gt;GitHub+picGo+CDN 搭建免费图床&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/489236769&#34;&gt;GitHub+PicGo+Typora&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+">用PicGo为Hexo博客添加腾讯云COS图床服务</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://mdreame.github.io/post/扫年/"" data-c="
+          &lt;p&gt;这两天都是我做饭，不知道为什么爸爸吃一碗就放了筷子，平时得多吃一会。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261537997.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;昨晚洗碗后就开始包蛋饺。每年只要有空我都会做一点，顺便送点给爷爷。今年的肉和蛋配得刚刚好，三十个鸡蛋包了四十个蛋饺。过程蛮顺利的，只是用灶台做火候不好控制，容易焦了皮。&lt;/p&gt;
+&lt;p&gt;上午打扫卫生，又打开网易云伴奏。播放到一首去年年底做清洁时听的歌，感觉时间就像手风琴一样，悠扬地展开了播放列表，里面唱得是一年年琐细的时光。繁忙急促的脚步声、积满灰尘的楼梯扶手，还有歪头凝望枯黄落叶的窗台，一一循着歌声找了回来。我拖着地，心中无比富足，再一次感受到了时光的厚度。&lt;/p&gt;
+&lt;p&gt;去年失了火后，房间装修铺的是木地板，妈妈就格外小心，叮嘱不要用湿拖把，否则木地板容易发翘。我其实蛮喜欢打扫卫生，做一点清洁人感觉非常好，里外都舒畅了些。后来听到锣鼓声，是梦楠今天出殡。汽车将路堵得动弹不得，像是在为她母亲挽留。梦楠昨天才走，她妈妈哭晕了过去，今天看见也还是有人掺着走路。梦楠爸爸应该没有来得及见她最后一面。沈老师是梦楠二伯，也是我和她小学的语文老师。看见他面容憔悴，估计也是身心疲惫，毕竟他一直在预着。&lt;/p&gt;
+&lt;p&gt;梦楠的病因是乳腺癌，不清楚怎么晚期了。跟姐姐提起她的事，她说太可惜了，还有个一岁多的孩子，提到了毕淑敏的《拯救乳房》一书。我看时间是09年出版的，然而这么些年后乳腺癌致死依然不少见，只能说医学常识普及工作做得不好，而且女性本身也没有认识到自己身体的重要性，总是羞于谈论自己。我不喜欢这样，但是我也不知道该怎么办。我会去了解月经，会找资料判断卫生棉条对人体的危害性，我不止一次想同汪汪问起这些，但又觉得不大合适。记得上次网上关于计划生育时女性体内还有节育环的事上了热门，我问妈妈她觉得我无端问这些干嘛。我也才知道，她那年去上海就取掉了，此前为妇科病困了好久。我不免心里对这样没有一点人道的政策和治理逻辑感到内在生理性的恶心。&lt;/p&gt;
+&lt;p&gt;💩🤢🤧&lt;/p&gt;
+&lt;p&gt;不过姐姐跳出农村传统观念的束缚，我感到很高兴。&lt;/p&gt;
+&lt;p&gt;今天中午，两个舅舅来了。我掌勺，正好蛋饺给他们尝个鲜，与金针菇一起煮了个火锅，又做了丐版地三鲜、韭黄鸡蛋、芹菜芽炒千张。小露一手，被夸了一下，心里都乐开了花😁。&lt;/p&gt;
+&lt;p&gt;晚上又做了鱼面，不过失败了。原来看《风味人间4》第5集中，人用鱼肉和山芋粉揉好一起拍打成纸一样薄，自己做了才知道不是那么容易的。于是又掺了面粉，干脆做手擀面了。口感一般，汤倒很鲜。我明天还要再试一遍。&lt;/p&gt;
+&lt;p&gt;天天都会想汪汪女士在做什么。&lt;/p&gt;
+&lt;p&gt;降温了。&lt;/p&gt;
+">扫年</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://mdreame.github.io/post/《何日君再来》歌词/"" data-c="
+          &lt;p&gt;歌词各有不同的版本，在网易云上看着错误的歌词真别扭，我忍着难受。于是去找正确的版本，竟也发现了蛮有趣的东西。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;《何日君再来》这歌最早是在费玉清那听来的，然后知道邓丽君、周旋等等都唱过，才发现是一首很老的歌了。到费玉清这歌词已经被简化掉了。这次是听&lt;strong&gt;孙建平 &amp;amp; Sweet Style&lt;/strong&gt;的版本，就决心查一下看看歌词到底是什么样的。&lt;/p&gt;
+&lt;p&gt;网易云上这版&lt;a href=&#34;https://music.163.com/#/song?id=379000&#34;&gt;《何日君再来》&lt;/a&gt;歌词第二段明显错了，网上不同答案争议最大的地方也就在这。QQ 音乐上的是：&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;小鱼水中游 春宵告不在&lt;br&gt;
+盼了一处情 明月早不在&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;仔细一听也不对。另一个稍可信的版本是：&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;晓露湿中院 沉香飘户外&lt;br&gt;
+寒鸦依树栖 明月照高台&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;周璇原版似乎是这样，但听着有点不太对。唱到“有”字后半段时似乎故意长大了嘴巴。不得不说，那个时期的唱腔是有点怪怪的，不怪鲁迅吐槽......&lt;/p&gt;
+&lt;p&gt;费玉清的版本是：&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;停唱阳关叠 重擎白玉杯&lt;br&gt;
+殷勤频致语 牢牢抚君怀&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;网上也有对这第二段歌词&lt;a href=&#34;https://www.bilibili.com/read/cv4471625/&#34;&gt;关心甚者&lt;/a&gt;，认真得可爱。对比几个版本后，周璇版的依然是个谜题，但可以确定音乐磁场这个版本第二段的歌词是：&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;逍乐时中有 春宵飘吾裁&lt;br&gt;
+寒鸦依树栖 明月照高台&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;学到了一个文字方面的知识点，就是&lt;strong&gt;裁&lt;/strong&gt;字，也&lt;a href=&#34;https://baike.baidu.com/item/%E8%A3%81/4352280#1_2&#34;&gt;可以读&lt;strong&gt;zāi&lt;/strong&gt;&lt;/a&gt;，从衣。因此飘吾裁就说得通了，春宵一刻吾裁飘。&lt;/p&gt;
+&lt;p&gt;确定音乐磁场版本完整版歌词如下：&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;好花不常开 好景不常在&lt;br&gt;
+愁堆解笑眉 泪洒相思带&lt;br&gt;
+今宵离别后 何日君再来&lt;br&gt;
+喝完了这杯 请进点小菜&lt;br&gt;
+人生难得几回醉 不欢更何待&lt;br&gt;
+今宵离别后 何日君再来&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;逍乐时中有 春宵飘吾裁&lt;br&gt;
+寒鸦依树栖 明月照高台&lt;br&gt;
+今宵离别后 何日君再来&lt;br&gt;
+喝完了这杯 请进点小菜&lt;br&gt;
+人生难得几回醉 不欢更何待&lt;br&gt;
+今宵离别后 何日君再来&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;玉漏频相催 良辰去不回&lt;br&gt;
+一刻千金价 痛饮莫徘徊&lt;br&gt;
+今宵离别后 何日君再来&lt;br&gt;
+喝完了这杯 请进点小菜&lt;br&gt;
+人生难得几回醉 不欢更何待&lt;br&gt;
+今宵离别后 何日君再来&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;这歌词写的是真好呀，不得不感叹民国时期人们的文学功底是厉害的。另外，查下来发现&lt;a href=&#34;https://music.163.com/#/song?id=1868448262&#34;&gt;谢雷版&lt;/a&gt;和李香兰这个&lt;a href=&#34;https://music.163.com/#/song?id=1459296575&#34;&gt;日语版&lt;/a&gt;也蛮好听。&lt;/p&gt;
+">《何日君再来》歌词</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://mdreame.github.io/post/不大懂得照顾别人的感受/"" data-c="
+          &lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261651249.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;看到 B 站 up 主嘉倩&lt;a href=&#34;https://www.bilibili.com/video/BV1RD4y1h7wn/?spm_id_from=333.1007.top_right_bar_window_history.content.click&#34;&gt;最新一期视频&lt;/a&gt;中与爸妈一起互动的过程让人觉得安心，是让我羡慕的家庭氛围。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261650546.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+然后嘉倩问她妈妈那是什么山？好像是爸爸在旁边说叫“奶牛山”，蛮可爱的。就忽然想到原来可以鼓励父母给他们取个名字的。为什么不可以呢？山的名字都是由人取的，眼前的山是你看到的山，你就可以给它取个名字。父母可能没有这样的意识，这样制造新的感受必会让他们感到欣喜，也将成为美好的回忆。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261650473.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+嘉倩妈妈见到雪山时，蹦蹦跳跳地指了过去，嘉倩说像个小女孩一样。&lt;/p&gt;
+&lt;p&gt;嘉倩测试他爸“徒步”用英文怎么说。我想起了小时候我爸看我写英语的一幕。我完成了英语抄写作业后，他拿起我的书问我人名怎么写。我当时感到不屑，说人名又不用记，关键在其他的形容词，动词之类有具体含义的词。往后的多年里，我常常在英语环境中被人名卡住，这一不屑延续到了现在。现在看来，我错了。依稀记得六年级的班主任曹春銮评价我就是有点小调皮，会耍小聪明。投机取巧不是正路，也让我吃了苦头。&lt;/p&gt;
+&lt;p&gt;这两年有要鼓励爸学点什么的想法，看到视频又记起来了。他很聪明，学习也很踏实。只是如今有点害怕接触新的东西了，而我也不知道怎么与他沟通。&lt;/p&gt;
+&lt;p&gt;嘉倩父母登完山后，下来买打折的蔬菜。认真喜悦的样子是很有家庭的味道的，于是我想如果以后带父母或者其他人玩，也应该穿插他们熟悉的东西。这样会感觉更好吧，虽然说不出来哪里好。&lt;/p&gt;
+&lt;p&gt;又想到爬山。如何能让人心甘情愿的跟你一起玩，并且丝毫不会感到无聊和身体上的疲惫呢？首先可以学习嘉倩的鼓励法。哇？这个坡度你都能如履平地，太厉害了吧！哈哈。另外就是可以通过介绍路上的花花草草，吸引他们去看，这样在不知觉的过程中休息一下，登山就很优雅了。&lt;/p&gt;
+">不大懂得照顾别人的感受</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://mdreame.github.io/post/一个冷雨天/"" data-c="
+          &lt;p&gt;气温降了，只穿保暖裤腿还是感到冷，于是又加了羊毛裤。总觉得这几年对寒冷不耐了，也没有了期待寒冷的心情。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;又听到张艾嘉唱的《戏雪》，汪汪说节奏要是再慢一点就好了。我觉得再慢点就会让人觉得悲伤了，“哀而不伤”的氛围倒是最能让人消受的。以前喜欢冬天，是期待着雪的飘洒。如今心态没有了那样的轻巧，感到雪前冷冬的难熬。还有什么好期待的呢，何况疫情如此，一颗心早已疲累了。&lt;/p&gt;
+&lt;p&gt;广州现在天气应该是正舒服的，即便降温也不至于太冷，而且天气应该不会太差。不像南京，一到秋冬，空气中的尘霾就罩下来了，一整个季节都是阴沉的天。我只感到气氛压抑，想要逃离。&lt;/p&gt;
+&lt;p&gt;初夏开始养了三盆花草，分别是栀子、茉莉和薄荷。栀子花已经死了一半，茉莉花叶子皱起来，可能是需要施肥。然而我没有那样的耐心去查找种花的知识，只有薄荷不用我操心，好生养。我果然不想对这些花草尽点心力，只希望漂亮地长在花园里，偶让我驻足欣赏就好了。我不想投入精力，如我不信任他人，总觉得疏离一样。&lt;/p&gt;
+&lt;p&gt;总要寻找，总要寻找。这难挨的微漠的冬天。&lt;/p&gt;
+">一个冷雨天</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://mdreame.github.io/post/常用网站导航📑/"" data-c="
+          &lt;p&gt;为了方便使用，将常用的网站做个导航。主要分为知识、技术及知识分享类。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h1 id=&#34;编程&#34;&gt;编程&lt;/h1&gt;
+&lt;h2 id=&#34;入门&#34;&gt;入门&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://csdiy.wiki/&#34;&gt;CS 自学指南&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/19959253&#34;&gt;编程入门指南 2.0（萧井陌）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;语言&#34;&gt;语言&lt;/h2&gt;
+&lt;h3 id=&#34;javascript&#34;&gt;Javascript&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://zh.javascript.info/&#34;&gt;现代 Javascript 教程&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;电子书&#34;&gt;电子书&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://libgen.gs/index.php&#34;&gt;Library Genesis+&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://sobooks.net/&#34;&gt;sobooks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://lorefree.com/&#34;&gt;Lorefree&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.xiaolipan.com/index.html&#34;&gt;小力盘&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.jiumodiary.com/&#34;&gt;鸠摩搜书&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://trasptation.com/ebook/&#34;&gt;PDF Search Engine (trasptation.com)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+">常用网站导航📑</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://mdreame.github.io/post/互联网产品-👉-平替/"" data-c="
+          &lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261703661.webp&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;这是一个清单，主要收集功能相近的“平替”互联网软件。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h1 id=&#34;笔记类&#34;&gt;笔记类&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://flomoapp.com/&#34;&gt;flomo&lt;/a&gt; --&amp;gt; &lt;a href=&#34;https://github.com/usememos/memos&#34;&gt;memos&lt;/a&gt;，也有 obsidian 插件&lt;/li&gt;
+&lt;/ul&gt;
+">互联网产品 👉 平替</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://mdreame.github.io/post/旧博客纪念2022/"" data-c="
+          &lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261703662.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;网站又到期，腾讯云续费挺贵，其次不想花太多精力折腾，就不搞了。现在又转回 GitHub Pages，不用总挂心了。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h2 id=&#34;web&#34;&gt;Web&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261703663.gif&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261703664.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261703665.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261703666.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261703667.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261703668.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;phone&#34;&gt;Phone&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261703669.JPEG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261703670.JPEG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261703672.JPEG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261703673.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261703674.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261703675.JPEG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261703676.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261703677.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261703678.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261703679.JPG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://mdreame-1315121834.cos.ap-hongkong.myqcloud.com/markdown-img/202301261703680.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+">旧博客纪念2022</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://mdreame.github.io/post/大风起，把头摇一摇/"" data-c="
+          &lt;p&gt;最近网上负面消息很多，朋友圈里看见有朋友情绪状态似乎不太对劲了，心里其实有点担忧。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;之前“政治性抑郁”这个词很火，指对当今生活种种现象有一种无力感。各种声音在心里憋得久了总有爆发的时候。对此，我是深有体会的，不过这种体会比疫情来的时间还要早一些。那时候初入社会，过于理想，难以适应。逢亲人离逝，于是将自己际遇不顺的烦懑、初面死亡带来的惶恐，身边人遭遇的不公以及所求理想的无望都混作一团，用不安包裹着，时刻觉得自己像个气球，一经触碰就要爆炸。不愿让任何人知晓我的苦楚，也不忍影响他人，在哪里都待不住。于是只好自绝于亲友，对人事极尽敷衍。&lt;/p&gt;
+&lt;p&gt;人一迷茫就更渴求答案，便奔往图书馆。记得有一排蓝色书皮的《新青年》，就坐地上靠着书架看得人热血沸腾，倍受鼓舞。知道了很多东西，但仅限于知道，其后将有很多苦头教我慢慢尝舐。一言概之，即看来的东西超出了自己的接受能力，消化不了。但其时并没有意识到，总觉得自己比别人懂得多，理所当然地有勇气有义务去指点形形色色的人和事，觉得身边人是如此地冷漠。沉浸在这样一种空洞的氛围中，使我回过头来发现失去了很多东西，比如朋友。现在看到年轻的孩子也有这样的困惑，更似有重蹈我小小覆辙的迹象，不免有些担心。&lt;/p&gt;
+&lt;p&gt;很久之前读过池莉的一本书，叫做《大树小虫》，以两个家庭的结合讲三代人的故事，书名似有隐喻，大树早已被小虫钻噬得腐烂空洞了。但看下来全书像是她个人生活的吐槽本一样，极尽讽刺挖苦。这又使我想起民国时期的黑幕小说，有一本叫做《中国黑幕大观》，足百万字。其作者说明写作意图，“世教衰微，道德堕落，益以内乱外患，商业陵夷，国人生计困难，遂相率为卑污残忍、诈伪欺罔之事，以求幸获。受其祸者，无所得伸，或泄其愤于口舌，文人笔而存之，是为时下流行之黑幕......”。然而朱光潜在《文学上的低级趣味》中则指出黑幕小说不能仅仅依靠黑幕去刺激去满足读者，逢迎人心中的需要，若隔岸观火，实也属于一种低级趣味。&lt;/p&gt;
+&lt;p&gt;时下就有不少自媒体为了流量抑或其他原因而渲染一种诡怪的气氛，煽动用户的情绪。没有过程的梳理和理性的分析，只是在借着片面的消息发泄情绪，所以常常看到事件发生的过程竟是一波三折，大众消耗了时间，相关部门更是要花费额外的精力去解释。&lt;/p&gt;
+&lt;p&gt;揭露黑暗面有其需要，过去的媒体报刊承担了监督的职责。在传统媒体衰落，新媒体崛起的这一过程中，这一职能是逐步分散的。目前主流媒体中好像只有财新算得上深度报道，新华社偶有但毕竟官方色彩过浓，其他多家似乎已经躺平了。这一现象以时代背景和政治因素的影响为主，其次是因为众多自媒体成了发声渠道，但并不具备媒体人的素养，以致于从总体上看来呈现两种极端。一面是商业依托的过度娱乐化，另一面则是反面的声音太大。为了治理社会风气，2020年3月开始实行网络内容生态管理的规定。从正面效果看，广告、诈骗、低俗和虚假信息减少了，网络环境变得清净了。同时，反面的声音一段时间内也在减小。但意识形态层面的争吵开始占据了风头，不同人群都能表达自己的看法和主张，而这个真假好坏是难辨难分的，争论并不能出结果。&lt;/p&gt;
+&lt;p&gt;说回池莉。她在《什么书不必读》中说要在阅读中体会高贵与优雅，并以劳动阶级何至于背路易威登作反例来说明人不要过度看重物质层面的需要。表面上看这是对消费文化嗤之以鼻，但却忽视人人都追求体面和平等的渴望，这体现出来的是傲慢和优越感。劳动阶级也不必就要拿最低的报酬，着最素的衣衫。她说道，“高贵优雅不是外在的东西......而是你面对他人乃至这个世界，能够表现出自己的善良与宽容，坚强与淡定，宠辱不惊的定力。”然而她在书中似骂街的言语俨然是自己思想状态的投射，这本书好似她自己言行不一的明证，不然就是要以它来告诉人高贵典雅也如大树一般空洞。意识形态上的局限使她不能够触及她所处现实的本质，东捣西捶，反而有欲盖弥彰的嫌疑。于是有人称她为“小市民名作家”，说她“会走红一阵，但不会是一个大作家”，这便可以理解了。&lt;/p&gt;
+&lt;p&gt;在作为一位作家的自觉这一点上，她不及另一位疫情期间在武汉的女性作家。这位女作家在疫情伊始因批评的言论在外网受到热捧，在国内却成为众矢之的。等到国外疫情扩散开来之后，国外原本支持她的又反对她，国内曾反对她的如今态度似乎又暧昧了起来，风向变化速度之快不能不让人感到诧异。在这样生动戏剧的现实情景下，不知热望的年轻人心中是怎样一番感受，还能坚定维护心中的正确么。现在“同志”这个称谓在网络上出现的频次仿佛又变多了，但从以上来看，跟你持一样态度的人未必就是同志者。&lt;/p&gt;
+&lt;p&gt;再说回黑幕小说。黑幕小说从1915年开始到五四运动后便销声匿迹，从写作意图来看，其出发点是好的，那又何以短短几年时间便落幕了？一个原因是说了，但说的不多，说不到点子上。其次就是内容不加取舍，朱光潜就是出于道德和美学的层面，批评黑幕小说没有考虑到长远的影响，以致于后来成了某些人的教科书。周氏兄弟也都对其进行了批判。&lt;/p&gt;
+&lt;p&gt;而紧接黑幕小说之后，鸳鸯蝴蝶派便流行起来。由此便知道，不论过去或现在，要么黑暗恐怖带点阴谋色彩的，要么娱乐奢迷似雪月风花的，总是这两样最为吸睛。这不得不说明一下时代背景，新中国成立之初文盲率为80%左右，更不用说民国初期。知识分子秉着对人的关怀去批评这两类作品，然而这些作品却在民间流行开来，出现这样的情况只能说可以理解。但是在一百多年后的今天，如果依然没有一点变改，岂不令人匪夷所思。改变当然是有的，如今人人都有机会接受良好的教育，但同时如前所说，媒体环境也发生了变化，具备如此庞大信息源的网络内容治理是有难度的。每个人应该都具备一定的分辨能力，将态度观点和事实分开来，不被舆论左右。&lt;/p&gt;
+&lt;p&gt;我想表达的意思就是，事情都是很复杂的，不能由真假好坏来简单评断。过往的历史已经说明，在那些造成惨痛后果的事件或运动中，无人不是有颗赤诚之心。但须知事情是在不断变化的，不会总按照预定的计划发展，要时时冷静，重新看待。《史记》被称为史家之绝唱，其绝在于太史公创造了新的史观。而其史观之超前，也很绝。汉武帝举全国之力一兴汉之伟业，而生民疲敝，衣食不足。在《平准书》的结尾，太史公评价说“古者尝竭天下之资财以奉其上，犹自以为不足也。无异故云，事势之流，相激使然，曷足怪焉。”早在千年前太史公就表明了对历史的态度，人不要囿于一时。年轻的孩子不应该将过多的热情投入到宏大的东西中去，把握不住的。世易时移，情况与过去已然不同了。&lt;/p&gt;
+&lt;p&gt;可能发展的现状和方向一时没有期望中的那么好，但是绝没有想象中的那么坏。比如教育内卷，得失心太重可能说明并不适合这条路。是摆脱不了观念的束缚，也找不到想要的自由。时至今日，大可以将学校看成是培训公司，获得职业认证后便去自己想从事的方向。同时从另一面来看，这是个打破旧观念的机会，除了”千军万马走一条路“，广阔天地应当大有作为。&lt;/p&gt;
+&lt;p&gt;再比如各地疫情出现的层层加码的问题，这是整个系统的问题，在对其感到愤怒的同时要了解为什么会出现这样的情况，而不是一味地表明反对的态度。物理学家费曼在与NASA官员打交道的时候也对其中的官僚主义嗤之以鼻。而官僚主义不是某一个系统某一个国家特有的问题，而是行政系统日益发展繁复的结果，并且由于现代化的影响在中国又加重了这一趋势。因此，要改变这一现象，首先得理解为什么基层政治会失灵。然而这又不仅仅是个政治问题，也是个文化观念的问题。有这样一个为人熟悉的场景：小孩做不出来题目，家长一边教一边呵斥，小孩反而更不会做了。这是是个家长制文化的典型问题。如此多重因素叠加到一起，要解决这样的问题不容易。把人当人，理性和尊重是每个人身体力行出来的，不是被索求出来的。文化和精神的塑造不是说有就有的。&lt;/p&gt;
+&lt;p&gt;年轻人关注社会的，但要有审慎的思考，而不是追求公正的狂热，过去的事件中认为自己受到莫大欺骗的往往是呼唤声最高的人，当浪潮退去，理想和热情也都被卷走了。现已身处时代的洪流之中，我只希望孩子们不要再以身扑火，要学会保护自己，不可让善意被驱使或利用。以前听到时代这个词，作为渺小一员总觉得很遥远，如今人人都应该能体会到时代的距离了。疫情给人带来伤痛的记忆，但同时也紧紧把人联系到一起，甚至可以说塑造了几代人的共同经验。这么多人的力量能聚在一起，不可谓不是一次宝贵的机会，决定人们心联系到一起，还是离散的机会。&lt;/p&gt;
+&lt;p&gt;不能掌控的事情就作为一位见证者抑或记录者，可以掌控的事情就尽力做到最好。就拿做核酸来举例，有家长因为孩子上学快迟到而临时插了个队，但有一个就有第二个，很快起了争吵，队伍也停滞不前。家长要求体谅一下孩子，队伍前面的人自然是体谅，靠后的人当然不答应。然而家长争红脸的时候，可能没注意到孩子面对一列人直视的目光和激动的言语时，神情茫然，手脚无措，或许他去了学校一天都不会有好的心情。想得更甚一点，他长大后回想起这时期，浮现的可能是一张张狰狞的面孔，而非来自大人的善意和关怀。&lt;/p&gt;
+&lt;p&gt;再比如核酸到点停止检测而引起冲突，队伍过长而阻碍了交通，假若自己在场能否自发参与协调呢。又或者提前而不是临了才打开检测码，检测的时候稍弯多一点腰而不用医护人员将手臂举得老高。这是很实在的小事，是将体谅医护人员落到了实处，可并不见得人人都有这样的自觉。赶紧弄完，让他们歇息一下才是真的体谅。&lt;/p&gt;
+&lt;p&gt;再就是居家期间可以读写书。我想每个人都应该读一读《毛选》，提升自己的政治素养。作为五四运动的参与者，不同思想理论的实践者，新中国的主要缔造者，国家命运转折都与其息息相关，他的思想和经历有什么理由不去了解呢。不过读的时候可能会感到困惑，会发现有矛盾。这个时候理性的作用就凸显了，应当怀着质疑一切的态度去思考，如此便是对的么，形势背景今昔有何迁变，过去的准则放到今天仍适用么。在读书过程中走过最前面所述的弯路后，愈发觉得循序渐进、有人引导的重要性。因此这里推荐《毛泽东读书笔记解析》一书与前书搭配阅读。后书详尽地搜集了相关资料，介绍他是如何读书思考，其思想形成的渊源以及变化和发展，可以更具体地了解毛泽东的形象，从而知道他是如何看待经济政治问题以及如何做决策。&lt;/p&gt;
+&lt;p&gt;或者听点积极的音乐。八十年代某段时间内，社会气氛都是积极乐观的，人人都像在希望的田野上期待着明天更好。这一时代氛围也反映在歌曲上，比如整体上是一种简单自然的风格，但又蕴含哲理。这里安利一首刘文正的《小草》吧。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;大风起 把头摇一摇&lt;br&gt;
+风停了 又挺直腰&lt;br&gt;
+大雨来 弯着背让雨浇&lt;br&gt;
+雨停了抬起头 站直脚&lt;br&gt;
+不怕风 不怕雨 立志要长高&lt;br&gt;
+小草实在是并不小&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;变化太快的时代，笨拙一点未尝就是坏事。收拾心情，保持身体健康。不要赌球，不能逞一时的快意，去发泄积攒的冲动，赌输了心情反而更糟。要沉静下来，找自己的方向。若前路不明，记得站稳脚下，回头望望。&lt;/p&gt;
+&lt;p&gt;“足于性者，天损不能入；贞于期者，时累不能淫。是以迅风陵雨，不谬晨禽之察；劲阴杀节，不凋寒木之心。”保持住内在的秩序感，该做什么便做什么。天气终于冷了，但春天更接近了，相信一切很快都会过去。&lt;/p&gt;
+">大风起，把头摇一摇</a>
+      </div>
+      
+    </div>
+    <div class="page">
+      <div id="page_ul"></div>
+    </div>
+  </div>
+</div>
+<script>
+  !function () {
+    let searchMask = document.querySelector('#search_mask');
+    let result = document.querySelector('#result');
+    let items = document.querySelectorAll('.item');
+    let searchBox = document.querySelector('#search');
+    let statCount = document.querySelector('#stat_count');
+    let statTimes = document.querySelector('#stat_times');
+    let pageUl = document.querySelector('#page_ul');
+    let close = document.querySelector('#close');
+    
+    close.addEventListener('click', function() {
+      searchMask.style = 'display: none;'
+    })
+
+    let finds = [];
+    let contents = [];
+    let pageSize = 10;
+    items.forEach(item => {
+      let a = item.querySelector('a');
+      contents.push({
+        title: a.innerText,
+        details: a.dataset.c,
+        link: a.href
+      })
+      item.remove();
+    })
+
+    function insertStr(soure, start, count) {
+      let newStr = soure.substr(start, count);
+      return soure.slice(0, start) + '<em>' + newStr + '</em>' + soure.slice(start + count);
+    }
+
+    pageUl.addEventListener('click', function(event) {
+      let target = event.target;
+      if (target.__proto__ === HTMLSpanElement.prototype) {
+        appendResults(parseInt(target.dataset.i));
+      }
+    })
+
+    function appendResults(index) {
+      let htmlResult = '';
+      let start = index || 0;
+      let end = Math.min(start + pageSize, finds.length);
+      for (let i = start; i < end; i++) {
+        const current = finds[i];
+        let html = current.title;
+        let sum = 0;
+        let positions = current.positions;
+        positions.forEach(position => {
+          html = insertStr(html, position.start + sum, position.count);
+          sum += 9;
+        })
+        htmlResult += `<div class="item"><a class="result-title" href="${current.link}">${html}</a></div>`;
+      }
+      result.innerHTML = htmlResult;
+      pageUl.innerHTML = '';
+      let count = finds.length / pageSize;
+      let lis = '';
+      if (start !== 0) {
+        lis += `<span class="fa fa-angle-left" data-i='${start - 1}'></span>`;
+      }
+      for (let i = 0; i < count; i++) {
+        lis += `<span class='${i === start?'current':''}' data-i='${i}'>${i+1}</span>`;     
+      }
+      if (start+1 < count) {
+        lis += `<span class="fa fa-angle-right" data-i='${start+1}'></span>`;  
+      }
+      pageUl.innerHTML = lis;
+    }
+
+    function search(delay) {
+      let timer = null
+      return function () {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          let start = Date.now();
+          let segments = searchBox.value.split(' ').filter(c => c != '');
+          if (segments.length <= 0) {
+            return;
+          }
+          finds = [];
+          let htmlResult = '';
+          contents.forEach(content => {
+            let title = content.title;
+            let positions = [];
+            let find = false;
+            segments.forEach((segment) => {
+              if (content.title.includes(segment)) {
+                find = true;
+                positions.push({
+                  start: content.title.indexOf(segment),
+                  count: segment.length
+                })
+              } else if (content.details.includes(segment)) {
+                find = true;
+              }
+            });
+            if (find) {
+              finds.push({
+                title: content.title,
+                link: content.link,
+                positions
+              });
+            }
+          })
+          appendResults(0);
+          statCount.textContent = finds.length;
+          statTimes.textContent = Date.now() - start;
+        }, delay)
+      }
+    }
+    searchBox.addEventListener('input', search(200));
+  }()
+</script>
+
+<input hidden id="copy" />
+<script>
+  !function () {
+    let times = document.querySelectorAll('.publish-time');
+    for (let i = 0; i < times.length; i++) {
+      let date = times[i].dataset.t;
+      let time = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
+      if (time < 60) {
+        str = time + '秒之前';
+      } else if (time < 3600) {
+        str = Math.floor(time / 60) + '分钟之前';
+      } else if (time >= 3600 && time < 86400) {
+        str = Math.floor(time / 3600) + '小时之前';
+      } else if (time >= 86400 && time < 259200) {
+        str = Math.floor(time / 86400) + '天之前';
+      } else {
+        str = times[i].textContent;
+      }
+      times[i].textContent = str;
+    }
+  }();
+</script>
+
+<script>
+  let language = '';
+  if (language !== '') {
+    let map = new Map();
+    if (language === 'en') {
+      map.set('search', 'Search');
+      map.set('category', 'Categories');
+      map.set('article', 'Articles');
+      map.set('tag', 'Tags');
+      map.set('top', 'Top');
+      map.set('publish', 'published');
+      map.set('minute', ' minutes');
+      map.set('read-more', 'Read More');
+      map.set('view', 'View');
+      map.set('words', ' words');
+      map.set('category-in', 'category in');
+      map.set('preview', 'Meta');
+      map.set('index', 'Toc');
+      map.set('no-archives', "You haven't created yet");
+      map.set('archives', " articles in total");
+      map.set('cloud-tags', " tags in total");
+      map.set('copyright', "Copyright: ");
+      map.set('author', "Author: ");
+      map.set('link', "Link: ");
+      map.set('leave-message', "Leave a message");
+      map.set('format', "Links Format");
+      map.set('site-name', "Name: ");
+      map.set('site-link', "Link: ");
+      map.set('site-desc', "Desc: ");
+      map.set('stat', " related results, taking ");
+      map.set('stat-time', " ms");
+      map.set('site-img', "Image: ");
+    }
+
+    if (map.size > 0) {
+      let lanElems = document.querySelectorAll('.language');
+      lanElems.forEach(elem => {
+        let lan = elem.dataset.lan, text = map.get(lan);
+        if (elem.__proto__ === HTMLInputElement.prototype) {
+          elem.placeholder = text
+        } else {
+          if (elem.dataset.count) {
+            text = elem.dataset.count + text;
+          }
+          elem.textContent = text;
+        }
+      })
+    }
+  }
+
+  window.Clipboard = (function (window, document, navigator) {
+    var textArea,
+      copy;
+
+    // 判断是不是ios端
+    function isOS() {
+      return navigator.userAgent.match(/ipad|iphone/i);
+    }
+    //创建文本元素
+    function createTextArea(text) {
+      textArea = document.createElement('textArea');
+      textArea.value = text;
+      textArea.style.width = 0;
+      textArea.style.height = 0;
+      textArea.clientHeight = 0;
+      textArea.clientWidth = 0;
+      document.body.appendChild(textArea);
+    }
+    //选择内容
+    function selectText() {
+      var range,
+        selection;
+
+      if (isOS()) {
+        range = document.createRange();
+        range.selectNodeContents(textArea);
+        selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        textArea.setSelectionRange(0, 999999);
+      } else {
+        textArea.select();
+      }
+    }
+
+    //复制到剪贴板
+    function copyToClipboard() {
+      try {
+        document.execCommand("Copy")
+      } catch (err) {
+        alert("复制错误！请手动复制！")
+      }
+      document.body.removeChild(textArea);
+    }
+
+    copy = function (text) {
+      createTextArea(text);
+      selectText();
+      copyToClipboard();
+    };
+
+    return {
+      copy: copy
+    };
+  })(window, document, navigator);
+
+  function copyCode(e) {
+    if (e.srcElement.tagName === 'SPAN' && e.srcElement.classList.contains('copy-code')) {
+      let code = e.currentTarget.querySelector('code');
+      var text = code.innerText;
+      if (e.srcElement.textContent === '复制成功') {
+        return;
+      }
+      e.srcElement.textContent = '复制成功';
+      (function (elem) {
+        setTimeout(() => {
+          if (elem.textContent === '复制成功') {
+            elem.textContent = '复制代码'
+          }
+        }, 1000);
+      })(e.srcElement)
+      Clipboard.copy(text);
+    }
+  }
+
+  let pres = document.querySelectorAll('pre');
+  pres.forEach(pre => {
+    let code = pre.querySelector('code');
+    let copyElem = document.createElement('span');
+    copyElem.classList.add('copy-code');
+    copyElem.textContent = '复制代码';
+    pre.appendChild(copyElem);
+    pre.onclick = copyCode
+  })
+
+</script>
+<script src="/media/js/motion.js"></script>
+
+
+  <script
+    src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+  <script>
+    var scroll = new SmoothScroll('a[href*="#"]', {
+      speed: 200
+    });
+  </script>
+
+
+
+
+
+
+</html>
