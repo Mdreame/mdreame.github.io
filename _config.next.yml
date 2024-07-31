@@ -260,7 +260,8 @@ post_meta:
 # Dependencies: https://github.com/next-theme/hexo-word-counter
 symbols_count_time:
   separated_meta: true
-  item_text_total: ture
+  item_text_total: false
+  wpm: 275
 
 # Use icon instead of the symbol # to indicate the tag at the bottom of the post
 tag_icon: false
@@ -296,7 +297,7 @@ related_posts:
 # Easily browse and edit blog source code online.
 post_edit:
   enable: true
-  url: https://github.com/Mdreame/mdreame.github.io/tree/main/subdirectory-name/ # Link for view source
+  url: https://github.com/Mdreame/mdreame.github.io/tree/main/source/ # Link for view source
   #url: https://github.com/user-name/repo-name/edit/branch-name/subdirectory-name/ # Link for fork & edit
 
 # Show previous post and next post in post footer if exists
@@ -440,7 +441,7 @@ font:
   global:
     external: true
     family: Monda, PingFang SC, Microsoft YaHei, sans-serif
-    size: 
+    size: 14px
 
   # Font settings for site title (.site-title).
   title:
