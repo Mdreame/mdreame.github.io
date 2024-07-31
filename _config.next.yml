@@ -37,10 +37,10 @@ custom_file_path:
 # ---------------------------------------------------------------
 
 # Schemes
-scheme: Muse
+#scheme: Muse
 #scheme: Mist
 #scheme: Pisces
-#scheme: Gemini
+scheme: Gemini
 
 # Dark Mode
 darkmode: true
@@ -270,7 +270,7 @@ tag_icon: false
 # Front-matter variable (nonsupport animation).
 reward_settings:
   # If true, a donate button will be displayed in every article by default.
-  enable: true
+  enable: false
   animation: false
 
 reward:
@@ -384,7 +384,7 @@ codeblock:
 back2top:
   enable: true
   # Back to top in sidebar.
-  sidebar: true
+  sidebar: false
   # Scroll percent label in b2t button.
   scrollpercent: true
 
@@ -403,10 +403,10 @@ reading_progress:
 bookmark:
   enable: true
   # Customize the color of the bookmark.
-  color: "#222"
+  color: "#424242"
   # If auto, save the reading progress when closing the page or clicking the bookmark-icon.
   # If manual, only save it by clicking the bookmark-icon.
-  save: auto
+  save: manual
 
 # `Follow me on GitHub` banner in the top-right corner.
 github_banner:
