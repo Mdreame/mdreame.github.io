@@ -37,10 +37,10 @@ custom_file_path:
 # ---------------------------------------------------------------
 
 # Schemes
-#scheme: Muse
+scheme: Muse
 #scheme: Mist
 #scheme: Pisces
-scheme: Gemini
+#scheme: Gemini
 
 # Dark Mode
 darkmode: true
@@ -122,7 +122,7 @@ sidebar:
 
   # Sidebar width.
   # Applicable to Muse | Mist and mobile of Pisces | Gemini.
-  width_expanded: 320
+  width_expanded: 300
   # Applicable to desktop of Pisces | Gemini.
   width_dual_column: 240
 
@@ -225,7 +225,7 @@ footer:
 
   # Beian ICP and gongan information for Chinese users. See: https://beian.miit.gov.cn, https://beian.mps.gov.cn
   beian:
-    enable: true
+    enable: false
     icp:
     # The digit in the num of gongan beian.
     gongan_id:
@@ -270,12 +270,12 @@ tag_icon: false
 # Front-matter variable (nonsupport animation).
 reward_settings:
   # If true, a donate button will be displayed in every article by default.
-  enable: false
+  enable: true
   animation: false
 
 reward:
-  #wechatpay: /images/wechatpay.png
-  #alipay: /images/alipay.png
+  wechatpay: /images/wechatpay.png
+  alipay: /images/alipay.png
   #paypal: /images/paypal.png
   #bitcoin: /images/bitcoin.png
 
@@ -725,7 +725,7 @@ gitalk:
   repo: blog-comments # Repository name to store issues
   client_id: Ov23liQv8Vsafd6WKAx8 # GitHub Application Client ID
   client_secret: e6077bbb3e86c8ea9fba5b3a16dafc88a1ba4ccd # GitHub Application Client Secret
-  admin_user: ['Mdreame'] # GitHub repo owner and collaborators, only these guys can initialize gitHub issues
+  admin_user: 'Mdreame' # GitHub repo owner and collaborators, only these guys can initialize gitHub issues
   distraction_free_mode: true # Facebook-like distraction free mode
   # When the official proxy is not available, you can change it to your own proxy address
   proxy: https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token # This is official proxy address
