@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Mdreame</title>
+  
+  
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2024-08-20T03:13:11.534Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>Mdreame</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test</title>
+    <link href="http://example.com/2024/08/20/20240820-test/"/>
+    <id>http://example.com/2024/08/20/20240820-test/</id>
+    <published>2024-08-20T15:09:08.000Z</published>
+    <updated>2024-08-20T03:13:11.534Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;所谓记忆，就是对陌生的东西用熟悉的事物进行编码重组。&lt;/p&gt;
+&lt;p&gt;感觉自己记忆力有下降的趋势，于是在微信读书找了本《我最想要的记忆魔法书》开始读。其中提到一个观点印象很深刻：提高记忆的关键在于想象和创意。简单说就是将所需记忆的东西尽可能地与其他事物通过图像联系成一个故事。</summary>
+        
+      
+    
+    
+    
+    
+    <category term="阅读" scheme="http://example.com/tags/%E9%98%85%E8%AF%BB/"/>
+    
+    <category term="记忆" scheme="http://example.com/tags/%E8%AE%B0%E5%BF%86/"/>
+    
+    <category term="学习" scheme="http://example.com/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>记忆、联想和创造力</title>
+    <link href="http://example.com/2024/08/02/20240802-%E8%AE%B0%E5%BF%86%E3%80%81%E8%81%94%E6%83%B3%E5%92%8C%E5%88%9B%E9%80%A0%E5%8A%9B/"/>
+    <id>http://example.com/2024/08/02/20240802-%E8%AE%B0%E5%BF%86%E3%80%81%E8%81%94%E6%83%B3%E5%92%8C%E5%88%9B%E9%80%A0%E5%8A%9B/</id>
+    <published>2024-08-02T15:09:08.000Z</published>
+    <updated>2024-08-19T15:20:22.165Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;所谓记忆，就是对陌生的东西用熟悉的事物进行编码重组。&lt;/p&gt;
+&lt;p&gt;感觉自己记忆力有下降的趋势，于是在微信读书找了本《我最想要的记忆魔法书》开始读。其中提到一个观点印象很深刻：提高记忆的关键在于想象和创意。简单说就是将所需记忆的东西尽可能地与其他事物通过图像联系成一个故事。</summary>
+        
+      
+    
+    
+    
+    
+    <category term="阅读" scheme="http://example.com/tags/%E9%98%85%E8%AF%BB/"/>
+    
+    <category term="记忆" scheme="http://example.com/tags/%E8%AE%B0%E5%BF%86/"/>
+    
+    <category term="学习" scheme="http://example.com/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用 Libby 阅读英文原著</title>
+    <link href="http://example.com/2024/08/01/20240801-%E7%94%A8%20Libby%20%E9%98%85%E8%AF%BB%E8%8B%B1%E6%96%87%E5%8E%9F%E8%91%97/"/>
+    <id>http://example.com/2024/08/01/20240801-%E7%94%A8%20Libby%20%E9%98%85%E8%AF%BB%E8%8B%B1%E6%96%87%E5%8E%9F%E8%91%97/</id>
+    <published>2024-08-01T14:59:58.000Z</published>
+    <updated>2024-08-19T15:26:09.534Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Libby 是一款电子书阅读应用程序，能帮助你借阅并在线浏览世界各地图书馆的电子书、有声书和杂志，前提是你拥有或能申请到该图书馆的读者证。&lt;/p&gt;
+&lt;p&gt;Libby 有&lt;a href=&quot;https://libbyapp.com/&quot;&gt;网页版&lt;/a&gt;和</summary>
+        
+      
+    
+    
+    
+    
+    <category term="阅读" scheme="http://example.com/tags/%E9%98%85%E8%AF%BB/"/>
+    
+    <category term="app" scheme="http://example.com/tags/app/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>消散的笔记</title>
+    <link href="http://example.com/2024/07/31/20240731-%E6%B6%88%E6%95%A3%E7%9A%84%E7%AC%94%E8%AE%B0/"/>
+    <id>http://example.com/2024/07/31/20240731-%E6%B6%88%E6%95%A3%E7%9A%84%E7%AC%94%E8%AE%B0/</id>
+    <published>2024-07-31T14:59:58.000Z</published>
+    <updated>2024-08-19T15:17:20.826Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;配齐苹果全家桶的一个原因是觉得 iCloud 同步实在是太舒服了，让人非常省心。在 Apple Notes 中手写笔记，可以实时显示在 Mac</summary>
+        
+      
+    
+    
+    
+    
+    <category term="inner peace" scheme="http://example.com/tags/inner-peace/"/>
+    
+    <category term="写作" scheme="http://example.com/tags/%E5%86%99%E4%BD%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《恋妻家宫本》</title>
+    <link href="http://example.com/2024/07/30/20240730-%E3%80%8A%E6%81%8B%E5%A6%BB%E5%AE%B6%E5%AE%AB%E6%9C%AC%E3%80%8B/"/>
+    <id>http://example.com/2024/07/30/20240730-%E3%80%8A%E6%81%8B%E5%A6%BB%E5%AE%B6%E5%AE%AB%E6%9C%AC%E3%80%8B/</id>
+    <published>2024-07-30T14:59:58.000Z</published>
+    <updated>2024-08-19T15:15:08.063Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;爱一个人永远也不要让他难堪，不要让他感到被嫌弃。多说积极肯定的话，不能逞意气。&lt;/p&gt;
+&lt;p&gt;不要让他感到一个人, 或边界感太强，抑或过分客气。其实相处是需要两个人一起做决定，互相影响的。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我会告诉 27</summary>
+        
+      
+    
+    
+    
+    
+    <category term="爱" scheme="http://example.com/tags/%E7%88%B1/"/>
+    
+    <category term="电影" scheme="http://example.com/tags/%E7%94%B5%E5%BD%B1/"/>
+    
+  </entry>
+  
+</feed>
