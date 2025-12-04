@@ -1,0 +1,13 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "mdreame.life",
+    "description": "",
+    "home_page_url": "https://mdreame.github.io",
+    "feed_url": "https://mdreame.github.io/feed.json",
+    "user_comment": "",
+    "author": {
+        "name": "Xu Jiang"
+    },
+    "items": [
+    ]
+}
