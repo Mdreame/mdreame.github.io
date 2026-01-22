@@ -2,7 +2,7 @@ title_primary: "朝花夕拾" # the bigger text
 title_secondary: "Mdreame" # the smaller text
 keywords:
 
-truncate_len: 160
+truncate_len: 120
 
 twitter: #username
 rss: atom.xml

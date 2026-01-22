@@ -30,7 +30,7 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
-about_page: p/about/
+about_page: p/10f10fcde4d34c9b9524a57cf2e9e97e/
 
 # Writing
 new_post_name: :title.md # File name of new posts
