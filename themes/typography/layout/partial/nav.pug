@@ -24,6 +24,11 @@ div#site-nav.site-title-links
             else
                 a(href=config.root + config.tag_dir)= __('Tags')
         - }
+        li
+            if is_current('about/')
+                a.current(href=config.root + config.about_page)= __('About')
+            else
+                a(href=config.root + config.about_page)= __('About')
         include ../mixins
         +make_page_links()
         li.soc
