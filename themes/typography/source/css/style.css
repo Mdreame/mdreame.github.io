@@ -352,7 +352,7 @@ a {
     -moz-transition: color 0.3s ease 0s, background-color 0.3s ease 0s;
     -o-transition: color 0.3s ease 0s, background-color 0.3s ease 0s;
     -webkit-transition: color 0.3s ease 0s, background-color 0.3s ease 0s;
-    border-bottom: solid #2e405b 2px;
+    /* border-bottom: solid #2e405b 2px; */
     padding: 0;
     cursor: pointer;
     cursor: hand
@@ -366,7 +366,7 @@ a:focus {
 a:hover {
     color: #fff !important;
     background-color: #2e405b;
-    border-bottom: solid transparent 2px
+    /* border-bottom: solid transparent 2px */
 }
 
 a:focus {
@@ -446,13 +446,18 @@ footer * {
 
 .post-container {
     margin: 0 0 20px 0;
-    font-weight: normal
+    font-weight: normal;
+    border-bottom: dashed 1px #2e405b;
+}
+
+.listing-post{
+    display: flex;
 }
 
 .post-title {
     font-size: 18px;
     font-weight: bold;
-    margin: 3px 0
+    margin: 3px 10px 3px 0;
 }
 
 .post-meta {
