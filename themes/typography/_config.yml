@@ -21,7 +21,7 @@ dove: # For fun ONLY. Set to true to 'disable' comments on your site.
 showPageCount: true
 
 # Set true to show category or tags behind post titles
-showCategories: true
+showCategories: false
 showTags: true
 
 # Color scheme
