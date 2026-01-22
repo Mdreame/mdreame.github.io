@@ -127,7 +127,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Source Sans Pro", "Roboto", "Helvetica", "Helvetica Neue", "Source Han Sans SC", "Source Han Sans TC", "PingFang SC", "PingFang HK", "PingFang TC", sans-serif;
+    font-family: "Noto Sans SC","Source Sans Pro", "Roboto", "Helvetica", "Helvetica Neue", "Source Han Sans SC", "Source Han Sans TC", "PingFang SC", "PingFang HK", "PingFang TC", sans-serif;
     color: #2e405b
 }
 
@@ -177,7 +177,7 @@ h6 {
 
 body {
     font-size: 16px;
-    line-height: 1.5em;
+    line-height: 1.75;
     background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACFJREFUeNpiZGBg4GegAsBlCD8TqSYNQg2Mo6FEBAAIMACdPABtrSW/IQAAAABJRU5ErkJggg==");
     background-repeat: repeat;
     background-attachment: fixed;
@@ -352,7 +352,7 @@ a {
     -moz-transition: color 0.3s ease 0s, background-color 0.3s ease 0s;
     -o-transition: color 0.3s ease 0s, background-color 0.3s ease 0s;
     -webkit-transition: color 0.3s ease 0s, background-color 0.3s ease 0s;
-    /* border-bottom: solid #2e405b 2px; */
+    border-bottom: solid #2e405b 1px;
     padding: 0;
     cursor: pointer;
     cursor: hand
@@ -450,6 +450,11 @@ footer * {
     /* border-bottom: dashed 1px #2e405b; */
 }
 
+.post-container p:not(:first-child, :nth-child(2)) {
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
 .listing-post{
     display: flex;
     align-items: baseline;
@@ -508,7 +513,7 @@ figure .code pre {
 
 @media (max-width: 768px) {
     body {
-        line-height: normal
+        line-height: 1.75
     }
 
     h1 {
@@ -583,7 +588,7 @@ figure .code pre {
         text-align: left;
         height: auto;
         margin: 0;
-        padding: 20px 30px;
+        padding: 20px 15px;
         overflow: auto
     }
 
@@ -604,7 +609,7 @@ figure .code pre {
     .site-title-links ul li {
         display: inline;
         margin: 0 3px;
-        font-size: 16px
+        font-size: 18px
     }
 
     footer {
@@ -679,7 +684,7 @@ figure .code pre {
 
 @media only screen and (max-height: 600px) {
     body {
-        line-height: normal
+        line-height: 1.75
     }
 
     h1 {
@@ -754,7 +759,7 @@ figure .code pre {
         text-align: left;
         height: auto;
         margin: 0;
-        padding: 20px 30px;
+        padding: 20px 15px;
         overflow: auto
     }
 
