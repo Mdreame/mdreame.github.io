@@ -2,6 +2,8 @@ title_primary: "朝花夕拾" # the bigger text
 title_secondary: "Mdreame" # the smaller text
 keywords:
 
+truncate_len: 160
+
 twitter: #username
 rss: atom.xml
 weibo: #username/id
@@ -23,3 +25,4 @@ showTags: true
 
 # Color scheme
 themeStyle: light # light/dark
+
