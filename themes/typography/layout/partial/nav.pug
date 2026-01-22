@@ -39,6 +39,9 @@ div#site-nav.site-title-links
             if theme.weibo
                 a(href="http://weibo.com/u/" + theme.weibo, target="_blank", rel="noopener noreferrer", aria-label="Sina Weibo")
                     i.fa.fa-weibo &nbsp;
+            if theme.email
+                a(href="mailto:" + theme.email, target="_blank", rel="noopener noreferrer", aria-label="Email")
+                    i.fa.fa-envelope &nbsp;
             if theme.rss
                 a(href=config.url + "/" + theme.rss, target="_blank", rel="noopener noreferrer", aria-label="RSS")
                     i.fa.fa-rss &nbsp;
