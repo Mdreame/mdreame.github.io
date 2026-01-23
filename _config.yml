@@ -100,6 +100,22 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: typography
 
+# 缓存和资源优化（Hexo 8+ 内置功能）
+cache:
+  enable: true
+
+# 代码压缩 - 减小文件体积
+minify:
+  html:
+    enable: true
+    exclude:
+  css:
+    enable: true
+    exclude:
+  js:
+    enable: true
+    exclude:
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
