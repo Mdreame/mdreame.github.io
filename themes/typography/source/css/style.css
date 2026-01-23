@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:100,300,400,600");
+/* @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:100,300,400,600"); */
 
 @keyframes fadein {
     from {
@@ -127,7 +127,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Noto Sans SC","Source Sans Pro", "Roboto", "Helvetica", "Helvetica Neue", "Source Han Sans SC", "Source Han Sans TC", "PingFang SC", "PingFang HK", "PingFang TC", sans-serif;
+    font-family: "Noto Sans SC", "Roboto", "Helvetica", "Helvetica Neue", "Source Han Sans SC", "Source Han Sans TC", "PingFang SC", "PingFang HK", "PingFang TC", sans-serif;
     color: #2e405b
 }
 
@@ -405,11 +405,11 @@ a:focus {
 
 .soc {
     margin: 0 5px 0 0;
-    font-size: 18px !important
 }
 
 .soc a {
-    border-bottom: solid transparent 2px
+    border-bottom: solid transparent 2px;
+    font-size: 24px !important
 }
 
 .soc a:hover {
