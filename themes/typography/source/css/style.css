@@ -196,7 +196,8 @@ body {
 .container {
     background-color: transparent;
     padding: 0;
-    position: relative
+    position: relative;
+    font-size: 0.95em;
 }
 
 .full-width-container {
