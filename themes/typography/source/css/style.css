@@ -519,7 +519,8 @@ figure .code pre {
 
 @media (max-width: 768px) {
     body {
-        line-height: 1.75
+        line-height: 1.75;
+        font-size: 16px;
     }
 
     h1 {
@@ -594,7 +595,7 @@ figure .code pre {
         text-align: left;
         height: auto;
         margin: 0;
-        padding: 20px 15px;
+        padding: 20px;
         overflow: auto
     }
 
@@ -690,7 +691,8 @@ figure .code pre {
 
 @media only screen and (max-height: 600px) {
     body {
-        line-height: 1.75
+        line-height: 1.75;
+        /* font-size: 16px; */
     }
 
     h1 {
@@ -765,7 +767,7 @@ figure .code pre {
         text-align: left;
         height: auto;
         margin: 0;
-        padding: 20px 15px;
+        padding: 20px 30px;
         overflow: auto
     }
 
