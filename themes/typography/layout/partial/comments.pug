@@ -6,13 +6,46 @@ if theme.disqus
         var disqus_identifier = '#{page.path}';
         var disqus_title = '#{page.title}';
         var disqus_url = '#{config.url}/#{page.path}';
-        (function () {
+        function loadDisqus () {
             var dsq = document.createElement('script');
             dsq.type = 'text/javascript';
             dsq.async = true;
             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.setAttribute('data-timestamp', +new Date());
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
+            window.disqus_config = function () {
+                this.page.url = window.location.href;
+                this.page.identifier = window.location.href.substring(18);
+            };
+        };
+        // 通过检查 window 对象确认是否在浏览器中运行
+        var runningOnBrowser = typeof window !== "undefined";
+        // 通过检查 scroll 事件 API 和 User-Agent 来匹配爬虫
+        var isBot = runningOnBrowser && !("onscroll" in window) || typeof navigator !== "undefined" && /(gle|ing|ro|msn)bot|crawl|spider|yand|duckgo/i.test(navigator.userAgent);
+        // 检查当前浏览器是否支持 IntersectionObserver API
+        var supportsIntersectionObserver = runningOnBrowser && "IntersectionObserver" in window;
+
+        // 一个小 hack，将任务包裹在 setTimeout(() => { }, 1) 中、推迟到 Event Loop 的任务队列中、等待主调用栈清空后才执行，在绝大部分浏览器中都有效
+        setTimeout(function () {
+            if (!isBot && supportsIntersectionObserver) {
+                // 当前环境不是爬虫、并且浏览器兼容 IntersectionObserver API
+                var disqus_observer = new IntersectionObserver(function(entries) {
+                // 当前视窗中已出现 Disqus 评论框所在位置
+                if (entries[0].isIntersecting) {
+                    // 加载 Disqus
+                    loadDisqus();
+                    // 停止当前的 Observer
+                    disqus_observer.disconnect();
+                }
+                }, { threshold: [0] });
+                // 设置让 Observer 观察 #disqus_thread 元素
+                disqus_observer.observe(document.getElementById('disqus_thread'));
+            } else {
+                // 当前环境是爬虫、或当前浏览器其不兼容 IntersectionObserver API
+                // 直接加载 Disqus
+                loadDisqus();
+            }
+        }, 1);
     script(id='dsq-count-scr' src='//#{theme.disqus}.disqus.com/count.js' async)
 
 if theme.livere
