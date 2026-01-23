@@ -197,7 +197,6 @@ body {
     background-color: transparent;
     padding: 0;
     position: relative;
-    font-size: 0.95em;
 }
 
 .full-width-container {
@@ -460,6 +459,7 @@ footer * {
 .post-container p:not(:first-child, :nth-child(2)) {
     margin-bottom: 20px;
     text-align: justify;
+    font-size: 0.95em;
 }
 
 .listing-post{
@@ -522,6 +522,10 @@ figure .code pre {
     body {
         line-height: 1.75;
         font-size: 16px;
+    }
+
+    .post-container p:not(:first-child, :nth-child(2)) {
+        font-size: 1em;  
     }
 
     h1 {
