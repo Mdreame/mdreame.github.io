@@ -219,6 +219,10 @@ body {
     margin: 0
 }
 
+.pagination{
+    font-size: 0.95em;
+}
+
 .vertical-text {
     -ms-writing-mode: tb-rl;
     writing-mode: vertical-rl
