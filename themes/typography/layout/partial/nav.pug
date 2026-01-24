@@ -31,28 +31,36 @@ div#site-nav.site-title-links
                 a(href=config.root + config.about_page)= __('About')
         include ../mixins
         +make_page_links()
-        li.soc
+    ul.soc    
+        
             if theme.email
-                a(href="mailto:" + theme.email, target="_blank", rel="noopener noreferrer", aria-label="Email")
-                    i.fa.fa-envelope &nbsp;
+                li  
+                    a(href="mailto:" + theme.email, target="_blank", rel="noopener noreferrer", aria-label="Email")
+                        i.fa.fa-envelope
             if theme.github
-                a(href="https://github.com/" + theme.github, target="_blank", rel="noopener noreferrer", aria-label="Github")
-                    i.fa.fa-github &nbsp;
+                li
+                    a(href="https://github.com/" + theme.github, target="_blank", rel="noopener noreferrer", aria-label="Github")
+                        i.fa.fa-github
+            if theme.twitter
+                li
+                    a(href="https://x.com/" + theme.twitter, target="_blank", rel="noopener noreferrer", aria-label="Twitter")
+                        i.fa.fa-twitter
             if theme.telegram
-                a(href="https://t.me/" + theme.telegram, target="_blank", rel="noopener noreferrer", aria-label="Telegram")
-                    i.fa.fa-telegram &nbsp;
-            //- if theme.twitter
-            //-     a(href="https://x.com/" + theme.twitter, target="_blank", rel="noopener noreferrer", aria-label="Twitter")
-            //-         i.fa.fa-twitter &nbsp;
+                li
+                    a(href="https://t.me/" + theme.telegram, target="_blank", rel="noopener noreferrer", aria-label="Telegram")
+                        i.fa.fa-telegram
             if theme.instagram
-                a(href="https://www.instagram.com/" + theme.instagram, target="_blank", rel="noopener noreferrer", aria-label="Instagram")
-                    i.fa.fa-instagram &nbsp;
+                li
+                    a(href="https://www.instagram.com/" + theme.instagram, target="_blank", rel="noopener noreferrer", aria-label="Instagram")
+                        i.fa.fa-instagram
             if theme.weibo
-                a(href="http://weibo.com/u/" + theme.weibo, target="_blank", rel="noopener noreferrer", aria-label="Sina Weibo")
-                    i.fa.fa-weibo &nbsp;
+                li
+                    a(href="http://weibo.com/u/" + theme.weibo, target="_blank", rel="noopener noreferrer", aria-label="Sina Weibo")
+                        i.fa.fa-weibo
             if theme.rss
-                a(href=config.url + "/" + theme.rss, target="_blank", rel="noopener noreferrer", aria-label="RSS")
-                    i.fa.fa-rss &nbsp;
+                li
+                    a(href=config.url + "/" + theme.rss, target="_blank", rel="noopener noreferrer", aria-label="RSS")
+                        i.fa.fa-rss
     div.visible-lg.visible-md.visible-sm.site-nav-footer
         br.site-nav-footer-br
         include footer
