@@ -37,7 +37,7 @@ block content
                             |&nbsp;
                             != __('prev_post')+': ' + page.prev.title
                 if next
-                    span &nbsp;
+                    span &nbsp;&nbsp;&nbsp;&nbsp;
                     span.next.pagbuttons
                         a(role="button",href=url_for(next), title=page.next.title)
                             != __('next_post')+': ' + page.next.title
