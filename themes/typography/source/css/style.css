@@ -460,12 +460,12 @@ footer * {
     margin: 0 0 36px 0;
     font-weight: normal;
     /* border-bottom: dashed 1px #2e405b; */
+    font-size: 0.95em;
 }
 
 .post-container p:not(:first-child, :nth-child(2)) {
     margin-bottom: 20px;
     text-align: justify;
-    font-size: 0.95em;
 }
 
 .listing-post{
