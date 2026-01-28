@@ -536,7 +536,7 @@ figure .code pre {
     }
 
     .post-container p:not(:first-child, :nth-child(2)) {
-        font-size: 1em;  
+        font-size:  16px
     }
 
     h1 {
