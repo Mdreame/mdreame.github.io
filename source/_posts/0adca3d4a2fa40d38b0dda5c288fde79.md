@@ -4,9 +4,7 @@ title: 父子关系的症结
 abbrlink: 0adca3d4a2fa40d38b0dda5c288fde79
 tags: []
 categories:
-  - 10 Life
-  - 15 Writing 写作
-  - 15.3 Blog 博客
+  - 40 Blog 博客写作
 date: 1763803560000
 updated: 1769592434203
 ---
