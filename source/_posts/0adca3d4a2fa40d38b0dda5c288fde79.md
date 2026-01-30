@@ -6,12 +6,12 @@ tags: []
 categories:
   - 40 Blog 博客写作
 date: 1763803560000
-updated: 1769592434203
+updated: 1769747069372
 ---
 
 在抖音上刷到一个视频，很有感触。内容讲的是一位老父亲感觉自己与博士儿子的情感越来越疏远，但是儿子却不以为意，由此展开了争论。
 
-<iframe title="Spotify Embed: 赤子" style="border-radius: 12px" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" src="https://open.spotify.com/embed/track/5YgJuitL5p7LJqWdcEvU2P?si=8ba5e52a24774430&amp;utm_source=oembed"></iframe>
+[![](https://img.mdreame.space/20260130122306099.webp)](https://music.163.com/#/song?id=109091)
 
 父亲认为父子关系疏远的理由从话语间透露出来的具体有三点。一件比较重要事情的是父亲有几十亩田地因年纪大了不种，希望通过儿子的自媒体平台转租出去，儿子拒绝。这件事情可能是视频中争论开启的“导火索”。
 
