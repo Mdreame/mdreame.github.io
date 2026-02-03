@@ -872,10 +872,16 @@ figure .code pre {
 /* 给所有http/https链接添加外部链接标识（不适用于相对路径） */
 .post-container a[href^="http://"]:not([href*="blog.mdreame.space"]):not(:has(img))::after,
 .post-container a[href^="https://"]:not([href*="blog.mdreame.space"]):not(:has(img))::after {
-  content: "↗";
+  content: "\f08e"; /* external-link图标的Unicode */
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: none;
   font-size: 0.8em;
   color: #666;
-  margin: 0 2px;
+  margin: 0 4px;
+
 }
 
 .post-container a[href^="http://"]:not([href*="blog.mdreame.space"]):not(:has(img))::after:hover,
