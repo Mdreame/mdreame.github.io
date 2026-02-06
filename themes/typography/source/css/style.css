@@ -331,7 +331,8 @@ body {
 
 .site-title-links ul {
     list-style: none;
-    padding: 0
+    padding: 0;
+    margin-bottom: 16px;
 }
 
 .site-title-links ul li {
@@ -662,7 +663,7 @@ figure .code pre {
     .site-title-links ul li {
         display: inline;
         margin: 0 3px;
-        font-size: 20px
+        font-size: 22px;
     }
 
     footer {
