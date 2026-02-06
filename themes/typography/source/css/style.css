@@ -246,8 +246,8 @@ body {
     padding: 80px 40px 80px 100px;
 }
 
-.ar-year {
-    margin-top: 5px;
+.main-container .ar-year {
+    margin-top: 2em;
     margin-bottom: 5px
 }
 
@@ -258,6 +258,10 @@ body {
 .ar-date {
     font-size: 16px;
     margin-bottom: 5px
+}
+
+.archive{
+    padding-right: 2em;
 }
 
 .archive :first-child {
@@ -489,13 +493,14 @@ ul li:has(> input[type="checkbox"]) {
 }
 
 .post-container p:not(:first-child, :nth-child(2)) {
-    margin-bottom: 24px;
+    margin-bottom: 2em;
     text-align: justify;
 }
 
 .listing-post{
     display: flex;
     align-items: baseline;
+    justify-content: space-between;
 }
 
 .post-title {
