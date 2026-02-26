@@ -183,7 +183,7 @@ h6 {
 
 body {
     font-size: 18px;
-    line-height: 1.75;
+    line-height: 2;
     background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACFJREFUeNpiZGBg4GegAsBlCD8TqSYNQg2Mo6FEBAAIMACdPABtrSW/IQAAAABJRU5ErkJggg==");
     background-repeat: repeat;
     background-attachment: fixed;
@@ -491,7 +491,7 @@ ul li:has(> input[type="checkbox"]) {
     margin: 0 0 36px 0;
     font-weight: normal;
     /* border-bottom: dashed 1px #2e405b; */
-    font-size: 0.95em;
+    /* font-size: 0.95em; */
 }
 
 .post-container p:not(:first-child, :nth-child(2)) {
