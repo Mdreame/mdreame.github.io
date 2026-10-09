@@ -6,6 +6,12 @@
       "resolved": "/Users/xj/Desktop/blog/quartz/plugins/forest",
       "commit": "local",
       "installedAt": "2026-10-09T08:43:04.562Z"
+    },
+    "garden": {
+      "source": "./plugins/garden",
+      "resolved": "/Users/xj/Desktop/blog/quartz/plugins/garden",
+      "commit": "local",
+      "installedAt": "2026-10-09T09:38:24.739Z"
     }
   }
 }

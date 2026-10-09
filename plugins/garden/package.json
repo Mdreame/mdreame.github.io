@@ -1,0 +1,36 @@
+{
+  "name": "garden-island",
+  "version": "1.0.0",
+  "description": "Isometric 3D knowledge garden: notes rendered as trees on a floating island",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "quartz": {
+    "name": "garden-island",
+    "displayName": "Garden Island",
+    "category": "emitter",
+    "version": "1.0.0",
+    "quartzVersion": ">=5.0.0",
+    "dependencies": [],
+    "defaultOrder": 60,
+    "defaultEnabled": false,
+    "defaultOptions": {
+      "slug": "garden",
+      "limit": 50
+    },
+    "optionSchema": {
+      "slug": {
+        "type": "string"
+      },
+      "limit": {
+        "type": "number"
+      }
+    }
+  }
+}
