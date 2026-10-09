@@ -16,36 +16,6 @@
     "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 }
 
-// 首页通往花园的入口卡片
-.garden-entry {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  margin: 1.5rem 0;
-  padding: 0.9rem 1.2rem;
-  border: 1px solid var(--lightgray);
-  border-radius: 10px;
-  text-decoration: none;
-  color: var(--dark);
-  background: linear-gradient(120deg, rgba(122, 189, 104, 0.1), rgba(122, 189, 104, 0));
-  transition: border-color 0.2s ease, transform 0.2s ease;
-}
-
-.garden-entry:hover {
-  border-color: var(--tertiary);
-  transform: translateY(-1px);
-}
-
-.garden-entry-title {
-  font-weight: 600;
-  color: var(--dark);
-}
-
-.garden-entry-desc {
-  font-size: 0.85rem;
-  color: var(--gray);
-}
-
 // 页脚链接清空后不留下空列表占位
 footer ul:empty {
   display: none;
@@ -125,15 +95,41 @@ article {
   background-color: var(--lightgray);
 }
 
+// Recent Notes：日期字号收小，条目之间更紧凑
+// 组件 CSS 晚于本文件加载，因此选择器用 .sidebar 提高一层特异性
+.sidebar .recent-notes > h3 {
+  font-size: 0.9rem;
+}
+
+.sidebar .recent-notes > ul.recent-ul {
+  margin-top: 0.5rem;
+}
+
+.sidebar .recent-notes > ul.recent-ul > li {
+  margin: 0.45rem 0;
+}
+
+.sidebar .recent-notes > ul.recent-ul > li .section > .desc > h3 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.sidebar .recent-notes > ul.recent-ul > li .section > .meta {
+  margin: 0;
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
 // 移动端：标题栏留在顶部，其余侧边栏内容移到正文下方
 @media all and ($mobile) {
   .page > #quartz-body {
-    grid-template-rows: auto auto auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto auto auto;
     grid-template-areas:
       "grid-sidebar-left"
       "grid-header"
       "grid-center"
       "grid-sidebar-right"
+      "grid-garden"
       "grid-recent"
       "grid-footer";
   }
@@ -147,6 +143,12 @@ article {
   .page > #quartz-body > .sidebar.left > .flex-component {
     grid-area: grid-sidebar-left;
     padding: 1rem 0 0;
+  }
+
+  // 花园入口：正文下方、Recent Notes 之上
+  .page > #quartz-body > .sidebar.left > .garden-link {
+    grid-area: grid-garden;
+    margin: 0;
   }
 
   // Recent Notes：正文下方

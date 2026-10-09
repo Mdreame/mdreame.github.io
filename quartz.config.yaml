@@ -206,7 +206,7 @@ plugins:
       priority: 35
       group: toolbar
   - source: "@quartz-community/breadcrumbs"
-    enabled: true
+    enabled: false
     layout:
       position: beforeBody
       priority: 5
@@ -237,13 +237,23 @@ plugins:
     layout:
       position: footer
       priority: 50
+  - source: ./plugins/gardenlink
+    enabled: true
+    options:
+      href: /garden
+      label: 花园
+      desc: 把笔记种成一座可以旋转的岛
+    order: 58
+    layout:
+      position: left
+      priority: 45
   - source: "@quartz-community/recent-notes"
     enabled: true
     options:
       title: Recent Notes
       limit: 5
       linkToMore: false
-      showTags: true
+      showTags: false
     layout:
       position: left
       priority: 60

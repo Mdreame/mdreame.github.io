@@ -1,0 +1,50 @@
+{
+  "name": "garden-link",
+  "version": "1.0.0",
+  "description": "Sidebar entry card linking to the 3D garden island",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./components": {
+      "import": "./dist/components/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "quartz": {
+    "name": "garden-link",
+    "displayName": "Garden Link",
+    "category": "component",
+    "version": "1.0.0",
+    "quartzVersion": ">=5.0.0",
+    "dependencies": [],
+    "defaultOrder": 58,
+    "defaultEnabled": false,
+    "defaultOptions": {
+      "href": "/garden",
+      "label": "花园",
+      "desc": "把笔记种成一座可以旋转的岛"
+    },
+    "components": {
+      "GardenLink": {
+        "displayName": "Garden Link",
+        "defaultPosition": "left",
+        "defaultPriority": 55
+      }
+    },
+    "optionSchema": {
+      "href": {
+        "type": "string"
+      },
+      "label": {
+        "type": "string"
+      },
+      "desc": {
+        "type": "string"
+      }
+    }
+  }
+}
