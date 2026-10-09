@@ -1,6 +1,5 @@
 ---
-title: Welcome to Quartz
+title: Jiang
 ---
 
-This is a blank Quartz installation.
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
+这是一个[[数字花园]]，主要用来记录一些不断发展的、不成熟的知识或想法。

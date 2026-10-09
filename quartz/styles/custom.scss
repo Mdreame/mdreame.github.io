@@ -1,3 +1,112 @@
 @use "./variables.scss" as *;
 
 // put your custom CSS here!
+
+// 搜索：隐藏输入框形态，只保留放大镜图标按钮
+.search {
+  max-width: none;
+}
+
+.search > .search-button {
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  justify-content: center;
+}
+
+.search > .search-button > p {
+  display: none;
+}
+
+.search > .search-button svg {
+  margin: 0;
+  width: 16px;
+  min-width: 16px;
+}
+
+.search > .search-button:hover {
+  background-color: var(--lightgray);
+}
+
+// 标题与工具栏图标同一行时垂直居中对齐
+.left-sidebar .flex-component {
+  align-items: center;
+}
+
+.page-title {
+  margin-bottom: 0;
+}
+
+// 工具栏图标统一尺寸，保证间距视觉一致
+.darkmode,
+.readermode {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.darkmode svg,
+.readermode svg {
+  width: 18px;
+  height: 18px;
+  top: calc(50% - 9px);
+  left: calc(50% - 9px);
+}
+
+.left-sidebar .flex-component button {
+  border-radius: 4px;
+}
+
+.left-sidebar .flex-component button:hover {
+  background-color: var(--lightgray);
+}
+
+// 移动端：标题栏留在顶部，其余侧边栏内容移到正文下方
+@media all and ($mobile) {
+  .page > #quartz-body {
+    grid-template-rows: auto auto auto auto auto auto;
+    grid-template-areas:
+      "grid-sidebar-left"
+      "grid-header"
+      "grid-center"
+      "grid-sidebar-right"
+      "grid-recent"
+      "grid-footer";
+  }
+
+  // 拆开左栏，让它的子元素各自占据网格区域
+  .page > #quartz-body > .sidebar.left {
+    display: contents;
+  }
+
+  // 标题 + 图标：顶部
+  .page > #quartz-body > .sidebar.left > .flex-component {
+    grid-area: grid-sidebar-left;
+    padding: 1rem 0 0;
+  }
+
+  // Recent Notes：正文下方
+  .page > #quartz-body > .sidebar.left > .recent-notes {
+    grid-area: grid-recent;
+  }
+
+  .page > #quartz-body > .sidebar.left > .mobile-only {
+    display: none;
+  }
+
+  // 右栏（目录 / 反向链接）在正文下方纵向堆叠
+  .page > #quartz-body > .sidebar.right {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    padding: 0;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .page > #quartz-body > .sidebar.right > * {
+    max-width: 100%;
+  }
+}
+

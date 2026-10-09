@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
 configuration:
-  pageTitle: Quartz 5
+  pageTitle: Jiang
   pageTitleSuffix: ""
   enableSPA: true
   enablePopovers: true
@@ -143,12 +143,12 @@ plugins:
   - source: "@quartz-community/tag-page"
     enabled: true
   - source: "@quartz-community/explorer"
-    enabled: true
+    enabled: false
     layout:
       position: left
       priority: 50
   - source: "@quartz-community/graph"
-    enabled: true
+    enabled: false
     layout:
       position: right
       priority: 10
@@ -159,7 +159,7 @@ plugins:
       priority: 20
       group: toolbar
       groupOptions:
-        grow: true
+        grow: false
   - source: "@quartz-community/backlinks"
     enabled: true
     layout:
@@ -185,6 +185,9 @@ plugins:
     layout:
       position: left
       priority: 10
+      group: toolbar
+      groupOptions:
+        grow: true
   - source: "@quartz-community/darkmode"
     enabled: true
     layout:
@@ -240,7 +243,7 @@ plugins:
       showTags: true
     layout:
       position: left
-      priority: 25
+      priority: 60
   - source: "@quartz-community/spacer"
     enabled: true
     options: {}
@@ -275,7 +278,7 @@ layout:
     toolbar:
       priority: 35
       direction: row
-      gap: 0.5rem
+      gap: 0.25rem
   byPageType:
     "404":
       positions:
