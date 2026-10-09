@@ -7,7 +7,7 @@ configuration:
   analytics:
     provider: plausible
   locale: en-US
-  baseUrl: mdreame.github.io/digital-garden
+  baseUrl: mdreame.github.io
   ignorePatterns:
     - private
     - templates
@@ -208,7 +208,7 @@ plugins:
     options:
       provider: giscus
       options:
-        repo: mdreame/digital-garden
+        repo: mdreame/mdreame.github.io
         repoId: R_kgDOVB70_A
         category: Announcements
         categoryId: DIC_kwDOVB70_M4DHY2-
