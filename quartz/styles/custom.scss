@@ -120,6 +120,39 @@ article {
   line-height: 1.35;
 }
 
+// 列表项：日期与标题并排时（grid 两列）按文本基线对齐
+// 组件默认 align-items: stretch 会让字号较小的日期落在标题基线之下
+.page-listing li.section-li > .section {
+  align-items: baseline;
+}
+
+// 列表项里的标签：并排排布，去掉列表符号，改为浅绿色
+// 限定 .page-listing，避免影响悬浮预览（那里默认隐藏标签）
+.page-listing li.section-li > .section > ul.tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page-listing li.section-li > .section > ul.tags > li {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.page-listing li.section-li > .section > ul.tags > li > .tag-link {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--tertiary) 16%, transparent);
+  color: var(--tertiary);
+  line-height: 1.5;
+  text-decoration: none;
+}
+
 // 移动端：标题栏留在顶部，其余侧边栏内容移到正文下方
 @media all and ($mobile) {
   .page > #quartz-body {
@@ -154,6 +187,11 @@ article {
   // Recent Notes：正文下方
   .page > #quartz-body > .sidebar.left > .recent-notes {
     grid-area: grid-recent;
+  }
+
+  // 窄屏保留组件默认行为：列表项里的标签不显示
+  .page-listing li.section-li > .section > ul.tags {
+    display: none;
   }
 
   .page > #quartz-body > .sidebar.left > .mobile-only {
