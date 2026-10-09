@@ -425,13 +425,12 @@ function animate() {
   if (found !== hovered) {
     hovered = found
     canvas.style.cursor = hovered ? "pointer" : "grab"
+    // 悬停只显示标题浮层；详情卡片仅在点击后出现
     if (hovered && !pinned) {
       tip.style.display = "block"
       tip.textContent = hovered.userData.note.title
-      showCard(hovered.userData.note)
     } else {
       tip.style.display = "none"
-      if (!pinned) showCard(null)
     }
   }
 
@@ -445,8 +444,7 @@ function animate() {
   }
 
   controls.update()
-  const cardTarget = pinned || hovered
-  if (cardTarget) positionCard(cardTarget)
+  if (pinned) positionCard(pinned)
   else card.style.display = "none"
   renderer.render(scene, camera)
   requestAnimationFrame(animate)
