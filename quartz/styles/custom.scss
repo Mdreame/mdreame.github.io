@@ -2,6 +2,39 @@
 
 // put your custom CSS here!
 
+// 中英混排字体栈：西文用系统 UI 字体，中文用苹方 / 雅黑
+:root {
+  --titleFont: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --headerFont: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --bodyFont: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --codeFont: "JetBrains Mono", "Sarasa Mono SC", "SF Mono", Menlo, Consolas, "PingFang SC",
+    "Microsoft YaHei", monospace;
+  --font-interface: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+// 页脚链接清空后不留下空列表占位
+footer ul:empty {
+  display: none;
+}
+
+// 中文排版：正文行距放宽，避免中英混排时行间过挤
+article p,
+article li,
+article blockquote,
+article td {
+  line-height: 1.8;
+}
+
+// 中文标点不出现在行首，长串英文/链接不撑破容器
+article {
+  line-break: strict;
+  overflow-wrap: anywhere;
+}
+
 // 搜索：隐藏输入框形态，只保留放大镜图标按钮
 .search {
   max-width: none;

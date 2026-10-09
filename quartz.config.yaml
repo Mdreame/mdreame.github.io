@@ -13,12 +13,13 @@ configuration:
     - templates
     - .obsidian
   theme:
-    fontOrigin: googleFonts
+    fontOrigin: local
     cdnCaching: true
     typography:
-      header: Schibsted Grotesk
-      body: Source Sans Pro
-      code: IBM Plex Mono
+      title: PingFang SC
+      header: PingFang SC
+      body: PingFang SC
+      code: Sarasa Mono SC
     colors:
       lightMode:
         light: "#faf8f8"
@@ -100,6 +101,8 @@ plugins:
     order: 92
   - source: "@quartz-community/quartz-fonts"
     enabled: true
+    options:
+      fontOrigin: local
   - source: "@quartz-themes/core"
     enabled: false
     options:
@@ -131,7 +134,7 @@ plugins:
   - source: "@quartz-community/favicon"
     enabled: true
   - source: "@quartz-community/og-image"
-    enabled: true
+    enabled: false
   - source: "@quartz-community/cname"
     enabled: false
   - source: "@quartz-community/canvas-page"
@@ -228,9 +231,7 @@ plugins:
   - source: "@quartz-community/footer"
     enabled: true
     options:
-      links:
-        GitHub: https://github.com/jackyzha0/quartz
-        Discord Community: https://discord.gg/cRFFHYye7t
+      links: {}
     layout:
       position: footer
       priority: 50
@@ -281,9 +282,9 @@ layout:
       gap: 0.25rem
   byPageType:
     "404":
+      template: default
       positions:
         beforeBody: []
-        left: []
         right: []
     content: {}
     folder:
