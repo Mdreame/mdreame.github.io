@@ -10,6 +10,7 @@ const cardMeta = document.getElementById("garden-card-meta")
 const cardLink = document.getElementById("garden-card-link")
 const empty = document.getElementById("garden-empty")
 const loading = document.getElementById("garden-loading")
+const stage = document.getElementById("stage")
 
 const ISLAND_R = 5
 const GRASS_TOP = 0
@@ -273,6 +274,53 @@ function updateVisibility() {
   empty.style.display = shown === 0 ? "block" : "none"
 }
 
+// 卡片跟着被选中的树浮动：每帧把树顶投影到屏幕坐标
+const anchorVec = new THREE.Vector3()
+function positionCard(tree) {
+  if (!tree) return
+  const w = stage.clientWidth
+  const h = stage.clientHeight
+
+  // 窄屏交给 CSS 固定在底部，避免浮动卡片出界
+  if (w < 640) {
+    card.style.left = ""
+    card.style.top = ""
+    card.style.right = ""
+    card.style.bottom = ""
+    return
+  }
+
+  const note = tree.userData.note
+  const size = treeSize(note)
+  tree.getWorldPosition(anchorVec)
+  anchorVec.y += (size.trunk + size.crown * 1.7) * tree.userData.target
+  anchorVec.project(camera)
+
+  // 树转到相机背后时先隐藏
+  if (anchorVec.z > 1) {
+    card.style.display = "none"
+    return
+  }
+  card.style.display = "block"
+
+  const sx = (anchorVec.x * 0.5 + 0.5) * w
+  const sy = (-anchorVec.y * 0.5 + 0.5) * h
+  const cw = card.offsetWidth || 260
+  const ch = card.offsetHeight || 90
+
+  let left = sx + 18
+  let top = sy - ch / 2
+  if (left + cw > w - 8) left = sx - cw - 18 // 贴右边界时翻到左侧
+  if (left < 8) left = 8
+  if (top < 8) top = 8
+  if (top + ch > h - 8) top = h - ch - 8
+
+  card.style.right = "auto"
+  card.style.bottom = "auto"
+  card.style.left = `${left}px`
+  card.style.top = `${top}px`
+}
+
 function showCard(note) {
   if (!note) {
     card.style.display = "none"
@@ -377,10 +425,10 @@ function animate() {
   if (found !== hovered) {
     hovered = found
     canvas.style.cursor = hovered ? "pointer" : "grab"
-    if (hovered) {
+    if (hovered && !pinned) {
       tip.style.display = "block"
       tip.textContent = hovered.userData.note.title
-      if (!pinned) showCard(hovered.userData.note)
+      showCard(hovered.userData.note)
     } else {
       tip.style.display = "none"
       if (!pinned) showCard(null)
@@ -396,8 +444,10 @@ function animate() {
     tree.scale.setScalar(cur + (want - cur) * 0.15)
   }
 
-  island.rotation.y += 0
   controls.update()
+  const cardTarget = pinned || hovered
+  if (cardTarget) positionCard(cardTarget)
+  else card.style.display = "none"
   renderer.render(scene, camera)
   requestAnimationFrame(animate)
 }
