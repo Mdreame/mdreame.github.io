@@ -16,6 +16,36 @@
     "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 }
 
+// 首页通往花园的入口卡片
+.garden-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin: 1.5rem 0;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid var(--lightgray);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--dark);
+  background: linear-gradient(120deg, rgba(122, 189, 104, 0.1), rgba(122, 189, 104, 0));
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.garden-entry:hover {
+  border-color: var(--tertiary);
+  transform: translateY(-1px);
+}
+
+.garden-entry-title {
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.garden-entry-desc {
+  font-size: 0.85rem;
+  color: var(--gray);
+}
+
 // 页脚链接清空后不留下空列表占位
 footer ul:empty {
   display: none;
