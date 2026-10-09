@@ -145,6 +145,7 @@ function engineScript() {
   var FLATTEN = 0.52;
   var rotation = -0.6;
   var zoom = 1;
+  var viewScale = 1;
   var dragging = false;
   var lastX = 0;
   var lastY = 0;
@@ -231,94 +232,169 @@ function engineScript() {
     };
   }
 
+  // 尺寸为世界单位（岛半径为 1），绘制时再乘 scale
   function treeSize(note) {
-    if (note.maturity === "evergreen")
-      return { trunk: 26, crown: 26, layers: 3 };
-    if (note.maturity === "budding") return { trunk: 15, crown: 15, layers: 2 };
-    if (note.maturity === "seedling") return { trunk: 5, crown: 7, layers: 1 };
-    return { trunk: 2, crown: 4, layers: 1 };
+    if (note.maturity === "evergreen") return { trunk: 0.078, crown: 0.062 };
+    if (note.maturity === "budding") return { trunk: 0.044, crown: 0.038 };
+    if (note.maturity === "seedling") return { trunk: 0.017, crown: 0.019 };
+    return { trunk: 0.006, crown: 0.008 };
+  }
+
+  function hsl(c, dl) {
+    var l = Math.max(10, Math.min(92, c.l + (dl || 0)));
+    return "hsl(" + c.h + " " + c.s + "% " + l + "%)";
   }
 
   function colorOf(note) {
-    if (!note.modified) return { fill: "#b9a97e", accent: "#d3c493" };
+    if (!note.modified) return { h: 44, s: 28, l: 56 };
     var days = (Date.now() - note.modified) / 86400000;
-    if (note.maturity === "seedling") return { fill: "#9ad07a", accent: "#c2e49b" };
-    if (days <= 30) return { fill: "#4fa96b", accent: "#7cc98a" };
-    if (days <= 90) return { fill: "#6aae5f", accent: "#96ca7c" };
-    if (days <= 180) return { fill: "#a8b454", accent: "#c9cd7e" };
-    return { fill: "#c2a45c", accent: "#d9c184" };
+    if (note.maturity === "seedling") return { h: 104, s: 46, l: 60 };
+    if (days <= 30) return { h: 138, s: 44, l: 40 };
+    if (days <= 90) return { h: 112, s: 38, l: 44 };
+    if (days <= 180) return { h: 68, s: 34, l: 48 };
+    return { h: 40, s: 26, l: 52 };
+  }
+
+  // 不规则树冠：极坐标半径加叶状起伏，形成云朵轮廓而不是椭圆
+  function canopy(cx, cy, rx, ry, seed, lobes) {
+    ctx2d.beginPath();
+    var n = 26;
+    for (var i = 0; i <= n; i++) {
+      var a = (i / n) * Math.PI * 2;
+      var bump =
+        1 + 0.16 * Math.sin(a * lobes + seed * 6.28) + 0.07 * Math.sin(a * (lobes * 2 + 1) + seed * 2.7);
+      var x = cx + Math.cos(a) * rx * bump;
+      var y = cy + Math.sin(a) * ry * bump;
+      if (i === 0) ctx2d.moveTo(x, y);
+      else ctx2d.lineTo(x, y);
+    }
+    ctx2d.closePath();
+  }
+
+  // 真正的叶片形状：两段二次曲线合成的尖叶
+  function leafPath(x, y, len, wid, angle) {
+    ctx2d.save();
+    ctx2d.translate(x, y);
+    ctx2d.rotate(angle);
+    ctx2d.beginPath();
+    ctx2d.moveTo(0, 0);
+    ctx2d.quadraticCurveTo(len * 0.45, -wid, len, 0);
+    ctx2d.quadraticCurveTo(len * 0.45, wid, 0, 0);
+    ctx2d.closePath();
+    ctx2d.fill();
+    ctx2d.restore();
   }
 
   function drawTree(p, s, scale, alpha, hover) {
     var note = p.note;
     var size = treeSize(note);
-    var colors = colorOf(note);
+    var col = colorOf(note);
     ctx2d.globalAlpha = alpha;
-    var grow = hover ? 1.1 : 1;
+    var g = hover ? 1.12 : 1;
+    var sway = Math.sin(performance.now() / 1500 + p.seed * 6.28) * 0.005 * scale;
 
-    // 阴影
+    // 地面阴影
     ctx2d.beginPath();
-    ctx2d.ellipse(s.sx, s.sy, size.crown * 0.5 * scale * grow, size.crown * 0.22 * scale * grow, 0, 0, Math.PI * 2);
-    ctx2d.fillStyle = "rgba(40, 60, 40, 0.16)";
+    ctx2d.ellipse(s.sx, s.sy, size.crown * 0.55 * scale * g, size.crown * 0.2 * scale * g, 0, 0, Math.PI * 2);
+    ctx2d.fillStyle = "rgba(40, 60, 40, 0.18)";
     ctx2d.fill();
 
-    var trunkH = size.trunk * scale * grow;
-    var sway = Math.sin(performance.now() / 1400 + p.seed * 6.28) * 1.6 * scale;
-
-    // 树干
-    var tw = Math.max(1.2, size.crown * 0.16 * scale * grow);
-    ctx2d.beginPath();
-    ctx2d.moveTo(s.sx - tw / 2, s.sy);
-    ctx2d.lineTo(s.sx - tw / 2.6 + sway * 0.2, s.sy - trunkH);
-    ctx2d.lineTo(s.sx + tw / 2.6 + sway * 0.2, s.sy - trunkH);
-    ctx2d.lineTo(s.sx + tw / 2, s.sy);
-    ctx2d.closePath();
-    ctx2d.fillStyle = "#8a6a45";
-    ctx2d.fill();
-
-    var topY = s.sy - trunkH;
-
-    if (note.maturity === "evergreen") {
-      for (var i = 0; i < 3; i++) {
-        var r = size.crown * scale * grow * (1 - i * 0.16);
-        ctx2d.beginPath();
-        ctx2d.ellipse(
-          s.sx + sway * (0.3 + i * 0.25),
-          topY - i * size.crown * 0.42 * scale * grow - size.crown * 0.3 * scale,
-          r,
-          r * 0.86,
-          0,
-          0,
-          Math.PI * 2
-        );
-        ctx2d.fillStyle = i === 1 ? colors.accent : colors.fill;
-        ctx2d.fill();
-      }
-    } else if (note.maturity === "budding") {
-      var rb = size.crown * scale * grow;
+    // 根部小草，强化"种在地上"
+    ctx2d.fillStyle = "hsl(102 40% 44%)";
+    for (var gi = -1; gi <= 1; gi++) {
+      var gx = s.sx + gi * size.crown * 0.34 * scale + sway * 0.2;
       ctx2d.beginPath();
-      ctx2d.ellipse(s.sx + sway * 0.3, topY - rb * 0.6, rb, rb * 0.92, 0, 0, Math.PI * 2);
-      ctx2d.fillStyle = colors.fill;
-      ctx2d.fill();
-      ctx2d.beginPath();
-      ctx2d.ellipse(s.sx + sway * 0.4 + rb * 0.3, topY - rb * 1.1, rb * 0.62, rb * 0.56, 0, 0, Math.PI * 2);
-      ctx2d.fillStyle = colors.accent;
-      ctx2d.fill();
-    } else if (note.maturity === "seedling") {
-      var rs = size.crown * scale * grow;
-      for (var k = -1; k <= 1; k += 2) {
-        ctx2d.beginPath();
-        ctx2d.ellipse(s.sx + k * rs * 0.5 + sway * 0.3, topY - rs * 0.5, rs * 0.5, rs * 0.24, k * 0.6, 0, Math.PI * 2);
-        ctx2d.fillStyle = colors.fill;
-        ctx2d.fill();
-      }
-    } else {
-      // 未标记：地上一颗种子
-      ctx2d.beginPath();
-      ctx2d.ellipse(s.sx, s.sy - 2 * scale, 3.4 * scale, 2.4 * scale, 0, 0, Math.PI * 2);
-      ctx2d.fillStyle = "#b3a58c";
+      ctx2d.moveTo(gx - 0.008 * scale, s.sy);
+      ctx2d.lineTo(gx, s.sy - 0.019 * scale * g);
+      ctx2d.lineTo(gx + 0.008 * scale, s.sy);
+      ctx2d.closePath();
       ctx2d.fill();
     }
+
+    // 未标记：地上一颗种子
+    if (!note.maturity) {
+      ctx2d.beginPath();
+      ctx2d.ellipse(s.sx, s.sy - 0.008 * scale, 0.013 * scale, 0.009 * scale, 0, 0, Math.PI * 2);
+      ctx2d.fillStyle = "hsl(40 14% 62%)";
+      ctx2d.fill();
+      ctx2d.globalAlpha = 1;
+      return;
+    }
+
+    var trunkH = size.trunk * scale * g;
+    var tw = Math.max(1.6, size.crown * 0.22 * scale * g);
+    var topX = s.sx + sway * 0.35;
+    var crownY = s.sy - trunkH;
+
+    // 树干：下粗上细
+    ctx2d.beginPath();
+    ctx2d.moveTo(s.sx - tw * 0.5, s.sy);
+    ctx2d.lineTo(topX - tw * 0.24, crownY);
+    ctx2d.lineTo(topX + tw * 0.24, crownY);
+    ctx2d.lineTo(s.sx + tw * 0.5, s.sy);
+    ctx2d.closePath();
+    ctx2d.fillStyle = "hsl(28 26% 30%)";
+    ctx2d.fill();
+
+    // 常青树：可见的分枝
+    if (note.maturity === "evergreen") {
+      ctx2d.strokeStyle = "hsl(28 26% 27%)";
+      ctx2d.lineWidth = Math.max(1, tw * 0.3);
+      ctx2d.lineCap = "round";
+      for (var bi = -1; bi <= 1; bi += 2) {
+        ctx2d.beginPath();
+        ctx2d.moveTo(topX, crownY + trunkH * 0.42);
+        ctx2d.quadraticCurveTo(
+          topX + bi * size.crown * 0.4 * scale,
+          crownY - size.crown * 0.2 * scale,
+          topX + bi * size.crown * 0.66 * scale,
+          crownY - size.crown * 0.62 * scale
+        );
+        ctx2d.stroke();
+      }
+    }
+
+    // 幼苗：茎 + 两片真叶
+    if (note.maturity === "seedling") {
+      ctx2d.fillStyle = hsl(col, 4);
+      leafPath(topX, crownY + 1 * scale, size.crown * 1.6 * scale * g, size.crown * 0.5 * scale * g, -0.5);
+      leafPath(topX, crownY + 1 * scale, size.crown * 1.45 * scale * g, size.crown * 0.45 * scale * g, Math.PI + 0.5);
+      ctx2d.beginPath();
+      ctx2d.ellipse(topX, crownY - size.crown * 0.25 * scale, size.crown * 0.26 * scale, size.crown * 0.38 * scale, 0, 0, Math.PI * 2);
+      ctx2d.fillStyle = hsl(col, 10);
+      ctx2d.fill();
+      ctx2d.globalAlpha = 1;
+      return;
+    }
+
+    var rx = size.crown * 1.05 * scale * g;
+    var ry = size.crown * 0.82 * scale * g;
+    var cxx = topX + sway * 0.5;
+
+    // 树冠三层：暗底 → 主色 → 亮面，形成体积感
+    ctx2d.fillStyle = hsl(col, -16);
+    canopy(cxx, crownY - ry * 0.3, rx * 1.05, ry * 1.0, p.seed, 5);
+    ctx2d.fill();
+
+    ctx2d.fillStyle = hsl(col, 0);
+    canopy(cxx, crownY - ry * 0.42, rx, ry, p.seed, 5);
+    ctx2d.fill();
+
+    if (note.maturity === "evergreen") {
+      // 两侧叶团，让轮廓不对称、更有机
+      ctx2d.fillStyle = hsl(col, -6);
+      canopy(cxx - rx * 0.58, crownY - ry * 0.12, rx * 0.52, ry * 0.56, p.seed + 0.3, 4);
+      ctx2d.fill();
+      ctx2d.fillStyle = hsl(col, -3);
+      canopy(cxx + rx * 0.62, crownY - ry * 0.22, rx * 0.48, ry * 0.52, p.seed + 0.6, 4);
+      ctx2d.fill();
+    }
+
+    // 顶部受光
+    ctx2d.fillStyle = "rgba(255,255,255,0.18)";
+    canopy(cxx - rx * 0.28, crownY - ry * 0.86, rx * 0.52, ry * 0.4, p.seed + 0.9, 4);
+    ctx2d.fill();
+
     ctx2d.globalAlpha = 1;
   }
 
@@ -328,6 +404,7 @@ function engineScript() {
     var cx = w / 2;
     var cy = h * 0.6;
     var scale = Math.min(w, h * 1.6) * 0.32 * zoom;
+    viewScale = scale;
     var ISLAND = 1;
 
     ctx2d.clearRect(0, 0, w, h);
@@ -403,9 +480,9 @@ function engineScript() {
       var e = screen[i];
       var size = treeSize(e.p.note);
       var dx = mx - e.s.sx;
-      var dy = my - (e.s.sy - size.trunk * 0.6);
+      var dy = my - (e.s.sy - size.trunk * viewScale * 0.6);
       var d = dx * dx + dy * dy;
-      var r = size.crown * 0.9 + 8;
+      var r = size.crown * viewScale * 1.5 + 12;
       if (d < r * r && d < bestD) {
         bestD = d;
         best = e.p.note;
