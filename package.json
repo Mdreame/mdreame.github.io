@@ -130,6 +130,6 @@
     "prettier": "^3.8.1",
     "three": "^0.186.1",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^7.0.2"
   }
 }
