@@ -1,0 +1,11 @@
+views:
+  - type: list
+    name: List
+    order:
+      - file.name
+    sort:
+      - property: file.ctime
+        direction: DESC
+    indentProperties: true
+  - type: cards
+    name: Gallery
