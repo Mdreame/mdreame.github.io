@@ -178,6 +178,8 @@ plugins:
     layout:
       position: beforeBody
       priority: 20
+  - source: "./plugins/forest"
+    enabled: true
   - source: "@quartz-community/tag-list"
     enabled: false
     layout:
@@ -274,6 +276,15 @@ plugins:
       position: beforeBody
       priority: 15
       display: all
+  - source: ./plugins/forest
+    enabled: false
+    options:
+      pageSlug: forest
+      perRow: 12
+    order: 55
+    layout:
+      position: beforeBody
+      priority: 15
 layout:
   groups:
     toolbar:
