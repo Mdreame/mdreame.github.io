@@ -1,0 +1,38 @@
+filters:
+  and:
+    - file.folder != "tags"
+    - file.name != "404"
+    - file.name != "index"
+formulas:
+  year: file.ctime.format("YYYY")
+  date: file.ctime.format("YYYY-MM-DD")
+views:
+  - type: table
+    name: 归档
+    groupBy:
+      property: formula.year
+      direction: DESC
+    order:
+      - file.name
+      - formula.date
+      - file.tags
+    sort:
+      - property: formula.date
+        direction: DESC
+      - property: file.name
+        direction: ASC
+  - type: list
+    name: List
+    order:
+      - file.name
+    sort:
+      - property: formula.date
+        direction: DESC
+      - property: file.name
+        direction: ASC
+    indentProperties: true
+  - type: cards
+    name: Gallery
+    sort:
+      - property: file.ctime
+        direction: DESC
