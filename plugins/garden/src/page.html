@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="把笔记种成一片森林。探索主题、发现想法，看看知识如何慢慢生长。"
+    />
+    <title>知识花园 · Jiang</title>
+    <link rel="stylesheet" href="__ROOT__static/garden.css" />
+  </head>
+  <body>
+    <a class="skip" href="#workspace">跳到 3D 花园</a>
+    <main>
+      <section class="garden-shell" aria-label="探索花园">
+        <aside class="sidebar">
+          <div class="section-label">探索花园 <span>EXPLORE</span></div>
+          <a class="home-link" href="__ROOT__">← 回到笔记首页</a>
+          <label class="search"
+            ><span aria-hidden="true">⌕</span
+            ><input
+              id="search"
+              type="search"
+              placeholder="寻找一颗想法…"
+              aria-label="搜索笔记标题、标签和摘要"
+            /><kbd>/</kbd></label
+          >
+          <div id="search-results" class="search-results" aria-label="搜索结果" hidden></div>
+          <h2>主题角落</h2>
+          <div id="topics" class="topic-list"></div>
+          <div class="sidebar-bottom">
+            <span class="little-sprout">❧</span>
+            <p>不必急着长成大树。<br />每一颗种子，都有自己的季节。</p>
+          </div>
+        </aside>
+        <div class="workspace" id="workspace" tabindex="-1">
+          <div class="workspace-toolbar">
+            <div>
+              <h2 id="view-title">整座花园</h2>
+              <span id="result-count" role="status" aria-live="polite"></span>
+            </div>
+            <div class="toolbar-actions">
+              <button id="random" class="random-button">✦ 随机漫步</button>
+              <div class="view-toggle" aria-label="显示方式">
+                <button id="map-view" aria-pressed="true">◈ 3D 花园</button
+                ><button id="list-view" aria-pressed="false">☷ 列表</button>
+              </div>
+            </div>
+          </div>
+          <div class="filters" id="filters" aria-label="按成长阶段筛选"></div>
+          <div id="scene-status" class="scene-status" role="status">正在唤醒花园…</div>
+          <div id="map" class="map">
+            <canvas
+              id="garden-canvas"
+              tabindex="0"
+              aria-label="三维知识花园。拖动旋转，滚轮缩放，右键拖动平移。也可使用场景按钮或切换笔记列表。"
+              aria-describedby="scene-help"
+            ></canvas>
+            <div id="scene-labels" class="scene-labels" aria-label="花园中的笔记"></div>
+            <div class="scene-heading" aria-hidden="true">
+              <span>JIANG’S FLOATING GARDEN</span>
+              <p>一方天地 · 慢慢生长</p>
+            </div>
+            <div class="scene-controls" aria-label="场景控制">
+              <button id="zoom-in" aria-label="放大花园" title="放大">＋</button>
+              <button id="zoom-out" aria-label="缩小花园" title="缩小">−</button>
+              <span></span>
+              <button id="overview" title="回到全景">⌂ 全景</button>
+              <button id="roam" aria-pressed="false" title="自动环绕花园">▷ 漫游</button>
+            </div>
+            <div id="empty" class="empty" hidden>
+              <span>☘</span>
+              <h3>暂时没有找到这颗想法</h3>
+              <p>换个关键词，或清除筛选继续散步。</p>
+              <button id="clear">清除筛选</button>
+            </div>
+          </div>
+          <div id="note-list" class="note-list" hidden></div>
+          <p id="scene-help" class="sr-only">
+            单指或鼠标拖动旋转，双指或滚轮缩放，双指移动或鼠标右键拖动平移。在场景获得焦点后，可使用方向键旋转，加减号缩放，Home
+            返回全景。
+          </p>
+          <div class="map-footer">
+            <span><i></i> <span id="map-hint">拖动旋转 · 滚轮缩放 · 点击植物阅读</span></span>
+          </div>
+        </div>
+        <aside class="detail" id="detail" aria-label="笔记详情">
+          <div id="detail-content"></div>
+        </aside>
+        <noscript
+          ><p class="noscript">
+            开启 JavaScript 即可探索三维花园，也可以直接<a href="__ROOT__">阅读笔记</a>。
+          </p></noscript
+        >
+      </section>
+    </main>
+    <script>
+      window.__GARDEN__ = __PAYLOAD__
+    </script>
+    <script type="module" src="__ROOT__static/garden-island.js"></script>
+  </body>
+</html>

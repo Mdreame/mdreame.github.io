@@ -240,7 +240,7 @@ plugins:
     options:
       href: /garden
       label: 花园
-      desc: 把笔记种成一片可以旋转的园子
+      desc: 把笔记种成一片森林
     order: 58
     layout:
       position: left

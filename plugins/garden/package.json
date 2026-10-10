@@ -1,7 +1,7 @@
 {
   "name": "garden-island",
   "version": "1.0.0",
-  "description": "Isometric 3D knowledge garden: notes rendered as trees on a floating island",
+  "description": "A real-time 3D floating knowledge garden with three growth stages, camera navigation, search, and an accessible list fallback",
   "type": "module",
   "license": "MIT",
   "exports": {
@@ -12,11 +12,12 @@
   },
   "main": "./dist/index.js",
   "scripts": {
-    "build": "esbuild src/garden.js --bundle --format=esm --target=es2020 --minify --outfile=dist/garden-island.js"
+    "build": "esbuild src/garden.js --bundle --format=esm --target=es2020 --minify --outfile=dist/garden-island.js",
+    "preview:fixture": "node scripts/generate-preview.mjs"
   },
   "quartz": {
     "name": "garden-island",
-    "displayName": "Garden Island",
+    "displayName": "Knowledge Garden",
     "category": "emitter",
     "version": "1.0.0",
     "quartzVersion": ">=5.0.0",
