@@ -1,5 +1,6 @@
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
+import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js"
 
 const data = window.__GARDEN__ || { notes: [], edges: [], counts: {}, total: 0 }
 const canvas = document.getElementById("garden-canvas")
@@ -12,8 +13,85 @@ const empty = document.getElementById("garden-empty")
 const loading = document.getElementById("garden-loading")
 const stage = document.getElementById("stage")
 
-const ISLAND_R = 5
+const ISLAND_R = 5 // 岛的建模基准半径，每座岛按自己的 r 缩放
 const GRASS_TOP = 0
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v))
+
+// ---------------------------------------------------------------- 分岛
+// 一个顶层标签一座岛。标签只取第一段：English/Writing/2026 → English。
+// 没有标签的笔记共用一座"未分类"岛。
+function topTag(note) {
+  const first = note.tags && note.tags.length ? String(note.tags[0]).replace(/^\/+/, "").trim() : ""
+  const cut = first.indexOf("/")
+  return (cut > 0 ? first.slice(0, cut) : first) || "未分类"
+}
+
+const ISLANDS = (() => {
+  const byTag = new Map()
+  for (const n of data.notes) {
+    const key = topTag(n)
+    if (!byTag.has(key)) byTag.set(key, [])
+    byTag.get(key).push(n)
+  }
+  const list = [...byTag].map(([key, notes]) => ({
+    key,
+    notes,
+    // 岛的面积跟着笔记数走（r ∝ √n），密度就是恒定的：小标签是小岛，大标签是大岛
+    r: clamp(1.03 * Math.sqrt(notes.length), 2.6, 18),
+    // 只有塞得特别满的岛才把树稍微缩小
+    shrink: clamp((notes.length / 400) ** -0.15, 0.7, 1),
+    x: 0,
+    z: 0,
+  }))
+  // 空花园也留一座裸岛，比一片空白好看
+  if (list.length === 0) list.push({ key: "未分类", notes: [], r: 2.6, shrink: 1, x: 0, z: 0 })
+  return list
+})()
+
+// 整片群岛的外接尺寸，相机取景、阳光和阴影范围都按它算
+const EXTENT = { x: ISLAND_R, z: ISLAND_R, max: ISLAND_R }
+
+;(function placeIslands() {
+  // 岛与岛之间的水面间距
+  const GAP = 4.5
+  // 大的岛先摆，整片更紧凑，主岛也自然落在前面
+  ISLANDS.sort((a, b) => b.notes.length - a.notes.length || a.key.localeCompare(b.key, "zh"))
+
+  // 一行大致摆几座岛：让整片群岛接近方形，而不是排成一条长龙
+  const perRow = Math.ceil(Math.sqrt(ISLANDS.length))
+  const avgR = ISLANDS.reduce((s, i) => s + i.r, 0) / ISLANDS.length
+  const rowW = Math.max(2 * ISLANDS[0].r, perRow * (2 * avgR + GAP) - GAP)
+
+  let x = 0
+  let z = 0
+  let rowH = 0
+  for (const isl of ISLANDS) {
+    if (x > 0 && x + isl.r * 2 > rowW + 1e-6) {
+      z += rowH + GAP
+      x = 0
+      rowH = 0
+    }
+    isl.x = x + isl.r
+    isl.z = z + isl.r
+    x += isl.r * 2 + GAP
+    rowH = Math.max(rowH, isl.r * 2)
+  }
+
+  // 整片群岛挪到原点，相机绕着它转
+  const minX = Math.min(...ISLANDS.map((i) => i.x - i.r))
+  const maxX = Math.max(...ISLANDS.map((i) => i.x + i.r))
+  const minZ = Math.min(...ISLANDS.map((i) => i.z - i.r))
+  const maxZ = Math.max(...ISLANDS.map((i) => i.z + i.r))
+  const cx = (minX + maxX) / 2
+  const cz = (minZ + maxZ) / 2
+  for (const isl of ISLANDS) {
+    isl.x -= cx
+    isl.z -= cz
+  }
+  EXTENT.x = (maxX - minX) / 2
+  EXTENT.z = (maxZ - minZ) / 2
+  EXTENT.max = Math.max(...ISLANDS.map((i) => i.r))
+})()
 
 // ---------------------------------------------------------------- 工具
 function hash(str) {
@@ -25,21 +103,24 @@ function hash(str) {
   return (h >>> 0) / 4294967296
 }
 
+// 叶色三档：绿（还在打理）→ 黄（搁了一阵）→ 灰（很久没动）
+const FRESH_DAYS = 90
+const STALE_DAYS = 365
+
 function leafColor(note) {
-  if (!note.modified) return new THREE.Color().setHSL(0.12, 0.28, 0.56)
-  const days = (Date.now() - note.modified) / 86400000
-  if (note.maturity === "seedling") return new THREE.Color().setHSL(0.29, 0.46, 0.6)
-  if (days <= 30) return new THREE.Color().setHSL(0.38, 0.44, 0.4)
-  if (days <= 90) return new THREE.Color().setHSL(0.31, 0.38, 0.44)
-  if (days <= 180) return new THREE.Color().setHSL(0.19, 0.34, 0.48)
-  return new THREE.Color().setHSL(0.11, 0.26, 0.52)
+  // 幼苗永远是嫩的黄绿色，跟新旧无关
+  if (note.maturity === "seedling") return new THREE.Color().setHSL(0.3, 0.5, 0.58)
+  const days = note.modified ? (Date.now() - note.modified) / 86400000 : Infinity
+  if (days <= FRESH_DAYS) return new THREE.Color().setHSL(0.34, 0.5, 0.38) // 绿
+  if (days <= STALE_DAYS) return new THREE.Color().setHSL(0.14, 0.6, 0.5) // 黄
+  return new THREE.Color().setHSL(0.09, 0.07, 0.48) // 灰：像枯枝败叶
 }
 
 // ---------------------------------------------------------------- 场景
 const scene = new THREE.Scene()
 
-const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 200)
-camera.position.set(0, 7.5, 13)
+const FOV = 45
+const camera = new THREE.PerspectiveCamera(FOV, 1, 0.1, 400)
 
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
 renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
@@ -47,185 +128,523 @@ renderer.shadowMap.enabled = true
 renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
 const controls = new OrbitControls(camera, renderer.domElement)
-controls.target.set(0, 0.6, 0)
 controls.enableDamping = true
 controls.dampingFactor = 0.08
 controls.enablePan = false
-controls.minDistance = 7
-controls.maxDistance = 26
 controls.minPolarAngle = 0.25
 controls.maxPolarAngle = 1.32
 controls.autoRotate = true
 controls.autoRotateSpeed = 0.55
 
-// 光照
+// 取景：把整片群岛装进画面。相机会绕圈，所以水平方向按外接圆算；
+// 俯角约 28°，纵深在屏幕上会被压扁到 sin(28°) ≈ 0.47
+const CAM_DIR = new THREE.Vector3(0, 0.47, 0.88).normalize()
+const FIT_TAN = Math.tan((FOV / 2) * (Math.PI / 180))
+const _p = new THREE.Vector3()
+function frameCamera() {
+  const aspect = camera.aspect || 1.6
+  const bound = Math.hypot(EXTENT.x, EXTENT.z)
+  let d = clamp(
+    Math.max((bound + 2) / (FIT_TAN * aspect), (CAM_DIR.y * bound + 3.5) / FIT_TAN),
+    14,
+    320,
+  )
+
+  // 上面那步是按外接圆估的；透视下近处的岛会被放大，光靠它会切掉画面边缘。
+  // 再把几处关键点真投影一遍，按实际超出量把距离推远。
+  const spots = []
+  for (const isl of ISLANDS) {
+    // 沿岛缘取点（别取外接方框的角，那会多留 41% 的余量）
+    for (let k = 0; k < 6; k += 1) {
+      const a = (k / 6) * Math.PI * 2
+      const x = isl.x + Math.cos(a) * isl.r
+      const z = isl.z + Math.sin(a) * isl.r
+      spots.push([x, 0, z], [x, 3.5, z])
+    }
+  }
+  for (let i = 0; i < 4; i += 1) {
+    camera.position.copy(CAM_DIR).multiplyScalar(d)
+    camera.lookAt(0, 0.6, 0)
+    camera.updateMatrixWorld(true)
+    let worst = 0
+    for (const [x, y, z] of spots) {
+      _p.set(x, y, z).project(camera)
+      worst = Math.max(worst, Math.abs(_p.x), Math.abs(_p.y))
+    }
+    if (worst <= 0.92) break
+    d *= Math.min(1.5, worst / 0.92)
+  }
+
+  camera.position.copy(CAM_DIR).multiplyScalar(d)
+  controls.target.set(0, 0.6, 0)
+  controls.minDistance = d * 0.35
+  controls.maxDistance = d * 3
+}
+
+// 光照：太阳和阴影相机都罩住整片群岛
 scene.add(new THREE.HemisphereLight(0xdff0fb, 0x7bbd68, 1.0))
 const sun = new THREE.DirectionalLight(0xffffff, 1.15)
-sun.position.set(6, 12, 7)
+const sunSpan = Math.max(EXTENT.x, EXTENT.z) + EXTENT.max + 4
+sun.position.set(0.42, 0.82, 0.48).normalize().multiplyScalar(sunSpan * 2.4)
 sun.castShadow = true
 sun.shadow.mapSize.set(2048, 2048)
 sun.shadow.camera.near = 1
-sun.shadow.camera.far = 40
-sun.shadow.camera.left = -9
-sun.shadow.camera.right = 9
-sun.shadow.camera.top = 9
-sun.shadow.camera.bottom = -9
+sun.shadow.camera.far = sunSpan * 8
+sun.shadow.camera.left = -sunSpan
+sun.shadow.camera.right = sunSpan
+sun.shadow.camera.top = sunSpan
+sun.shadow.camera.bottom = -sunSpan
 sun.shadow.bias = -0.0008
 scene.add(sun)
 scene.add(new THREE.AmbientLight(0xffffff, 0.25))
 
 // ---------------------------------------------------------------- 岛屿
-const island = new THREE.Group()
+// 几何体按基准半径建一次，每座岛只是同一副壳的等比缩放
+const GRASS_GEO = new THREE.CylinderGeometry(ISLAND_R, ISLAND_R * 0.99, 0.5, 72)
+const SOIL_GEO = new THREE.CylinderGeometry(ISLAND_R * 0.98, ISLAND_R * 0.12, 2.6, 72, 1)
+const TIP_GEO = new THREE.ConeGeometry(ISLAND_R * 0.12, 0.9, 32)
+const GRASS_MAT = new THREE.MeshStandardMaterial({ color: 0x86c96a, roughness: 0.9 })
+const SOIL_MAT = new THREE.MeshStandardMaterial({ color: 0x8a6f4f, roughness: 1, flatShading: true })
+const TIP_MAT = new THREE.MeshStandardMaterial({ color: 0x7a6045, roughness: 1, flatShading: true })
 
-const grass = new THREE.Mesh(
-  new THREE.CylinderGeometry(ISLAND_R, ISLAND_R * 0.99, 0.5, 72),
-  new THREE.MeshStandardMaterial({ color: 0x86c96a, flatShading: false, roughness: 0.9 }),
-)
-grass.position.y = GRASS_TOP - 0.25
-grass.receiveShadow = true
-island.add(grass)
+// 岛名牌：画在 canvas 上贴成精灵，永远正面朝向相机
+function makeLabel(name, count) {
+  const font = '600 30px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif'
+  const probe = document.createElement("canvas").getContext("2d")
+  probe.font = font
+  const nameW = probe.measureText(name).width
+  const numW = probe.measureText(` · ${count}`).width
+  const padX = 18
+  const padY = 11
+  const cw = Math.ceil(nameW + numW + padX * 2)
+  const ch = 30 + padY * 2
 
-// 圆润的岛底：上宽下窄的倒锥台，不是三角形
-const soil = new THREE.Mesh(
-  new THREE.CylinderGeometry(ISLAND_R * 0.98, ISLAND_R * 0.12, 2.6, 72, 1),
-  new THREE.MeshStandardMaterial({ color: 0x8a6f4f, roughness: 1, flatShading: true }),
-)
-soil.position.y = GRASS_TOP - 0.5 - 1.3
-soil.receiveShadow = true
-island.add(soil)
+  const dpr = 2
+  const cvs = document.createElement("canvas")
+  cvs.width = cw * dpr
+  cvs.height = ch * dpr
+  const c = cvs.getContext("2d")
+  c.scale(dpr, dpr)
 
-// 岛底尖端
-const tipCone = new THREE.Mesh(
-  new THREE.ConeGeometry(ISLAND_R * 0.12, 0.9, 32),
-  new THREE.MeshStandardMaterial({ color: 0x7a6045, roughness: 1, flatShading: true }),
-)
-tipCone.position.y = GRASS_TOP - 0.5 - 2.6 - 0.45
-tipCone.rotation.x = Math.PI
-island.add(tipCone)
+  const r = ch / 2
+  c.fillStyle = "rgba(255,255,255,0.86)"
+  c.beginPath()
+  c.moveTo(r, 0)
+  c.lineTo(cw - r, 0)
+  c.arc(cw - r, r, r, -Math.PI / 2, Math.PI / 2)
+  c.lineTo(r, ch)
+  c.arc(r, r, r, Math.PI / 2, (Math.PI * 3) / 2)
+  c.closePath()
+  c.fill()
 
-scene.add(island)
+  c.font = font
+  c.textBaseline = "middle"
+  c.fillStyle = "#2f3a2f"
+  c.fillText(name, padX, ch / 2 + 1)
+  c.fillStyle = "#7b8b7b"
+  c.fillText(` · ${count}`, padX + nameW, ch / 2 + 1)
+
+  const tex = new THREE.CanvasTexture(cvs)
+  tex.anisotropy = 4
+  const sprite = new THREE.Sprite(
+    // sizeAttenuation: false —— 名牌在屏幕上始终保持同样大小，缩放到哪都读得清
+    new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false, sizeAttenuation: false }),
+  )
+  sprite.userData.aspect = cw / ch
+  sprite.renderOrder = 2
+  return sprite
+}
+
+// 名牌固定约 22 像素高：关掉 sizeAttenuation 后，屏幕高度 = scale.y × projection[1][1] ÷ 2
+const LABEL_PX = 29
+const LABEL_K = 2 * Math.tan((FOV / 2) * (Math.PI / 180))
+function sizeLabels() {
+  const h = canvas.clientHeight || 600
+  const y = (LABEL_PX / h) * LABEL_K
+  for (const isl of ISLANDS) {
+    if (isl.label) isl.label.scale.set(y * isl.label.userData.aspect, y, 1)
+  }
+}
+
+for (const isl of ISLANDS) {
+  const g = new THREE.Group()
+
+  const grass = new THREE.Mesh(GRASS_GEO, GRASS_MAT)
+  grass.position.y = GRASS_TOP - 0.25
+  grass.receiveShadow = true
+  g.add(grass)
+
+  // 圆润的岛底：上宽下窄的倒锥台，不是三角形
+  const soil = new THREE.Mesh(SOIL_GEO, SOIL_MAT)
+  soil.position.y = GRASS_TOP - 0.5 - 1.3
+  soil.receiveShadow = true
+  g.add(soil)
+
+  // 岛底尖端
+  const tipCone = new THREE.Mesh(TIP_GEO, TIP_MAT)
+  tipCone.position.y = GRASS_TOP - 0.5 - 2.6 - 0.45
+  tipCone.rotation.x = Math.PI
+  g.add(tipCone)
+
+  // 整座岛等比缩放；草面仍在 y = 0，所以树不会被抬起来
+  g.scale.setScalar(isl.r / ISLAND_R)
+  g.position.set(isl.x, 0, isl.z)
+  scene.add(g)
+  isl.group = g
+
+  // 名牌浮在树顶之上
+  const label = makeLabel(isl.key, isl.notes.length)
+  label.position.set(isl.x, 3.4, isl.z)
+  scene.add(label)
+  isl.label = label
+}
 
 // ---------------------------------------------------------------- 树
-function treeSize(note) {
-  if (note.maturity === "evergreen") return { trunk: 1.5, crown: 0.72 }
-  if (note.maturity === "budding") return { trunk: 0.85, crown: 0.46 }
-  if (note.maturity === "seedling") return { trunk: 0.3, crown: 0.2 }
-  return { trunk: 0.05, crown: 0.09 }
+// 低多边形树：枝干是"圆台段"，树冠是被揉皱的多面体块——比正球自然得多。
+// 每棵树最后合并成一个 mesh，顶点色带材质，所以一棵树只要一次 draw call。
+const SHAPES = {
+  evergreen: { trunk: 1.5, crown: 0.55 },
+  budding: { trunk: 0.8, crown: 0.34 },
+  seedling: { trunk: 0.38, crown: 0.16 },
+}
+// 常青笔记长什么样："pine" 松树（叠锥）/"broadleaf" 阔叶（团簇树冠）
+const EVERGREEN_STYLE = "pine"
+const MOSS = new THREE.Color(0x6f9c58)
+const SOIL = new THREE.Color(0xa4906a)
+const SEED = new THREE.Color(0xb3a58c)
+
+const UP = new THREE.Vector3(0, 1, 0)
+const _rv = new THREE.Vector3()
+
+// 顶点按"坐标"抖动而不是按索引：多面体每个面都持有独立顶点，
+// 同一个角落在不同面里的坐标相同，抖动一致，表面才不会裂开
+function ruffle(geo, amp, seed) {
+  const pos = geo.attributes.position
+  for (let i = 0; i < pos.count; i += 1) {
+    _rv.fromBufferAttribute(pos, i)
+    const key = `${_rv.x.toFixed(3)},${_rv.y.toFixed(3)},${_rv.z.toFixed(3)},${seed}`
+    _rv.multiplyScalar(1 + (hash(key) - 0.5) * amp)
+    pos.setXYZ(i, _rv.x, _rv.y, _rv.z)
+  }
+  pos.needsUpdate = true
+  geo.computeVertexNormals()
+  return geo
+}
+
+// 单位树冠块（半径 1）与单位叶片，建一次到处克隆
+const BLOBS = Array.from({ length: 6 }, (_, i) =>
+  ruffle(new THREE.IcosahedronGeometry(1, 1), 0.42, `b${i}`),
+)
+const BLADES = Array.from({ length: 4 }, (_, i) =>
+  ruffle(new THREE.IcosahedronGeometry(1, 0), 0.4, `l${i}`),
+)
+// 单位针叶层：底半径 1、高 1 的低多边形圆锥（带底盖），轻微揉皱免得像陀螺
+const CONES = Array.from({ length: 3 }, (_, i) =>
+  ruffle(new THREE.ConeGeometry(1, 1, 7, 1).toNonIndexed(), 0.12, `c${i}`),
+)
+// 单位枝干：底半径 1、顶半径 0.62、高 1、无盖（两端都藏在树干/树冠里）
+const LIMB = new THREE.CylinderGeometry(0.62, 1, 1, 6, 1, true).toNonIndexed()
+
+const TREE_MATERIAL = new THREE.MeshStandardMaterial({
+  vertexColors: true,
+  roughness: 0.88,
+  flatShading: true,
+})
+
+// 给一块几何体刷上纯色，合并后就是顶点色
+function paint(geo, color) {
+  const n = geo.attributes.position.count
+  const arr = new Float32Array(n * 3)
+  for (let i = 0; i < n; i += 1) {
+    arr[i * 3] = color.r
+    arr[i * 3 + 1] = color.g
+    arr[i * 3 + 2] = color.b
+  }
+  geo.setAttribute("color", new THREE.BufferAttribute(arr, 3))
+  return geo
+}
+
+// 树冠底暗顶亮的渐变档数
+const SHADES = 6
+
+// 按高度给顶点上色：底部压暗到 color × dark，顶部是原色
+function shade(geo, color, halfHeight, dark) {
+  const pos = geo.attributes.position
+  const n = pos.count
+  const arr = new Float32Array(n * 3)
+  const lut = Array.from({ length: SHADES }, (_, s) =>
+    color
+      .clone()
+      .multiplyScalar(dark)
+      .lerp(color, s / (SHADES - 1)),
+  )
+  for (let i = 0; i < n; i += 1) {
+    const t = clamp((pos.getY(i) / halfHeight + 1) * 0.5, 0, 1)
+    const c = lut[Math.round(t * (SHADES - 1))]
+    arr[i * 3] = c.r
+    arr[i * 3 + 1] = c.g
+    arr[i * 3 + 2] = c.b
+  }
+  geo.setAttribute("color", new THREE.BufferAttribute(arr, 3))
+  return geo
 }
 
 function buildTree(note) {
   const group = new THREE.Group()
-  const size = treeSize(note)
-  const color = leafColor(note)
   const r = hash(note.slug)
+  const parts = []
 
-  const trunkGeo = new THREE.CylinderGeometry(size.trunk * 0.13, size.trunk * 0.2, size.trunk, 8)
-  const trunk = new THREE.Mesh(trunkGeo, new THREE.MeshStandardMaterial({ color: 0x8a6a45, roughness: 0.95 }))
-  trunk.position.y = size.trunk / 2
-  group.add(trunk)
+  const wood = new THREE.Color().setHSL(0.074, 0.26, 0.2 + hash(note.slug + "w") * 0.09)
+  const woodDark = wood.clone().multiplyScalar(0.78)
+  const leaf = leafColor(note)
+  const leafDark = leaf.clone().multiplyScalar(0.82)
+  const leafLight = leaf.clone().lerp(new THREE.Color(0xffffff), 0.16)
 
-  const leafMat = new THREE.MeshStandardMaterial({
-    color,
-    roughness: 0.85,
-    flatShading: true,
-  })
-
-  if (note.maturity === "evergreen") {
-    // 三层低多边形树冠
-    const layers = [
-      { r: size.crown, y: size.trunk + size.crown * 0.45, dx: 0, dz: 0 },
-      { r: size.crown * 0.74, y: size.trunk + size.crown * 1.18, dx: 0.06, dz: -0.08 },
-      { r: size.crown * 0.52, y: size.trunk + size.crown * 1.75, dx: -0.05, dz: 0.05 },
-    ]
-    for (const l of layers) {
-      const m = new THREE.Mesh(new THREE.IcosahedronGeometry(l.r, 1), leafMat)
-      m.position.set(l.dx, l.y, l.dz)
-      m.rotation.set(r * 3, r * 6, r * 2)
-      group.add(m)
-    }
-  } else if (note.maturity === "budding") {
-    const main = new THREE.Mesh(new THREE.IcosahedronGeometry(size.crown, 1), leafMat)
-    main.position.y = size.trunk + size.crown * 0.7
-    main.rotation.set(r * 4, r * 3, r * 2)
-    group.add(main)
-    const side = new THREE.Mesh(new THREE.IcosahedronGeometry(size.crown * 0.6, 1), leafMat)
-    side.position.set(size.crown * 0.5, size.trunk + size.crown * 1.05, -size.crown * 0.2)
-    group.add(side)
-  } else if (note.maturity === "seedling") {
-    // 两片嫩叶 + 顶芽
-    for (const dir of [-1, 1]) {
-      const leaf = new THREE.Mesh(new THREE.SphereGeometry(size.crown, 10, 8), leafMat)
-      leaf.scale.set(1.5, 0.34, 0.7)
-      leaf.position.set(dir * size.crown * 0.85, size.trunk + 0.1, 0)
-      leaf.rotation.z = dir * 0.5
-      group.add(leaf)
-    }
-    const bud = new THREE.Mesh(new THREE.SphereGeometry(size.crown * 0.42, 10, 8), leafMat)
-    bud.position.y = size.trunk + size.crown * 0.5
-    group.add(bud)
-  } else {
-    // 未标记：地上的种子
-    const seed = new THREE.Mesh(
-      new THREE.SphereGeometry(size.crown, 10, 8),
-      new THREE.MeshStandardMaterial({ color: 0xb3a58c, roughness: 1 }),
-    )
-    seed.scale.set(1, 0.7, 1)
-    seed.position.y = size.crown * 0.7
-    group.add(seed)
+  // 从 a 连到 b 的一段枝干
+  const limb = (ax, ay, az, bx, by, bz, radius, color = wood) => {
+    const dir = new THREE.Vector3(bx - ax, by - ay, bz - az)
+    const len = dir.length()
+    if (len < 1e-4) return
+    const geo = LIMB.clone()
+    geo.scale(radius, len, radius)
+    geo.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(UP, dir.normalize()))
+    geo.translate((ax + bx) / 2, (ay + by) / 2, (az + bz) / 2)
+    parts.push(paint(geo, color))
   }
 
-  group.traverse((o) => {
-    if (o.isMesh) {
-      o.castShadow = true
-      o.receiveShadow = true
+  // 一团树冠：压扁过的多面体块。底部顶点压暗，自带一点环境光遮蔽，
+  // 看起来才像一坨叶子而不是一块石头
+  const blob = (x, y, z, radius, flatten, variant, color) => {
+    const geo = BLOBS[variant % BLOBS.length].clone()
+    geo.scale(radius, radius * flatten, radius)
+    shade(geo, color, radius * flatten, 0.7)
+    geo.translate(x, y, z)
+    parts.push(geo)
+  }
+
+  // 一层针叶：低多边形圆锥，同样底暗顶亮
+  const tier = (x, y, z, radius, height, variant, color) => {
+    const geo = CONES[variant % CONES.length].clone()
+    geo.scale(radius, height, radius)
+    shade(geo, color, height / 2, 0.78)
+    geo.translate(x, y, z)
+    parts.push(geo)
+  }
+
+  // 一片叶子：沿自身长轴拉长、压扁，再翘起来
+  const blade = (x, y, z, len, tilt, yaw, variant, color) => {
+    const geo = BLADES[variant % BLADES.length].clone()
+    geo.scale(len, len * 0.26, len * 0.58)
+    geo.rotateZ(tilt)
+    geo.rotateY(yaw)
+    geo.translate(x, y, z)
+    parts.push(paint(geo, color))
+  }
+
+  if (note.maturity === "evergreen") {
+    const s = SHAPES.evergreen
+    const lean = (r - 0.5) * 0.18
+    limb(0, 0, 0, 0, 0.24, 0, 0.24, woodDark) // 根部外扩，落地更稳
+    limb(0, 0, 0, lean, s.trunk, lean * 0.4, 0.15)
+    if (EVERGREEN_STYLE === "pine") {
+      // 松树：四层针叶层层叠着往上收，底下留一截光树干。
+      // 层与层在高度上大幅重叠，轮廓才连得起来，不会像叠起来的甜筒
+      const c = s.crown
+      const tiers = [
+        [0.75, 1.2, 1.5, 0, leafDark],
+        [1.02, 0.98, 1.4, 1, leaf],
+        [1.26, 0.72, 1.25, 2, leafLight],
+        [1.465, 0.45, 1.1, 0, leaf],
+      ]
+      for (let i = 0; i < tiers.length; i += 1) {
+        const [ky, kr, kh, variant, color] = tiers[i]
+        // 每层稍微偏一点点，免得像根对称的陀螺
+        const dx = i === 0 ? 0 : (hash(note.slug + "tx" + i) - 0.5) * 0.09
+        const dz = i === 0 ? 0 : (hash(note.slug + "tz" + i) - 0.5) * 0.09
+        tier(lean + dx, s.trunk * ky, lean * 0.4 + dz, c * kr, c * kh, variant, color)
+      }
+    } else {
+      // 三根斜枝托住树冠，枝梢收在冠里，不会露出光秃秃的一截
+      for (let i = 0; i < 3; i += 1) {
+        const a = r * 6.3 + i * 2.39
+        const y = s.trunk * (0.52 + i * 0.17)
+        limb(
+          lean * (y / s.trunk),
+          y,
+          0,
+          Math.cos(a) * 0.4 + lean,
+          y + 0.5,
+          Math.sin(a) * 0.4,
+          0.075,
+        )
+      }
+      // 七团树冠挤成一顶有起伏的伞
+      const c = s.crown
+      const crown = [
+        [-0.34, s.trunk + c * 0.5, 0.12, 0.88, 0.86, 0, leaf],
+        [0.36, s.trunk + c * 0.58, -0.1, 0.84, 0.84, 1, leafLight],
+        [0, s.trunk + c * 0.76, -0.3, 0.8, 0.86, 2, leafDark],
+        [-0.08, s.trunk + c * 0.86, 0.32, 0.78, 0.86, 3, leaf],
+        [0.02, s.trunk + c * 1.4, 0, 0.8, 0.9, 4, leafLight],
+        [-0.24, s.trunk + c * 1.18, -0.16, 0.6, 0.86, 5, leafDark],
+        [0.22, s.trunk + c * 1.14, 0.2, 0.58, 0.86, 0, leaf],
+      ]
+      for (const [x, y, z, kr, flat, variant, color] of crown) {
+        blob(x, y, z, c * kr, flat, variant, color)
+      }
     }
-  })
+  } else if (note.maturity === "budding") {
+    const s = SHAPES.budding
+    const lean = (r - 0.5) * 0.12
+    limb(0, 0, 0, 0, 0.14, 0, 0.15, woodDark)
+    limb(0, 0, 0, lean, s.trunk, lean * 0.4, 0.085)
+    // 刚分叉的两根细枝
+    for (let i = 0; i < 2; i += 1) {
+      const a = r * 6.3 + i * 3.1
+      limb(
+        lean * 0.8,
+        s.trunk * 0.62,
+        0,
+        Math.cos(a) * 0.22 + lean,
+        s.trunk + 0.3,
+        Math.sin(a) * 0.22,
+        0.04,
+      )
+    }
+    const c = s.crown
+    blob(0, s.trunk + c * 0.5, 0, c * 1.15, 0.86, 0, leaf)
+    blob(-0.24, s.trunk + c * 1.0, 0.06, c * 0.85, 0.84, 1, leafDark)
+    blob(0.22, s.trunk + c * 1.05, -0.05, c * 0.8, 0.84, 2, leafLight)
+    blob(0, s.trunk + c * 1.5, 0, c * 0.72, 0.88, 3, leaf)
+  } else if (note.maturity === "seedling") {
+    const s = SHAPES.seedling
+    const lean = (r - 0.5) * 0.1
+    blob(0, 0.008, 0, 0.2, 0.12, 5, MOSS) // 脚下一小片深色的草，别像只花盆
+    limb(0, 0, 0, lean, s.trunk, lean * 0.5, 0.032)
+    // 两片子叶从茎顶向两侧张开，微微上翘
+    const base = r * 6.3
+    for (let i = 0; i < 2; i += 1) {
+      const a = base + i * Math.PI
+      blade(
+        Math.cos(a) * s.crown + lean,
+        s.trunk - 0.01,
+        Math.sin(a) * s.crown,
+        s.crown * 1.05,
+        i === 0 ? 0.55 : -0.55,
+        -a,
+        i,
+        leaf,
+      )
+    }
+    blob(lean * 1.2, s.trunk + 0.05, 0, s.crown * 0.5, 0.9, 3, leafLight) // 顶芽
+  } else {
+    // 未标记：地上的一粒种子
+    blob(0, 0.01, 0, 0.17, 0.16, 0, SOIL)
+    blob(0.01, 0.09, 0, 0.1, 0.85, 2, SEED)
+  }
+
+  const merged = mergeGeometries(parts, false)
+  merged.computeBoundingBox()
+  const mesh = new THREE.Mesh(merged, TREE_MATERIAL)
+  mesh.castShadow = true
+  mesh.receiveShadow = true
+  group.add(mesh)
+
   group.rotation.y = r * Math.PI * 2
+  group.rotation.x = (hash(note.slug + "t") - 0.5) * 0.05 // 各长各的，别都笔直
+  group.rotation.z = (hash(note.slug + "t2") - 0.5) * 0.05
+  group.userData.top = merged.boundingBox.max.y
   return group
 }
 
 // ---------------------------------------------------------------- 布局
 const trees = []
 ;(function plant() {
-  const byTag = {}
-  for (const n of data.notes) {
-    const key = n.tags && n.tags.length ? String(n.tags[0]) : "未分类"
-    if (!byTag[key]) byTag[key] = []
-    byTag[key].push(n)
-  }
-  const keys = Object.keys(byTag)
   const total = data.notes.length || 1
-  let angle = -Math.PI / 2
+  // 出场动画的总时长固定，笔记多了也不会等太久
+  const stagger = Math.min(0.06, 2.5 / total)
+  let planted = 0
 
-  for (const key of keys) {
-    const list = byTag[key]
-    const span = (Math.PI * 2 * list.length) / total
-    const a0 = angle
-    angle += span
+  ISLANDS.forEach((isl, index) => {
+    const list = isl.notes
+    if (list.length === 0) return
 
-    let inRing = 0
-    let ring = 0
-    let ringCap = 4
-    list.forEach((note, idx) => {
-      if (inRing >= ringCap) {
-        inRing = 0
-        ring += 1
-        ringCap = 4 + ring * 3
+    const R = isl.r
+    const TREE_GAP = 0.95 * isl.shrink // 相邻两棵树的最小间距（世界单位）
+    const rIn = 0.3 * R
+    const rOut = 0.88 * R
+    const span = Math.PI * 2
+
+    // 圈层：半径收在岛内 30%~88%，每圈能站几棵按"弧长 ÷ 树间距"推算，
+    // 所以岛变大、树变小时，一圈自然能容纳更多树；圈数同时受岛半径限制，
+    // 免得圈与圈之间挤在一起
+    const maxRings = Math.max(1, Math.min(16, 1 + Math.floor((rOut - rIn) / TREE_GAP)))
+    function ringPlan(count) {
+      // 岛上只有一棵树时让它待在近中央，别偏到岛边上去
+      if (count === 1) return { caps: [1], radii: [0.3 * R] }
+      let plan = null
+      for (let n = 1; n <= maxRings; n += 1) {
+        const radii =
+          n === 1 ? [0.59 * R] : Array.from({ length: n }, (_, i) => (0.3 + (0.58 * i) / (n - 1)) * R)
+        // 1.35 是给抖动留的余量：就算两棵树各自抖到最近处，也还剩得下间距
+        const caps = radii.map((r) => Math.max(1, Math.floor((span * r) / (TREE_GAP * 1.35))))
+        plan = { caps, radii }
+        if (caps.reduce((a, b) => a + b, 0) >= count) break
       }
-      const a = a0 + span * ((idx % ringCap) / ringCap) + (hash(note.slug) - 0.5) * 0.22
-      const radius = (0.24 + 0.66 * ((ring + 1) / 3)) * ISLAND_R + (hash(note.slug + "r") - 0.5) * 0.3
-      inRing += 1
+      return plan
+    }
 
-      const group = buildTree(note)
-      group.position.set(Math.cos(a) * radius, GRASS_TOP, Math.sin(a) * radius)
-      // 轻微随机缩放，避免整齐划一
-      const s = 0.9 + hash(note.slug + "s") * 0.25
-      group.scale.setScalar(0.001)
-      group.userData = { note, target: s, born: idx * 0.06 }
-      scene.add(group)
-      trees.push(group)
+    const { caps, radii } = ringPlan(list.length)
+
+    // 按各圈容量比例分树。笔记多到超过整座岛的容量时，是整体一起变密，
+    // 而不是把多出来的树堆在最外圈——那样会两棵叠在一起
+    const capSum = caps.reduce((a, b) => a + b, 0)
+    const alloc = caps.map((c) => Math.max(1, Math.round((list.length * c) / capSum)))
+    let drift = list.length - alloc.reduce((a, b) => a + b, 0)
+    for (let i = 0; drift !== 0; i += 1) {
+      const k = i % alloc.length
+      if (drift > 0) {
+        alloc[k] += 1
+        drift -= 1
+      } else if (alloc[k] > 1) {
+        alloc[k] -= 1
+        drift += 1
+      }
+    }
+
+    let idx = 0
+    alloc.forEach((placed, ring) => {
+      const r = radii[ring]
+      const gap = ring === 0 ? r : r - radii[ring - 1]
+      // 整圈平分，没有扇区边界要躲，所以不留空槽
+      const slotW = span / placed
+
+      for (let slot = 0; slot < placed; slot += 1, idx += 1) {
+        const note = list[idx]
+        // 抖动跟着局部间距缩放，笔记密的时候不会把两棵树叠在一起
+        const a = -Math.PI / 2 + slotW * (slot + 0.5) + (hash(note.slug) - 0.5) * slotW * 0.4
+        const jitter = (hash(note.slug + "r") - 0.5) * Math.min(gap, 0.3 * R) * 0.3
+        const radius = Math.min(r + jitter, 0.99 * R)
+
+        const group = buildTree(note)
+        group.position.set(isl.x + Math.cos(a) * radius, GRASS_TOP, isl.z + Math.sin(a) * radius)
+        // 轻微随机缩放，避免整齐划一；再乘上密度系数
+        const s = (0.9 + hash(note.slug + "s") * 0.25) * isl.shrink
+        group.scale.setScalar(0.001)
+        group.userData = {
+          ...group.userData,
+          note,
+          target: s,
+          born: planted * stagger,
+          island: index,
+          islandR: R,
+        }
+        planted += 1
+        scene.add(group)
+        trees.push(group)
+      }
     })
-  }
+  })
 })()
 
 // ---------------------------------------------------------------- 连接线
@@ -239,8 +658,10 @@ const trees = []
     const a = bySlug[String(from).replace(/\/index$/, "")]
     const b = bySlug[String(to).replace(/\/index$/, "")]
     if (!a || !b) continue
+    // 根系只在同一座岛底下连；跨岛的线会横穿海面，太乱
+    if (a.userData.island !== b.userData.island) continue
     const mid = new THREE.Vector3().addVectors(a.position, b.position).multiplyScalar(0.5)
-    mid.y = GRASS_TOP - 0.6
+    mid.y = GRASS_TOP - 0.6 * (a.userData.islandR / ISLAND_R)
     const curve = new THREE.QuadraticBezierCurve3(
       new THREE.Vector3(a.position.x, GRASS_TOP + 0.1, a.position.z),
       mid,
@@ -266,11 +687,22 @@ function visible(note) {
 
 function updateVisibility() {
   let shown = 0
+  const perIsland = new Map()
   for (const t of trees) {
     const ok = visible(t.userData.note)
     t.visible = ok
-    if (ok) shown += 1
+    if (ok) {
+      shown += 1
+      perIsland.set(t.userData.island, (perIsland.get(t.userData.island) || 0) + 1)
+    }
   }
+  // 整座岛都没树可看时，连岛带名牌一起收起来；一片空花园则留一座裸岛
+  const bare = trees.length === 0
+  ISLANDS.forEach((isl, i) => {
+    const alive = (perIsland.get(i) || 0) > 0 || (bare && i === 0)
+    if (isl.group) isl.group.visible = alive
+    if (isl.label) isl.label.visible = (perIsland.get(i) || 0) > 0
+  })
   empty.style.display = shown === 0 ? "block" : "none"
 }
 
@@ -290,10 +722,8 @@ function positionCard(tree) {
     return
   }
 
-  const note = tree.userData.note
-  const size = treeSize(note)
   tree.getWorldPosition(anchorVec)
-  anchorVec.y += (size.trunk + size.crown * 1.7) * tree.userData.target
+  anchorVec.y += (tree.userData.top || 1) * tree.userData.target
   anchorVec.project(camera)
 
   // 树转到相机背后时先隐藏
@@ -379,8 +809,7 @@ for (const btn of document.querySelectorAll(".garden-filter")) {
 }
 
 document.getElementById("garden-reset").addEventListener("click", () => {
-  camera.position.set(0, 7.5, 13)
-  controls.target.set(0, 0.6, 0)
+  frameCamera()
   controls.autoRotate = true
   pinned = null
   showCard(null)
@@ -392,6 +821,7 @@ function resize() {
   renderer.setSize(w, h, false)
   camera.aspect = w / Math.max(1, h)
   camera.updateProjectionMatrix()
+  sizeLabels()
 }
 window.addEventListener("resize", resize)
 
@@ -408,6 +838,7 @@ function animate() {
     const eased = 1 - Math.pow(1 - progress, 3)
     tree.scale.setScalar(Math.max(0.001, d.target * eased))
   }
+
 
   // hover 命中
   raycaster.setFromCamera(pointer, camera)
@@ -451,6 +882,7 @@ function animate() {
 }
 
 resize()
+frameCamera()
 updateVisibility()
 if (loading) loading.style.display = "none"
 animate()

@@ -69,7 +69,9 @@ function collectNotes(content, opts) {
     if (d.frontmatter?.unlisted === true) continue
     if (d.frontmatter?.draft === true) continue
 
-    const maturity = String(d.frontmatter?.maturity ?? "").trim().toLowerCase()
+    const maturity = String(d.frontmatter?.maturity ?? "")
+      .trim()
+      .toLowerCase()
     const level = WEIGHT[maturity] ? maturity : null
     const tags = Array.isArray(d.frontmatter?.tags) ? d.frontmatter.tags.map(String) : []
     const growth = growthOf(d)
@@ -224,7 +226,7 @@ function pageHtml(data, opts) {
   <button class="garden-filter" data-level="evergreen">常青 ${data.counts.evergreen}</button>
   <button class="garden-filter" data-level="unknown">未标记 ${data.counts.unknown}</button>
   <button id="garden-reset">重置视角</button>
-  <span class="hint">颜色越绿表示最近还在打理 · 曲线是笔记间的链接</span>
+  <span class="hint">一座岛一个顶层标签 · 叶色：绿 近三个月打理过 · 黄 一年内 · 灰 更久 · 曲线是同岛笔记的链接</span>
 </footer>
 <script>
   window.__GARDEN__ = ${payload};
