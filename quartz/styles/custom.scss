@@ -143,14 +143,22 @@ article {
   font-size: 0.9rem;
 }
 
-.page-listing li.section-li > .section > ul.tags > li > .tag-link {
+// 标签胶囊：列表页与笔记正文里的 #标签 共用同一套样式
+.page-listing li.section-li > .section > ul.tags > li > .tag-link,
+article .markdown-rendered a.tag-link {
   display: inline-block;
   padding: 0.2rem 0.65rem;
   border-radius: 999px;
   background: color-mix(in srgb, var(--tertiary) 16%, transparent);
   color: var(--tertiary);
+  font-size: 0.9rem;
   line-height: 1.5;
   text-decoration: none;
+}
+
+// 正文里连续的标签只靠行内空格分隔（约 0.25em），比列表的 gap 紧，补一点右边距
+article .markdown-rendered a.tag-link {
+  margin-right: 0.1rem;
 }
 
 // 移动端：标题栏留在顶部，其余侧边栏内容移到正文下方
