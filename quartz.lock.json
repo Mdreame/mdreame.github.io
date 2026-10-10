@@ -1,12 +1,6 @@
 {
   "version": "1.0.0",
   "plugins": {
-    "forest": {
-      "source": "./plugins/forest",
-      "resolved": "/Users/xj/Desktop/blog/quartz/plugins/forest",
-      "commit": "local",
-      "installedAt": "2026-10-09T08:43:04.562Z"
-    },
     "garden": {
       "source": "./plugins/garden",
       "resolved": "/Users/xj/Desktop/blog/quartz/plugins/garden",

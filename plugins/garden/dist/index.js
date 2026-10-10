@@ -64,7 +64,7 @@ function collectNotes(content, opts) {
     if (!d) continue
     const slug = String(d.slug ?? "")
     if (!slug || !d.filePath) continue
-    if (slug === "index" || slug === "404" || slug === "forest" || slug === opts.slug) continue
+    if (slug === "index" || slug === "404" || slug === opts.slug) continue
     if (slug.startsWith("tags/")) continue
     if (d.frontmatter?.unlisted === true) continue
     if (d.frontmatter?.draft === true) continue
@@ -211,7 +211,7 @@ function pageHtml(data, opts) {
   <div id="garden-empty">这个筛选下还没有笔记</div>
   <div id="garden-fallback">
     你的浏览器/设备不支持 WebGL，无法渲染 3D 花园。<br>
-    可以看看 <a href="/forest" style="color:#3f7d52">二维森林</a>。
+    可以<a href="/" style="color:#3f7d52">回首页</a>看看其它笔记。
   </div>
   <div id="garden-card">
     <h3 id="garden-card-title"></h3>

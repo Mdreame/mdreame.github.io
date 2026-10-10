@@ -178,8 +178,6 @@ plugins:
     layout:
       position: beforeBody
       priority: 20
-  - source: ./plugins/forest
-    enabled: true
   - source: "@quartz-community/tag-list"
     enabled: false
     layout:
