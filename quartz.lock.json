@@ -12,6 +12,12 @@
       "resolved": "/Users/xj/Desktop/blog/quartz/plugins/gardenlink",
       "commit": "local",
       "installedAt": "2026-10-09T14:10:38.230Z"
+    },
+    "listcount": {
+      "source": "./plugins/listcount",
+      "resolved": "/Users/xj/Desktop/blog/quartz/plugins/listcount",
+      "commit": "local",
+      "installedAt": "2026-10-10T01:50:03.550Z"
     }
   }
 }

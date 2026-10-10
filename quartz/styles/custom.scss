@@ -72,6 +72,15 @@ article {
   margin-bottom: 0;
 }
 
+// 标题下的日期 / 阅读时长：字号收小、颜色放淡
+// 淡的程度对齐列表项里的 .meta（同为 --darkgray + 0.6 透明度）
+// 组件 CSS 晚于本文件加载，这里靠多一层 .page-header 提高特异性
+.page-header .content-meta {
+  margin-top: 0.2rem;
+  font-size: 0.82rem;
+  opacity: 0.6;
+}
+
 // 工具栏图标统一尺寸，保证间距视觉一致
 .darkmode,
 .readermode {
@@ -159,6 +168,27 @@ article .markdown-rendered a.tag-link {
 // 正文里连续的标签只靠行内空格分隔（约 0.25em），比列表的 gap 紧，补一点右边距
 article .markdown-rendered a.tag-link {
   margin-right: 0.1rem;
+}
+
+// 标签页 / 文件夹页的篇数（plugins/listcount 把 "N items …" 那句挪到标题旁）
+.list-count {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--tertiary) 16%, transparent);
+  color: var(--tertiary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.5;
+  vertical-align: middle;
+}
+
+// 篇数超过每页上限时插件会补一句 "Showing first N …"，跟着胶囊一起留在标题下
+.list-count-note {
+  margin: 0.3rem 0 0;
+  font-size: 0.8rem;
+  color: var(--gray);
 }
 
 // 移动端：标题栏留在顶部，其余侧边栏内容移到正文下方

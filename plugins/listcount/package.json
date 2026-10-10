@@ -1,0 +1,25 @@
+{
+  "name": "list-count",
+  "version": "1.0.0",
+  "description": "Move the \"N items with this tag.\" / \"N items under this folder.\" count out of the listing and next to the page title",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "quartz": {
+    "name": "list-count",
+    "displayName": "List Count",
+    "category": "emitter",
+    "version": "1.0.0",
+    "quartzVersion": ">=5.0.0",
+    "dependencies": [],
+    "defaultOrder": 90,
+    "defaultEnabled": false,
+    "defaultOptions": {}
+  }
+}

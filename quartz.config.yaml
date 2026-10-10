@@ -290,6 +290,9 @@ plugins:
       slug: garden
       limit: 50
     order: 60
+  - source: ./plugins/listcount
+    enabled: true
+    order: 90
 layout:
   groups:
     toolbar:
