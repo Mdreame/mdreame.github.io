@@ -1,0 +1,25 @@
+{
+  "name": "base-tags",
+  "version": "1.0.0",
+  "description": "Turn tag values in Bases tables into links to their tag pages",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "quartz": {
+    "name": "base-tags",
+    "displayName": "Base Tags",
+    "category": "emitter",
+    "version": "1.0.0",
+    "quartzVersion": ">=5.0.0",
+    "dependencies": [],
+    "defaultOrder": 91,
+    "defaultEnabled": false,
+    "defaultOptions": {}
+  }
+}
