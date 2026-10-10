@@ -2,7 +2,7 @@ import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js"
 
-const data = window.__GARDEN__ || { notes: [], edges: [], counts: {}, total: 0 }
+const data = window.__GARDEN__ || { notes: [], counts: {}, total: 0 }
 const canvas = document.getElementById("garden-canvas")
 const tip = document.getElementById("garden-tip")
 const card = document.getElementById("garden-card")
@@ -103,24 +103,29 @@ function hash(str) {
   return (h >>> 0) / 4294967296
 }
 
-// 叶色三档：绿（还在打理）→ 黄（搁了一阵）→ 灰（很久没动）
+// 叶色三档：绿（还在打理）→ 黄（搁了一阵）→ 枯黄（很久没动，秋天的落叶色）
 const FRESH_DAYS = 90
 const STALE_DAYS = 365
 
 function leafColor(note) {
-  // 幼苗永远是嫩的黄绿色，跟新旧无关
-  if (note.maturity === "seedling") return new THREE.Color().setHSL(0.3, 0.5, 0.58)
+  // 新芽永远是嫩的黄绿色，跟新旧无关；种子根本不用叶色（见下面的种子造型）
+  if (note.maturity === "sprout") return new THREE.Color().setHSL(0.3, 0.5, 0.58)
+  // 结果的树是常青树：叶子不随打理时间变，果子才是它要说的那句话。
+  // （叶子要是也转黄，橙果子和枯叶就糊成一片了）
+  if (note.maturity === "fruit") return new THREE.Color().setHSL(0.33, 0.45, 0.33)
   const days = note.modified ? (Date.now() - note.modified) / 86400000 : Infinity
   if (days <= FRESH_DAYS) return new THREE.Color().setHSL(0.34, 0.5, 0.38) // 绿
-  if (days <= STALE_DAYS) return new THREE.Color().setHSL(0.14, 0.6, 0.5) // 黄
-  return new THREE.Color().setHSL(0.09, 0.07, 0.48) // 灰：像枯枝败叶
+  if (days <= STALE_DAYS) return new THREE.Color().setHSL(0.145, 0.6, 0.52) // 黄
+  // 枯黄：干草和落叶那种暖赭色。比中间那档更深、更偏橙，才分得出来。
+  // 同样因为灯光泛白，得挑饱和度高的实色，调出来的"理论枯黄"到屏幕上就是土灰
+  return new THREE.Color(0xd4a017)
 }
 
 // ---------------------------------------------------------------- 场景
 const scene = new THREE.Scene()
 
 const FOV = 45
-const camera = new THREE.PerspectiveCamera(FOV, 1, 0.1, 400)
+const camera = new THREE.PerspectiveCamera(FOV, 1, 0.1, 1400)
 
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
 renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
@@ -136,9 +141,10 @@ controls.maxPolarAngle = 1.32
 controls.autoRotate = true
 controls.autoRotateSpeed = 0.55
 
-// 取景：把整片群岛装进画面。相机会绕圈，所以水平方向按外接圆算；
-// 俯角约 28°，纵深在屏幕上会被压扁到 sin(28°) ≈ 0.47
-const CAM_DIR = new THREE.Vector3(0, 0.47, 0.88).normalize()
+// 取景：把整片花园装进画面。相机会绕圈，所以水平方向按外接圆算；
+// 俯角约 17°——再抬一点地平线就被挤出画面，看不见天了；
+// 纵深在屏幕上被压扁到 sin(17°) ≈ 0.29
+const CAM_DIR = new THREE.Vector3(0, 0.3, 0.955).normalize()
 const FIT_TAN = Math.tan((FOV / 2) * (Math.PI / 180))
 const _p = new THREE.Vector3()
 function frameCamera() {
@@ -162,14 +168,28 @@ function frameCamera() {
       spots.push([x, 0, z], [x, 3.5, z])
     }
   }
-  for (let i = 0; i < 4; i += 1) {
-    camera.position.copy(CAM_DIR).multiplyScalar(d)
-    camera.lookAt(0, 0.6, 0)
-    camera.updateMatrixWorld(true)
+  // 相机会自己绕圈，所以得把一整圈方位角都投影一遍：只按当前角度拟合的话，
+  // 转到别的角度时边角的岛会捅出画面（群岛越大越明显）
+  const VIEWS = Array.from({ length: 8 }, (_, a) => {
+    const ang = (a / 8) * Math.PI * 2
+    const cos = Math.cos(ang)
+    const sin = Math.sin(ang)
+    return new THREE.Vector3(
+      CAM_DIR.x * cos - CAM_DIR.z * sin,
+      CAM_DIR.y,
+      CAM_DIR.x * sin + CAM_DIR.z * cos,
+    ).normalize()
+  })
+  for (let i = 0; i < 5; i += 1) {
     let worst = 0
-    for (const [x, y, z] of spots) {
-      _p.set(x, y, z).project(camera)
-      worst = Math.max(worst, Math.abs(_p.x), Math.abs(_p.y))
+    for (const dir of VIEWS) {
+      camera.position.copy(dir).multiplyScalar(d)
+      camera.lookAt(0, 0.6, 0)
+      camera.updateMatrixWorld(true)
+      for (const [x, y, z] of spots) {
+        _p.set(x, y, z).project(camera)
+        worst = Math.max(worst, Math.abs(_p.x), Math.abs(_p.y))
+      }
     }
     if (worst <= 0.92) break
     d *= Math.min(1.5, worst / 0.92)
@@ -179,9 +199,17 @@ function frameCamera() {
   controls.target.set(0, 0.6, 0)
   controls.minDistance = d * 0.35
   controls.maxDistance = d * 3
+
+  // 雾是给草地收边用的，不是给花园打柔光的：起雾点要远远甩在花园外侧，
+  // 只让远处那片空草地化进天色里，树和果子一点都不能糊
+  if (scene.fog) {
+    const reach = d + Math.hypot(EXTENT.x, EXTENT.z) + EXTENT.max
+    scene.fog.near = Math.max(60, reach * 1.6)
+    scene.fog.far = scene.fog.near * 3
+  }
 }
 
-// 光照：太阳和阴影相机都罩住整片群岛
+// 光照：太阳和阴影相机都罩住整片园子
 scene.add(new THREE.HemisphereLight(0xdff0fb, 0x7bbd68, 1.0))
 const sun = new THREE.DirectionalLight(0xffffff, 1.15)
 const sunSpan = Math.max(EXTENT.x, EXTENT.z) + EXTENT.max + 4
@@ -198,16 +226,28 @@ sun.shadow.bias = -0.0008
 scene.add(sun)
 scene.add(new THREE.AmbientLight(0xffffff, 0.25))
 
-// ---------------------------------------------------------------- 岛屿
-// 几何体按基准半径建一次，每座岛只是同一副壳的等比缩放
-const GRASS_GEO = new THREE.CylinderGeometry(ISLAND_R, ISLAND_R * 0.99, 0.5, 72)
-const SOIL_GEO = new THREE.CylinderGeometry(ISLAND_R * 0.98, ISLAND_R * 0.12, 2.6, 72, 1)
-const TIP_GEO = new THREE.ConeGeometry(ISLAND_R * 0.12, 0.9, 32)
-const GRASS_MAT = new THREE.MeshStandardMaterial({ color: 0x86c96a, roughness: 0.9 })
-const SOIL_MAT = new THREE.MeshStandardMaterial({ color: 0x8a6f4f, roughness: 1, flatShading: true })
-const TIP_MAT = new THREE.MeshStandardMaterial({ color: 0x7a6045, roughness: 1, flatShading: true })
+// ---------------------------------------------------------------- 草地与圈地
+// 所有圈地铺在同一片草地上。草地是一整块大平面，靠雾化进天色里，所以看不到边；
+// 圈地只是一畦微微抬起、四周培土的草坪。
+const FIELD_COLOR = 0xe6f2f7 // 和页面背景靠近地平线的那一段同色，雾才接得上
+const field = new THREE.Mesh(
+  new THREE.CircleGeometry(600, 72).rotateX(-Math.PI / 2),
+  new THREE.MeshStandardMaterial({ color: 0x7cbb60, roughness: 0.95 }),
+)
+field.position.y = GRASS_TOP - 0.02
+field.receiveShadow = true
+scene.add(field)
 
-// 岛名牌：画在 canvas 上贴成精灵，永远正面朝向相机
+// 雾的远近要跟着取景距离走，所以在 frameCamera 里重设
+scene.fog = new THREE.Fog(FIELD_COLOR, 60, 220)
+
+// 一块圈地：顶上长草、侧面培土。按基准半径建一次，每块地等比缩放
+const PLOT_H = 0.16
+const PLOT_GEO = new THREE.CylinderGeometry(ISLAND_R, ISLAND_R * 0.99, PLOT_H, 72)
+const PLOT_TOP_MAT = new THREE.MeshStandardMaterial({ color: 0x86c96a, roughness: 0.9 })
+const PLOT_SIDE_MAT = new THREE.MeshStandardMaterial({ color: 0x8a6f4f, roughness: 1 })
+
+// 圈地名牌：画在 canvas 上贴成精灵，永远正面朝向相机
 function makeLabel(name, count) {
   const font = '600 30px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif'
   const probe = document.createElement("canvas").getContext("2d")
@@ -267,34 +307,26 @@ function sizeLabels() {
 }
 
 for (const isl of ISLANDS) {
+  const s = isl.r / ISLAND_R
+  // 这畦地抬起来多高：树、名牌、小径都得跟着抬，不然会陷进土里
+  isl.top = GRASS_TOP + PLOT_H * s
+
   const g = new THREE.Group()
+  const plot = new THREE.Mesh(PLOT_GEO, [PLOT_SIDE_MAT, PLOT_TOP_MAT, PLOT_SIDE_MAT])
+  plot.position.y = PLOT_H / 2 // 缩放之后底面正好落在草地上
+  plot.castShadow = true
+  plot.receiveShadow = true
+  g.add(plot)
 
-  const grass = new THREE.Mesh(GRASS_GEO, GRASS_MAT)
-  grass.position.y = GRASS_TOP - 0.25
-  grass.receiveShadow = true
-  g.add(grass)
-
-  // 圆润的岛底：上宽下窄的倒锥台，不是三角形
-  const soil = new THREE.Mesh(SOIL_GEO, SOIL_MAT)
-  soil.position.y = GRASS_TOP - 0.5 - 1.3
-  soil.receiveShadow = true
-  g.add(soil)
-
-  // 岛底尖端
-  const tipCone = new THREE.Mesh(TIP_GEO, TIP_MAT)
-  tipCone.position.y = GRASS_TOP - 0.5 - 2.6 - 0.45
-  tipCone.rotation.x = Math.PI
-  g.add(tipCone)
-
-  // 整座岛等比缩放；草面仍在 y = 0，所以树不会被抬起来
-  g.scale.setScalar(isl.r / ISLAND_R)
+  // 每畦地按自己的半径等比缩放
+  g.scale.setScalar(s)
   g.position.set(isl.x, 0, isl.z)
   scene.add(g)
   isl.group = g
 
   // 名牌浮在树顶之上
   const label = makeLabel(isl.key, isl.notes.length)
-  label.position.set(isl.x, 3.4, isl.z)
+  label.position.set(isl.x, isl.top + 3.4, isl.z)
   scene.add(label)
   isl.label = label
 }
@@ -303,15 +335,21 @@ for (const isl of ISLANDS) {
 // 低多边形树：枝干是"圆台段"，树冠是被揉皱的多面体块——比正球自然得多。
 // 每棵树最后合并成一个 mesh，顶点色带材质，所以一棵树只要一次 draw call。
 const SHAPES = {
-  evergreen: { trunk: 1.5, crown: 0.55 },
-  budding: { trunk: 0.8, crown: 0.34 },
-  seedling: { trunk: 0.38, crown: 0.16 },
+  fruit: { trunk: 1.75, crown: 0.63 },
+  tree: { trunk: 1.65, crown: 0.6 },
+  sapling: { trunk: 0.95, crown: 0.4 },
+  sprout: { trunk: 0.42, crown: 0.18 },
+  seed: { crown: 0.17 }, // 一粒种子，没有树干
 }
-// 常青笔记长什么样："pine" 松树（叠锥）/"broadleaf" 阔叶（团簇树冠）
-const EVERGREEN_STYLE = "pine"
+// 成树长什么样："pine" 松树（叠锥）/"broadleaf" 阔叶（团簇树冠）
+const TREE_STYLE = "pine"
 const MOSS = new THREE.Color(0x6f9c58)
 const SOIL = new THREE.Color(0xa4906a)
 const SEED = new THREE.Color(0xb3a58c)
+// 果子要浅、要亮。这里的灯光很"泛白"，会把橙往米黄上冲：
+// 试过 HSL(0.08, 0.95, 0.63) 这类"理论上的亮橙"，画出来是米色；
+// 反倒是纯正的 #ff9500 在这种光下才站得住，所以用实色而不是调 HSL
+const FRUIT = new THREE.Color(0xff9500)
 
 const UP = new THREE.Vector3(0, 1, 0)
 const _rv = new THREE.Vector3()
@@ -441,12 +479,12 @@ function buildTree(note) {
     parts.push(paint(geo, color))
   }
 
-  if (note.maturity === "evergreen") {
-    const s = SHAPES.evergreen
+  if (note.maturity === "tree" || note.maturity === "fruit") {
+    const s = SHAPES[note.maturity]
     const lean = (r - 0.5) * 0.18
     limb(0, 0, 0, 0, 0.24, 0, 0.24, woodDark) // 根部外扩，落地更稳
     limb(0, 0, 0, lean, s.trunk, lean * 0.4, 0.15)
-    if (EVERGREEN_STYLE === "pine") {
+    if (TREE_STYLE === "pine") {
       // 松树：四层针叶层层叠着往上收，底下留一截光树干。
       // 层与层在高度上大幅重叠，轮廓才连得起来，不会像叠起来的甜筒
       const c = s.crown
@@ -456,12 +494,37 @@ function buildTree(note) {
         [1.26, 0.72, 1.25, 2, leafLight],
         [1.465, 0.45, 1.1, 0, leaf],
       ]
+      // 结果的树：下面几层针叶的边缘挂一圈橙色果子，越靠上的层越细，挂得越小也越少
+      const BERRIES = [4, 3, 2]
       for (let i = 0; i < tiers.length; i += 1) {
         const [ky, kr, kh, variant, color] = tiers[i]
         // 每层稍微偏一点点，免得像根对称的陀螺
         const dx = i === 0 ? 0 : (hash(note.slug + "tx" + i) - 0.5) * 0.09
         const dz = i === 0 ? 0 : (hash(note.slug + "tz" + i) - 0.5) * 0.09
-        tier(lean + dx, s.trunk * ky, lean * 0.4 + dz, c * kr, c * kh, variant, color)
+        const cx = lean + dx
+        const cz = lean * 0.4 + dz
+        tier(cx, s.trunk * ky, cz, c * kr, c * kh, variant, color)
+
+        if (note.maturity === "fruit" && i < BERRIES.length) {
+          // 果子挂在针叶下缘最宽的地方，半嵌进锥面，看着才像长在枝上
+          const rim = c * kr
+          const y = s.trunk * ky - (c * kh) / 2 + c * kh * 0.2
+          const size = Math.min(c * 0.19, rim * 0.22)
+          for (let k = 0; k < BERRIES[i]; k += 1) {
+            const a = (k / BERRIES[i]) * Math.PI * 2 + hash(`${note.slug}fa${i}.${k}`) * 1.2
+            const rr = rim * (0.74 + hash(`${note.slug}fr${i}.${k}`) * 0.16)
+            const grow = 0.85 + hash(`${note.slug}fs${i}.${k}`) * 0.35
+            blob(
+              cx + Math.cos(a) * rr,
+              y + (hash(`${note.slug}fy${i}.${k}`) - 0.5) * c * 0.14,
+              cz + Math.sin(a) * rr,
+              size * grow,
+              0.92, // 果子比树叶圆
+              4 + ((i + k) % 2),
+              FRUIT,
+            )
+          }
+        }
       }
     } else {
       // 三根斜枝托住树冠，枝梢收在冠里，不会露出光秃秃的一截
@@ -493,8 +556,8 @@ function buildTree(note) {
         blob(x, y, z, c * kr, flat, variant, color)
       }
     }
-  } else if (note.maturity === "budding") {
-    const s = SHAPES.budding
+  } else if (note.maturity === "sapling") {
+    const s = SHAPES.sapling
     const lean = (r - 0.5) * 0.12
     limb(0, 0, 0, 0, 0.14, 0, 0.15, woodDark)
     limb(0, 0, 0, lean, s.trunk, lean * 0.4, 0.085)
@@ -516,8 +579,8 @@ function buildTree(note) {
     blob(-0.24, s.trunk + c * 1.0, 0.06, c * 0.85, 0.84, 1, leafDark)
     blob(0.22, s.trunk + c * 1.05, -0.05, c * 0.8, 0.84, 2, leafLight)
     blob(0, s.trunk + c * 1.5, 0, c * 0.72, 0.88, 3, leaf)
-  } else if (note.maturity === "seedling") {
-    const s = SHAPES.seedling
+  } else if (note.maturity === "sprout") {
+    const s = SHAPES.sprout
     const lean = (r - 0.5) * 0.1
     blob(0, 0.008, 0, 0.2, 0.12, 5, MOSS) // 脚下一小片深色的草，别像只花盆
     limb(0, 0, 0, lean, s.trunk, lean * 0.5, 0.032)
@@ -538,9 +601,10 @@ function buildTree(note) {
     }
     blob(lean * 1.2, s.trunk + 0.05, 0, s.crown * 0.5, 0.9, 3, leafLight) // 顶芽
   } else {
-    // 未标记：地上的一粒种子
-    blob(0, 0.01, 0, 0.17, 0.16, 0, SOIL)
-    blob(0.01, 0.09, 0, 0.1, 0.85, 2, SEED)
+    // 种子（也是没写 maturity 时的默认形态）：地上一粒种子
+    const c = SHAPES.seed.crown
+    blob(0, 0.01, 0, c, 0.16, 0, SOIL) // 脚下一小撮土
+    blob(0.01, c * 0.53, 0, c * 0.59, 0.85, 2, SEED)
   }
 
   const merged = mergeGeometries(parts, false)
@@ -627,7 +691,8 @@ const trees = []
         const radius = Math.min(r + jitter, 0.99 * R)
 
         const group = buildTree(note)
-        group.position.set(isl.x + Math.cos(a) * radius, GRASS_TOP, isl.z + Math.sin(a) * radius)
+        // 种在这畦地的皮面上，不是草地平面上——地皮是抬起来的
+        group.position.set(isl.x + Math.cos(a) * radius, isl.top, isl.z + Math.sin(a) * radius)
         // 轻微随机缩放，避免整齐划一；再乘上密度系数
         const s = (0.9 + hash(note.slug + "s") * 0.25) * isl.shrink
         group.scale.setScalar(0.001)
@@ -638,6 +703,7 @@ const trees = []
           born: planted * stagger,
           island: index,
           islandR: R,
+          groundY: isl.top,
         }
         planted += 1
         scene.add(group)
@@ -647,30 +713,8 @@ const trees = []
   })
 })()
 
-// ---------------------------------------------------------------- 连接线
-;(function drawEdges() {
-  const bySlug = {}
-  for (const t of trees) {
-    bySlug[String(t.userData.note.slug).replace(/\/index$/, "")] = t
-  }
-  const mat = new THREE.LineBasicMaterial({ color: 0x6b8f5a, transparent: true, opacity: 0.5 })
-  for (const [from, to] of data.edges || []) {
-    const a = bySlug[String(from).replace(/\/index$/, "")]
-    const b = bySlug[String(to).replace(/\/index$/, "")]
-    if (!a || !b) continue
-    // 根系只在同一座岛底下连；跨岛的线会横穿海面，太乱
-    if (a.userData.island !== b.userData.island) continue
-    const mid = new THREE.Vector3().addVectors(a.position, b.position).multiplyScalar(0.5)
-    mid.y = GRASS_TOP - 0.6 * (a.userData.islandR / ISLAND_R)
-    const curve = new THREE.QuadraticBezierCurve3(
-      new THREE.Vector3(a.position.x, GRASS_TOP + 0.1, a.position.z),
-      mid,
-      new THREE.Vector3(b.position.x, GRASS_TOP + 0.1, b.position.z),
-    )
-    const geo = new THREE.BufferGeometry().setFromPoints(curve.getPoints(24))
-    scene.add(new THREE.Line(geo, mat))
-  }
-})()
+// 不再画笔记之间的连线：同一畦地本来就是一个主题，谁连着谁看图不如看笔记页里的
+// 局部关系图和 backlinks 清楚，画在地上只是给草地添乱
 
 // ---------------------------------------------------------------- 交互
 const raycaster = new THREE.Raycaster()
@@ -680,9 +724,7 @@ let pinned = null
 let level = "all"
 
 function visible(note) {
-  if (level === "all") return true
-  if (level === "unknown") return !note.maturity
-  return note.maturity === level
+  return level === "all" || note.maturity === level
 }
 
 function updateVisibility() {
@@ -759,8 +801,8 @@ function showCard(note) {
   card.style.display = "block"
   cardTitle.textContent = note.title
   const meta = []
-  const labels = { evergreen: "常青", budding: "生长", seedling: "幼苗" }
-  meta.push(note.maturity ? labels[note.maturity] : "未标记")
+  const labels = { seed: "种子", sprout: "新芽", sapling: "树苗", tree: "成树", fruit: "果实" }
+  meta.push(labels[note.maturity] ?? "种子")
   if (note.revisions > 0) meta.push(`修订 ${note.revisions} 次`)
   if (note.growthDays > 0) meta.push(`生长 ${note.growthDays} 天`)
   if (note.tags && note.tags.length) meta.push(note.tags.join(" / "))

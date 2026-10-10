@@ -4,7 +4,9 @@ import { fileURLToPath } from "node:url"
 import { execSync } from "node:child_process"
 
 const DAY = 86400000
-const WEIGHT = { evergreen: 3, budding: 2, seedling: 1 }
+// 五档成熟度：种子 → 新芽 → 树苗 → 成树 → 果实
+// fruit 不只比 tree 更成熟，是"这篇笔记真的帮到过我"：为人处事、专业能力之类
+const WEIGHT = { seed: 1, sprout: 2, sapling: 3, tree: 4, fruit: 5 }
 const BUNDLE = "garden-island.js"
 
 // ------------------------------------------------------------ git 历史
@@ -72,19 +74,23 @@ function collectNotes(content, opts) {
     const maturity = String(d.frontmatter?.maturity ?? "")
       .trim()
       .toLowerCase()
-    const level = WEIGHT[maturity] ? maturity : null
+    // 不写 maturity 的笔记就是种子；写错的也按种子算，只是提醒一声
+    const level = WEIGHT[maturity] ? maturity : "seed"
+    if (maturity && !WEIGHT[maturity]) {
+      console.warn(
+        `[garden] 未知的 maturity "${maturity}"（${slug}）按 seed 处理；可用值：seed / sprout / sapling / tree / fruit`,
+      )
+    }
     const tags = Array.isArray(d.frontmatter?.tags) ? d.frontmatter.tags.map(String) : []
     const growth = growthOf(d)
     const created = toTime(d.dates?.created ?? d.dates?.modified)
     const modified = toTime(d.dates?.modified ?? d.dates?.created)
-    const links = Array.isArray(d.links) ? d.links.map(String) : []
 
     raw.push({
       slug,
       title: String(d.frontmatter?.title ?? baseSlug(slug)),
       maturity: level,
       tags,
-      linkCount: links.length,
       created,
       modified,
       revisions: growth.revisions,
@@ -101,32 +107,10 @@ function collectNotes(content, opts) {
 
   const all = raw.slice(0, opts.limit)
 
-  const present = new Set(all.map((n) => baseSlug(n.slug)))
-  const edges = []
-  const seen = new Set()
-  for (const [, vfile] of content) {
-    const d = vfile?.data
-    if (!d) continue
-    const from = baseSlug(d.slug)
-    if (!present.has(from)) continue
-    for (const l of d.links ?? []) {
-      const to = baseSlug(String(l))
-      if (!present.has(to) || to === from) continue
-      const key = [from, to].sort().join("|")
-      if (seen.has(key)) continue
-      seen.add(key)
-      edges.push([from, to])
-    }
-  }
+  const counts = { seed: 0, sprout: 0, sapling: 0, tree: 0, fruit: 0 }
+  for (const n of all) counts[n.maturity] += 1
 
-  const counts = {
-    seedling: all.filter((n) => n.maturity === "seedling").length,
-    budding: all.filter((n) => n.maturity === "budding").length,
-    evergreen: all.filter((n) => n.maturity === "evergreen").length,
-    unknown: all.filter((n) => !n.maturity).length,
-  }
-
-  return { notes: all, edges, counts, total: raw.length }
+  return { notes: all, counts, total: raw.length }
 }
 
 // ------------------------------------------------------------ 页面
@@ -138,7 +122,7 @@ function pageHtml(data, opts) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>花园 · Jiang</title>
-<meta name="description" content="把笔记种成一座可以旋转的岛">
+<meta name="description" content="把笔记种成一片可以旋转的园子">
 <style>
   * { box-sizing: border-box; }
   html, body { height: 100%; margin: 0; }
@@ -201,7 +185,7 @@ function pageHtml(data, opts) {
 <body>
 <header>
   <h1>花园</h1>
-  <span class="sub">${data.total} 篇笔记 · 岛上 ${data.notes.length} 棵 · 拖拽旋转，滚轮缩放，点击查看</span>
+  <span class="sub">${data.total} 篇笔记 · 地里 ${data.notes.length} 棵 · 拖拽旋转，滚轮缩放，点击查看</span>
   <a href="/">← 返回博客</a>
 </header>
 <div id="stage">
@@ -221,12 +205,13 @@ function pageHtml(data, opts) {
 </div>
 <footer>
   <button class="garden-filter active" data-level="all">全部 ${data.notes.length}</button>
-  <button class="garden-filter" data-level="seedling">幼苗 ${data.counts.seedling}</button>
-  <button class="garden-filter" data-level="budding">生长 ${data.counts.budding}</button>
-  <button class="garden-filter" data-level="evergreen">常青 ${data.counts.evergreen}</button>
-  <button class="garden-filter" data-level="unknown">未标记 ${data.counts.unknown}</button>
+  <button class="garden-filter" data-level="seed">种子 ${data.counts.seed}</button>
+  <button class="garden-filter" data-level="sprout">新芽 ${data.counts.sprout}</button>
+  <button class="garden-filter" data-level="sapling">树苗 ${data.counts.sapling}</button>
+  <button class="garden-filter" data-level="tree">成树 ${data.counts.tree}</button>
+  <button class="garden-filter" data-level="fruit">果实 ${data.counts.fruit}</button>
   <button id="garden-reset">重置视角</button>
-  <span class="hint">一座岛一个顶层标签 · 叶色：绿 近三个月打理过 · 黄 一年内 · 灰 更久 · 曲线是同岛笔记的链接</span>
+  <span class="hint">一块圈地一个顶层标签 · 新芽嫩绿、果实树常青，其余叶色随打理时间由绿转黄再转枯黄 · 点击树看笔记</span>
 </footer>
 <script>
   window.__GARDEN__ = ${payload};

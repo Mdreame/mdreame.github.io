@@ -240,7 +240,7 @@ plugins:
     options:
       href: /garden
       label: 花园
-      desc: 把笔记种成一座可以旋转的岛
+      desc: 把笔记种成一片可以旋转的园子
     order: 58
     layout:
       position: left
@@ -288,11 +288,14 @@ plugins:
     enabled: true
     options:
       slug: garden
-      limit: 50
+      limit: 200
     order: 60
   - source: ./plugins/listcount
     enabled: true
     order: 90
+  - source: ./plugins/basetags
+    enabled: true
+    order: 91
 layout:
   groups:
     toolbar:
