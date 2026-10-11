@@ -21,7 +21,7 @@
     "Microsoft YaHei", sans-serif;
 }
 
-// 注册主题色后，切换深浅主题时由浏览器平滑插值，而不是整页瞬间变色。
+// 注册主题色后，切换深浅主题时由浏览器平滑插值。
 @property --light {
   syntax: "<color>";
   inherits: true;
@@ -79,15 +79,15 @@
 @media (prefers-reduced-motion: no-preference) {
   :root {
     transition:
-      --light 320ms ease,
-      --lightgray 320ms ease,
-      --gray 320ms ease,
-      --darkgray 320ms ease,
-      --dark 320ms ease,
-      --secondary 320ms ease,
-      --tertiary 320ms ease,
-      --highlight 320ms ease,
-      --textHighlight 320ms ease;
+      --light 560ms ease-in-out,
+      --lightgray 560ms ease-in-out,
+      --gray 560ms ease-in-out,
+      --darkgray 560ms ease-in-out,
+      --dark 560ms ease-in-out,
+      --secondary 560ms ease-in-out,
+      --tertiary 560ms ease-in-out,
+      --highlight 560ms ease-in-out,
+      --textHighlight 560ms ease-in-out;
   }
 }
 
