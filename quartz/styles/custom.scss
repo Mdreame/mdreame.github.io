@@ -21,6 +21,76 @@
     "Microsoft YaHei", sans-serif;
 }
 
+// 注册主题色后，切换深浅主题时由浏览器平滑插值，而不是整页瞬间变色。
+@property --light {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #faf8f8;
+}
+
+@property --lightgray {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #e5e5e5;
+}
+
+@property --gray {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #b8b8b8;
+}
+
+@property --darkgray {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #4e4e4e;
+}
+
+@property --dark {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #2b2b2b;
+}
+
+@property --secondary {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #284b63;
+}
+
+@property --tertiary {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #84a59d;
+}
+
+@property --highlight {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(143, 159, 169, 0.15);
+}
+
+@property --textHighlight {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #fff23688;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    transition:
+      --light 320ms ease,
+      --lightgray 320ms ease,
+      --gray 320ms ease,
+      --darkgray 320ms ease,
+      --dark 320ms ease,
+      --secondary 320ms ease,
+      --tertiary 320ms ease,
+      --highlight 320ms ease,
+      --textHighlight 320ms ease;
+  }
+}
+
 // 页脚链接清空后不留下空列表占位
 footer ul:empty {
   display: none;
@@ -69,7 +139,7 @@ article {
 }
 
 // 标题与工具栏图标同一行时垂直居中对齐
-.left-sidebar .flex-component {
+.sidebar.left > .flex-component {
   align-items: center;
 }
 
@@ -86,58 +156,33 @@ article {
   opacity: 0.75;
 }
 
-// 成长阶段由笔记的 maturity 属性生成，在笔记和列表中保持同一套轻量标识
-.maturity-badge {
-  display: inline-flex;
-  align-items: center;
-  margin-left: 0.45rem;
-  padding: 0.08rem 0.4rem;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--tertiary) 10%, transparent);
-  color: var(--darkgray);
-  font-size: 0.7rem;
-  font-weight: 500;
-  line-height: 1.5;
-  white-space: nowrap;
-  vertical-align: middle;
-}
-
-.maturity-badge.maturity-growing {
-  color: var(--tertiary);
-}
-
-.maturity-badge.maturity-tree {
-  color: var(--secondary);
-}
-
-.recent-notes .maturity-badge {
-  display: none;
-}
-
 // 工具栏图标统一尺寸，保证间距视觉一致
 .darkmode,
 .readermode {
+  display: grid;
+  place-items: center;
   width: 1.75rem;
   height: 1.75rem;
+  line-height: 0;
+  vertical-align: middle;
 }
 
 .darkmode svg,
 .readermode svg {
+  position: static;
   width: 18px;
   height: 18px;
-  top: calc(50% - 9px);
-  left: calc(50% - 9px);
 }
 
-.left-sidebar .flex-component button {
+.sidebar.left > .flex-component button {
   border-radius: 4px;
 }
 
-.left-sidebar .flex-component button:hover {
+.sidebar.left > .flex-component button:hover {
   background-color: var(--lightgray);
 }
 
-// Recent Notes：日期字号收小，条目之间更紧凑
+// Recent Notes：只显示标题，侧栏保持简洁；日期仍在笔记页与索引页显示。
 // 组件 CSS 晚于本文件加载，因此选择器用 .sidebar 提高一层特异性
 .sidebar .recent-notes > h3 {
   font-size: 0.9rem;
@@ -157,11 +202,7 @@ article {
 }
 
 .sidebar .recent-notes > ul.recent-ul > li .section > .meta {
-  margin: 0;
-  font-size: 0.72rem;
-  line-height: 1.35;
-  color: var(--darkgray);
-  opacity: 0.72;
+  display: none;
 }
 
 .sidebar .garden-link-desc {

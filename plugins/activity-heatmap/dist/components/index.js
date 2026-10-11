@@ -1,4 +1,6 @@
 import { jsx } from "preact/jsx-runtime"
+import { execFileSync } from "node:child_process"
+import path from "node:path"
 
 const h = (type, props, ...children) =>
   jsx(type, { ...props, children: children.length === 1 ? children[0] : children })
@@ -26,6 +28,26 @@ function dayLabel(day) {
   return `${date.getUTCFullYear()}年${date.getUTCMonth() + 1}月${date.getUTCDate()}日`
 }
 
+// The date transformer falls back to filesystem birthtime when a note has no
+// `created` property. On a fresh CI checkout that would become the deploy day.
+function creationDate(file, root = process.cwd()) {
+  if (file.frontmatter?.created) return file.dates?.created ?? file.frontmatter.created
+  if (file.filePath) {
+    try {
+      const relative = path.relative(root, path.resolve(root, file.filePath))
+      const additions = execFileSync(
+        "git",
+        ["log", "--follow", "--diff-filter=A", "--format=%aI", "--", relative],
+        { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] },
+      ).trim()
+      if (additions) return additions.split("\n").at(-1)
+    } catch {
+      // A newly created, uncommitted note can still use its local file date.
+    }
+  }
+  return file.dates?.created
+}
+
 function noteDays(allFiles, start, today) {
   const days = new Map()
   for (const file of allFiles) {
@@ -36,8 +58,9 @@ function noteDays(allFiles, start, today) {
       title: String(file.frontmatter?.title || file.slug),
       href: `/${String(file.slug).split("/").map(encodeURIComponent).join("/")}.html`,
     }
-    if (!file.dates?.created) continue
-    const day = dayNumber(file.dates.created)
+    const created = creationDate(file)
+    if (!created) continue
+    const day = dayNumber(created)
     if (day === null || day < start || day > today) continue
     const notes = days.get(day) ?? new Map()
     notes.set(file.slug, note)
@@ -180,4 +203,4 @@ function ActivityHeatmap() {
   return Component
 }
 
-export { ActivityHeatmap, ActivityHeatmap as default }
+export { ActivityHeatmap, ActivityHeatmap as default, creationDate }

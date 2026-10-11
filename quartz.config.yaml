@@ -32,15 +32,15 @@ configuration:
         highlight: rgba(143, 159, 169, 0.15)
         textHighlight: "#fff23688"
       darkMode:
-        light: "#161618"
-        lightgray: "#393639"
-        gray: "#646464"
-        darkgray: "#d4d4d4"
-        dark: "#ebebec"
-        secondary: "#7b97aa"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
-        textHighlight: "#b3aa0288"
+        light: "#24272b"
+        lightgray: "#3d4247"
+        gray: "#858c93"
+        darkgray: "#d1d7dc"
+        dark: "#eef1f2"
+        secondary: "#9bbcd0"
+        tertiary: "#a5c2b0"
+        highlight: rgba(155, 188, 208, 0.15)
+        textHighlight: "#cbb76b44"
 plugins:
   - source: "@quartz-community/created-modified-date"
     enabled: true
@@ -303,7 +303,7 @@ plugins:
   - source: ./plugins/basetags
     enabled: true
     order: 91
-  - source: ./plugins/maturity-labels
+  - source: ./plugins/external-links
     enabled: true
     order: 92
 layout:
@@ -321,12 +321,12 @@ layout:
     content: {}
     folder:
       exclude:
-        - reader-mode
+        - "@quartz-community/reader-mode"
       positions:
         right: []
     tag:
       exclude:
-        - reader-mode
+        - "@quartz-community/reader-mode"
       positions:
         right: []
     canvas: {}
