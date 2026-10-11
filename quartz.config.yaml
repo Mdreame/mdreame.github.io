@@ -6,7 +6,7 @@ configuration:
   enablePopovers: true
   analytics:
     provider: plausible
-  locale: en-US
+  locale: zh-CN
   baseUrl: mdreame.github.io
   ignorePatterns:
     - private
@@ -178,6 +178,7 @@ plugins:
     layout:
       position: beforeBody
       priority: 20
+      condition: not-index
   - source: "@quartz-community/tag-list"
     enabled: false
     layout:
@@ -245,10 +246,16 @@ plugins:
     layout:
       position: left
       priority: 45
+  - source: ./plugins/activity-heatmap
+    enabled: true
+    order: 65
+    layout:
+      position: beforeBody
+      priority: 5
   - source: "@quartz-community/recent-notes"
     enabled: true
     options:
-      title: Recent Notes
+      title: 最近笔记
       limit: 5
       linkToMore: false
       showTags: false
@@ -296,6 +303,9 @@ plugins:
   - source: ./plugins/basetags
     enabled: true
     order: 91
+  - source: ./plugins/maturity-labels
+    enabled: true
+    order: 92
 layout:
   groups:
     toolbar:

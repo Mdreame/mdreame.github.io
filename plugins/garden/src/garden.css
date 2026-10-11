@@ -745,12 +745,56 @@ main {
   font-size: 11px;
 }
 .scene-status {
-  font-size: 11px;
-  line-height: 1.8;
-  background: #f5edda;
-  color: #806b45;
-  padding: 10px 20px;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   z-index: 2;
+  background: radial-gradient(ellipse at 50% 30%, #f8f7e9 0%, #e9eee3 60%, #dce6dc 100%);
+  color: #627563;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  opacity: 1;
+  transition: opacity 0.32s ease;
+}
+.scene-status.is-ready {
+  opacity: 0;
+  pointer-events: none;
+}
+.scene-status::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #73946e;
+  box-shadow: 0 0 0 4px #73946e20;
+  animation: garden-wake 1.4s ease-in-out infinite;
+}
+.scene-status.error {
+  position: static;
+  justify-content: flex-start;
+  padding: 10px 20px;
+  background: #edf2e6;
+  letter-spacing: normal;
+}
+.scene-status.error::before {
+  display: none;
+}
+@keyframes garden-wake {
+  50% {
+    opacity: 0.4;
+    transform: scale(0.75);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scene-status {
+    transition: none;
+  }
+  .scene-status::before {
+    animation: none;
+  }
 }
 .noscript {
   position: absolute;
@@ -825,14 +869,31 @@ main {
   }
 }
 @media (max-width: 700px) {
+  html,
+  body {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  html:has(body.detail-open),
+  body.detail-open {
+    overflow: hidden;
+  }
+  main {
+    height: auto;
+    min-height: 100svh;
+  }
   .garden-shell {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    min-height: 0;
+    height: auto;
+    min-height: 100svh;
     max-height: none;
+    overflow: visible;
   }
   .sidebar {
+    flex: none;
     padding: 13px 13px 10px;
     border-right: 0;
     border-bottom: 1px solid var(--line);
@@ -842,20 +903,21 @@ main {
     display: none;
   }
   .home-link {
-    min-height: 30px;
+    min-height: 40px;
     margin: 0 0 8px;
-    padding: 5px 9px;
-    font-size: 10px;
+    padding: 7px 11px;
+    font-size: 12px;
   }
   .sidebar-bottom {
     display: none;
   }
   .search {
     margin: 0;
-    padding: 4px 9px;
+    min-height: 44px;
+    padding: 5px 10px;
   }
   .search input {
-    font-size: 12px;
+    font-size: 16px;
   }
   .topic-list {
     flex-direction: row;
@@ -866,44 +928,46 @@ main {
   }
   .topic {
     flex-shrink: 0;
-    min-height: 30px;
-    padding: 6px 8px;
-    font-size: 11px;
+    min-height: 36px;
+    padding: 7px 10px;
+    font-size: 12px;
   }
   .topic small {
-    font-size: 9px;
+    font-size: 10px;
   }
   .workspace {
-    flex: 1;
+    flex: 1 0 clamp(440px, 72svh, 640px);
     height: auto;
-    min-height: 340px;
+    min-height: 0;
   }
   .workspace-toolbar {
     padding: 13px 12px;
   }
   .workspace-toolbar h2 {
-    font-size: 12px;
+    font-size: 13px;
   }
   .workspace-toolbar > div:first-child {
     gap: 7px;
   }
   .workspace-toolbar span {
-    font-size: 9px;
+    font-size: 11px;
   }
   .view-toggle button {
-    padding: 6px 8px;
-    font-size: 10px;
+    min-height: 36px;
+    padding: 7px 9px;
+    font-size: 11px;
   }
   .map {
-    min-height: 380px;
+    min-height: 0;
   }
   .scene-controls {
     right: 10px;
     top: 10px;
   }
   .scene-controls button {
-    font-size: 10px;
-    padding: 6px 8px;
+    min-height: 34px;
+    font-size: 11px;
+    padding: 7px 9px;
   }
   .filters {
     bottom: 60px;
@@ -912,58 +976,100 @@ main {
     gap: 0;
   }
   .filters button {
-    font-size: 9px;
-    padding: 6px 7px;
+    min-height: 34px;
+    font-size: 10px;
+    padding: 7px 8px;
   }
   .filters button span {
     margin-left: 2px;
   }
   .scene-label {
-    font-size: 9px;
+    font-size: 10px;
     max-width: 120px;
     padding: 4px 6px;
   }
   .map-footer {
     padding: 11px 10px;
-    font-size: 8px;
+    font-size: 10px;
   }
   .map-footer i {
     display: none;
   }
   .detail.selected {
-    position: static;
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    height: 100dvh;
     max-height: none;
-    width: auto;
+    width: 100vw;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     border: 0;
-    border-top: 1px solid var(--line);
     border-radius: 0;
-    padding: 22px;
+    padding: max(16px, env(safe-area-inset-top)) 20px max(28px, env(safe-area-inset-bottom));
     box-shadow: none;
+    background: #fcfcf8;
   }
-  .detail-content {
-    max-width: 450px;
+  #detail-content {
+    max-width: 520px;
     margin: auto;
   }
-  .detail .specimen {
-    height: 100px;
+  .detail-eyebrow {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    min-height: 40px;
+    background: #fcfcf8;
   }
-  .detail dl {
+  .close-detail {
+    width: 36px;
+    height: 36px;
+  }
+  .detail .specimen {
+    height: 80px;
+    margin: 8px 0;
+  }
+  .detail .specimen svg {
+    width: 80px;
+    height: 80px;
+  }
+  .detail h2 {
+    font-size: 20px;
+    line-height: 1.4;
+  }
+  .detail .badge,
+  .detail-tags span {
     font-size: 11px;
   }
-  .detail .description {
+  .detail dl {
     font-size: 12px;
+  }
+  .detail .description {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .read-note {
+    font-size: 14px;
   }
   .note-list {
     padding: 5px 15px 75px;
   }
   .note-row {
     gap: 8px;
+    padding: 12px 4px;
   }
-  .note-row > small {
-    font-size: 8px;
+  .note-row svg {
+    width: 32px;
+    height: 36px;
   }
   .note-row strong {
+    font-size: 13px;
+  }
+  .note-row small {
     font-size: 11px;
+  }
+  .note-row > small {
+    font-size: 10px;
   }
 }
 @media (max-width: 520px) {
@@ -975,9 +1081,9 @@ main {
     justify-content: space-between;
   }
   .random-button {
-    min-height: 32px;
-    padding: 6px 10px;
-    font-size: 10px;
+    min-height: 36px;
+    padding: 7px 11px;
+    font-size: 11px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1039,6 +1145,12 @@ main {
 @media (max-width: 700px) {
   .search-results {
     max-height: 150px;
+  }
+  .search-results button {
+    font-size: 13px;
+  }
+  .search-results small {
+    font-size: 11px;
   }
 }
 

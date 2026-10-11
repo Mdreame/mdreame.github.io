@@ -119,13 +119,54 @@ function collectNotes(content, opts) {
 }
 
 // ------------------------------------------------------------ 页面
+const TOPIC_COLORS = ["#789573", "#b6a071", "#8c9fba", "#ae957e", "#9b9a74"]
+const STAGE_LABELS = { seed: "种子", growing: "生长中", tree: "常青", fruit: "结果 🍊" }
+const escapeHtml = (value) =>
+  String(value).replace(
+    /[&<>"']/g,
+    (char) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      })[char],
+  )
+const topicOf = (note) => note.tags?.[0]?.replace(/^\/+/, "").split("/")[0] || "未分类"
+
 function pageHtml(data, opts) {
   const depth = opts.slug.split("/").length - 1
   const root = "../".repeat(depth) || "./"
   const payload = JSON.stringify({ ...data, root }).replace(/</g, "\\u003c")
+  const notes = data.notes
+  const topics = [...new Set(notes.map(topicOf))].sort((a, b) => a.localeCompare(b, "zh"))
+  const topicMarkup = [["", "整座花园"], ...topics.map((topic) => [topic, topic])]
+    .map(
+      ([key, label], index) =>
+        `<button class="topic${key ? "" : " active"}" data-topic="${escapeHtml(key)}" aria-pressed="${!key}"><span class="topic-dot" style="--topic-color:${TOPIC_COLORS[index % TOPIC_COLORS.length]}"></span><span class="topic-name">${escapeHtml(label)}</span><small>${key ? notes.filter((note) => topicOf(note) === key).length : notes.length}</small></button>`,
+    )
+    .join("")
+  const filterMarkup = [["all", "全部"], ...Object.entries(STAGE_LABELS)]
+    .map(([key, label]) => ({
+      key,
+      label,
+      count:
+        key === "all"
+          ? notes.length
+          : notes.filter((note) => (key === "fruit" ? note.fruit : note.maturity === key)).length,
+    }))
+    .map(
+      ({ key, label, count }) =>
+        `<button data-level="${key}" aria-pressed="${key === "all"}"${key === "all" || count ? "" : " disabled"}>${label} <span>${count}</span></button>`,
+    )
+    .join("")
   return fs
     .readFileSync(new URL("../src/page.html", import.meta.url), "utf8")
     .replaceAll("__ROOT__", root)
+    .replace("__TOPICS__", topicMarkup)
+    .replace("__COUNT__", `${notes.length} / ${data.total} 篇笔记`)
+    .replace("__FILTERS__", filterMarkup)
     .replace("__PAYLOAD__", payload)
 }
 
@@ -166,4 +207,4 @@ var GardenIsland = (userOpts) => {
   }
 }
 
-export { GardenIsland, GardenIsland as default }
+export { GardenIsland, GardenIsland as default, pageHtml as renderGardenPage }

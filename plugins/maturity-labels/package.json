@@ -1,0 +1,24 @@
+{
+  "name": "maturity-labels",
+  "version": "1.0.0",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "quartz": {
+    "name": "maturity-labels",
+    "displayName": "Maturity Labels",
+    "category": "emitter",
+    "version": "1.0.0",
+    "quartzVersion": ">=5.0.0",
+    "dependencies": [],
+    "defaultOrder": 92,
+    "defaultEnabled": false,
+    "defaultOptions": {}
+  }
+}

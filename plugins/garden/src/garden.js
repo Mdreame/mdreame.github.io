@@ -3,7 +3,8 @@ import { linkedNotes } from "./layout.js"
 const data = window.__GARDEN__ ?? { notes: [], total: 0, root: "./" }
 const notes = data.notes.map((note) => (note.fruit ? { ...note, maturity: "tree" } : note))
 let garden = null,
-  failed = false
+  failed = false,
+  statusHideTimer = 0
 const $ = (id) => document.getElementById(id)
 const levels = {
   seed: ["种子", "刚刚收集的灵感"],
@@ -20,6 +21,12 @@ let topic = "",
 const root = data.root || "./"
 const topicOf = (note) => note.tags?.[0]?.replace(/^\/+/, "").split("/")[0] || "未分类"
 const topics = [...new Set(notes.map(topicOf))].sort((a, b) => a.localeCompare(b, "zh"))
+const matchesLevel = (note, key) =>
+  key === "all" || (key === "fruit" ? note.fruit : note.maturity === key)
+const stageCount = (key, selectedTopic = topic) =>
+  notes.filter(
+    (note) => (!selectedTopic || topicOf(note) === selectedTopic) && matchesLevel(note, key),
+  ).length
 const escape = (value) =>
   String(value).replace(
     /[&<>"']/g,
@@ -52,7 +59,7 @@ function matching() {
   return notes.filter(
     (n) =>
       (!topic || topicOf(n) === topic) &&
-      (level === "all" || (level === "fruit" ? n.fruit : n.maturity === level)) &&
+      matchesLevel(n, level) &&
       (!query ||
         `${n.title} ${n.tags.join(" ")} ${n.description || ""}`
           .toLocaleLowerCase()
@@ -60,20 +67,27 @@ function matching() {
   )
 }
 function renderTopics() {
-  $("topics").innerHTML = [["", "整座花园"], ...topics.map((t) => [t, t])]
+  const html = [["", "整座花园"], ...topics.map((t) => [t, t])]
     .map(
       ([key, label], i) =>
         `<button class="topic${topic === key ? " active" : ""}" data-topic="${escape(key)}" aria-pressed="${topic === key}"><span class="topic-dot" style="--topic-color:${palette[i % palette.length]}"></span><span class="topic-name">${escape(label)}</span><small>${key ? notes.filter((n) => topicOf(n) === key).length : notes.length}</small></button>`,
     )
     .join("")
+  if ($("topics").innerHTML !== html) $("topics").innerHTML = html
 }
 function renderFilters() {
-  $("filters").innerHTML = [["all", ["全部"]], ...Object.entries(levels), ["fruit", ["结果 🍊"]]]
+  const html = [["all", ["全部"]], ...Object.entries(levels), ["fruit", ["结果 🍊"]]]
+    .map(([key, [label]]) => ({
+      key,
+      label,
+      count: stageCount(key),
+    }))
     .map(
-      ([key, [label]]) =>
-        `<button data-level="${key}" aria-pressed="${level === key}">${label} <span>${notes.filter((n) => (!topic || topicOf(n) === topic) && (key === "all" || (key === "fruit" ? n.fruit : n.maturity === key))).length}</span></button>`,
+      ({ key, label, count }) =>
+        `<button data-level="${key}" aria-pressed="${level === key}"${key === "all" || count ? "" : " disabled"}>${label} <span>${count}</span></button>`,
     )
     .join("")
+  if ($("filters").innerHTML !== html) $("filters").innerHTML = html
 }
 function render() {
   const visible = matching()
@@ -121,9 +135,10 @@ function render() {
 }
 function renderDetail() {
   $("detail").classList.toggle("selected", !!selected)
+  document.body.classList.toggle("detail-open", !!selected)
   if (!selected) {
     $("detail-content").innerHTML =
-      `<div class="detail-eyebrow">GROWTH GUIDE <span>01 — 03</span></div><div class="specimen">${plant("tree", true)}</div><h2>每个想法，<br>都有自己的节奏。</h2><p class="description">种子、生长中、常青，记录笔记成熟的过程；真正帮到生活的笔记，会结出果实。</p><ul class="growth-legend">${Object.entries(
+      `<div class="detail-eyebrow">生长指南 <span>01 — 03</span></div><div class="specimen">${plant("tree", true)}</div><h2>每个想法，<br>都有自己的节奏。</h2><p class="description">种子、生长中、常青，记录笔记成熟的过程；真正帮到生活的笔记，会结出果实。</p><ul class="growth-legend">${Object.entries(
         levels,
       )
         .map(
@@ -146,7 +161,7 @@ function renderDetail() {
     )
     .join("")
   $("detail-content").innerHTML =
-    `<div class="detail-eyebrow">FIELD NOTES <button class="close-detail" id="close-detail" aria-label="关闭笔记详情">×</button></div><div class="specimen">${plant(n.maturity, true, n.fruit)}</div><span class="badge">${noteState(n)} · ${levels[n.maturity][1]}</span><h2>${escape(n.title)}</h2><p class="description">${escape(n.description ? n.description.slice(0, 180) + (n.description.length > 180 ? "…" : "") : "这颗想法正在慢慢生长。打开笔记，继续探索它的内容。")}</p><dl><div><dt>种下于</dt><dd>${date(n.created)}</dd></div><div><dt>最近照料</dt><dd>${date(n.modified)}</dd></div><div><dt>历史修订</dt><dd>${n.revisions || 0} 次</dd></div></dl><div class="detail-tags">${n.tags.map((t) => `<span># ${escape(t)}</span>`).join("")}</div>${relatedHtml ? `<div class="related-notes"><h3>关联的想法</h3>${relatedHtml}</div>` : ""}<a class="read-note" href="${escape(root + n.slug.split("/").map(encodeURIComponent).join("/"))}">打开这篇笔记 ↗</a><p class="detail-foot">想法在记录与回访中，慢慢扎根。<br>每次回访，都是一次照料。</p>`
+    `<div class="detail-eyebrow">笔记速览 <button class="close-detail" id="close-detail" aria-label="关闭笔记详情">×</button></div><div class="specimen">${plant(n.maturity, true, n.fruit)}</div><span class="badge">${noteState(n)} · ${levels[n.maturity][1]}</span><h2>${escape(n.title)}</h2><p class="description">${escape(n.description ? n.description.slice(0, 180) + (n.description.length > 180 ? "…" : "") : "这颗想法正在慢慢生长。打开笔记，继续探索它的内容。")}</p><dl><div><dt>种下于</dt><dd>${date(n.created)}</dd></div><div><dt>最近照料</dt><dd>${date(n.modified)}</dd></div><div><dt>历史修订</dt><dd>${n.revisions || 0} 次</dd></div></dl><div class="detail-tags">${n.tags.map((t) => `<span># ${escape(t)}</span>`).join("")}</div>${relatedHtml ? `<div class="related-notes"><h3>关联的想法</h3>${relatedHtml}</div>` : ""}<a class="read-note" href="${escape(root + n.slug.split("/").map(encodeURIComponent).join("/"))}">打开这篇笔记 ↗</a><p class="detail-foot">想法在记录与回访中，慢慢扎根。<br>每次回访，都是一次照料。</p>`
 }
 function select(slug) {
   selected = notes.find((n) => n.slug === slug) || null
@@ -162,11 +177,6 @@ function select(slug) {
     $("detail").scrollTop = 0
     if (view === "map") garden?.focusNote(slug)
     $("close-detail").focus({ preventScroll: true })
-    if (matchMedia("(max-width:700px)").matches)
-      $("detail").scrollIntoView({
-        behavior: matchMedia("(prefers-reduced-motion:reduce)").matches ? "instant" : "smooth",
-        block: "start",
-      })
   }
 }
 if (data.total > notes.length)
@@ -175,6 +185,7 @@ $("topics").addEventListener("click", (e) => {
   const b = e.target.closest("[data-topic]")
   if (b) {
     topic = b.dataset.topic
+    if (!stageCount(level, topic)) level = "all"
     render()
     if (view === "map") garden?.focusTopic(topic)
     $("topics")
@@ -261,7 +272,11 @@ function fallback(message) {
   failed = true
   garden = null
   view = "list"
+  clearTimeout(statusHideTimer)
   $("scene-status").textContent = message
+  $("scene-status").classList.remove("is-ready")
+  $("scene-status").classList.add("error")
+  $("map").before($("scene-status"))
   $("scene-status").hidden = false
   $("map-view").disabled = true
   $("map-view").title = "当前设备无法显示 3D，仍可阅读全部笔记"
@@ -277,12 +292,20 @@ try {
     notes,
     onSelect: select,
     onFail: fallback,
+    onReady: () => {
+      $("scene-status").classList.add("is-ready")
+      statusHideTimer = window.setTimeout(
+        () => {
+          $("scene-status").hidden = true
+        },
+        matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 320,
+      )
+    },
     onRoamChange: (active) => {
       $("roam").setAttribute("aria-pressed", String(active))
       $("roam").textContent = active ? "Ⅱ 暂停" : "▷ 漫游"
     },
   })
-  $("scene-status").hidden = true
   render()
 } catch (error) {
   console.warn("Garden 3D unavailable", error)

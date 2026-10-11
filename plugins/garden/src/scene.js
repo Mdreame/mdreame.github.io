@@ -2,7 +2,7 @@ import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import { growthScale, hash, layoutGarden, linkedNotes, topicOf } from "./layout.js"
 
-export function createGarden({ canvas, labels, notes, onSelect, onFail, onRoamChange }) {
+export function createGarden({ canvas, labels, notes, onSelect, onFail, onReady, onRoamChange }) {
   const reduced = matchMedia("(prefers-reduced-motion: reduce)")
   const renderer = new THREE.WebGLRenderer({
     canvas,
@@ -736,6 +736,7 @@ export function createGarden({ canvas, labels, notes, onSelect, onFail, onRoamCh
     invalidate()
   }
   let dirty = true
+  let firstFrame = true
   function invalidate() {
     dirty = true
     if (!frame && !dead && visible && !document.hidden) frame = requestAnimationFrame(animate)
@@ -768,6 +769,10 @@ export function createGarden({ canvas, labels, notes, onSelect, onFail, onRoamCh
       updateLabels()
       renderer.render(scene, camera)
       dirty = false
+      if (firstFrame) {
+        firstFrame = false
+        onReady?.()
+      }
     }
     if ((!reduced.matches && notes.length <= 80) || transition || controls.autoRotate) invalidate()
   }

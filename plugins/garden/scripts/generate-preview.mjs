@@ -1,10 +1,8 @@
 import fs from "node:fs"
 import path from "node:path"
+import { renderGardenPage } from "../dist/index.js"
 
 const root = path.resolve(import.meta.dirname, "../../..")
-const template = fs
-  .readFileSync(path.join(root, "plugins/garden/src/page.html"), "utf8")
-  .replaceAll("__ROOT__", "./")
 const topics = [
   ["长篇主题", 50],
   ["次要主题", 25],
@@ -31,10 +29,7 @@ for (const [topic, size] of topics) {
     })
   }
 }
-const output = template.replace(
-  "__PAYLOAD__",
-  JSON.stringify({ notes, total: notes.length }).replaceAll("<", "\\u003c"),
-)
+const output = renderGardenPage({ notes, total: notes.length }, { slug: "__garden-layout-sim" })
 const destination = path.join(root, "public/__garden-layout-sim.html")
 fs.mkdirSync(path.dirname(destination), { recursive: true })
 fs.writeFileSync(destination, output)

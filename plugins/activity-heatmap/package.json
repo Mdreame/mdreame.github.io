@@ -1,0 +1,34 @@
+{
+  "name": "activity-heatmap",
+  "version": "1.0.0",
+  "description": "A compact note activity calendar for the Quartz homepage",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./components": {
+      "import": "./dist/components/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "quartz": {
+    "name": "activity-heatmap",
+    "displayName": "Activity Heatmap",
+    "category": "component",
+    "version": "1.0.0",
+    "quartzVersion": ">=5.0.0",
+    "dependencies": [],
+    "defaultOrder": 65,
+    "defaultEnabled": false,
+    "components": {
+      "ActivityHeatmap": {
+        "displayName": "Activity Heatmap",
+        "defaultPosition": "beforeBody",
+        "defaultPriority": 5
+      }
+    }
+  }
+}

@@ -5,7 +5,14 @@ filters:
     - file.name != "index"
 formulas:
   year: file.ctime.format("YYYY")
-  date: file.ctime.format("YYYY-MM-DD")
+  date: file.ctime.format("YYYY年MM月DD日")
+properties:
+  file.name:
+    displayName: 笔记
+  formula.date:
+    displayName: 日期
+  file.tags:
+    displayName: 标签
 views:
   - type: table
     name: 归档
@@ -21,18 +28,3 @@ views:
         direction: DESC
       - property: file.name
         direction: ASC
-  - type: list
-    name: List
-    order:
-      - file.name
-    sort:
-      - property: formula.date
-        direction: DESC
-      - property: file.name
-        direction: ASC
-    indentProperties: true
-  - type: cards
-    name: Gallery
-    sort:
-      - property: file.ctime
-        direction: DESC

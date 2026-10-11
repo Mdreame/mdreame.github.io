@@ -3,6 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: #f7f8f2;
+      }
+    </style>
     <meta
       name="description"
       content="把笔记种成一片森林。探索主题、发现想法，看看知识如何慢慢生长。"
@@ -28,7 +36,7 @@
           >
           <div id="search-results" class="search-results" aria-label="搜索结果" hidden></div>
           <h2>主题角落</h2>
-          <div id="topics" class="topic-list"></div>
+          <div id="topics" class="topic-list">__TOPICS__</div>
           <div class="sidebar-bottom">
             <span class="little-sprout">❧</span>
             <p>不必急着长成大树。<br />每一颗种子，都有自己的季节。</p>
@@ -38,7 +46,7 @@
           <div class="workspace-toolbar">
             <div>
               <h2 id="view-title">整座花园</h2>
-              <span id="result-count" role="status" aria-live="polite"></span>
+              <span id="result-count" role="status" aria-live="polite">__COUNT__</span>
             </div>
             <div class="toolbar-actions">
               <button id="random" class="random-button">✦ 随机漫步</button>
@@ -48,9 +56,9 @@
               </div>
             </div>
           </div>
-          <div class="filters" id="filters" aria-label="按成长阶段筛选"></div>
-          <div id="scene-status" class="scene-status" role="status">正在唤醒花园…</div>
+          <div class="filters" id="filters" aria-label="按成长阶段筛选">__FILTERS__</div>
           <div id="map" class="map">
+            <div id="scene-status" class="scene-status" role="status">正在唤醒花园…</div>
             <canvas
               id="garden-canvas"
               tabindex="0"

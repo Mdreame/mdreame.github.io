@@ -4,16 +4,21 @@
 
 // 中英混排字体栈：西文用系统 UI 字体，中文用苹方 / 雅黑
 :root {
-  --titleFont: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
-  --headerFont: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
-  --bodyFont: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
-  --codeFont: "JetBrains Mono", "Sarasa Mono SC", "SF Mono", Menlo, Consolas, "PingFang SC",
+  --titleFont:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --headerFont:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --bodyFont:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --codeFont:
+    "JetBrains Mono", "Sarasa Mono SC", "SF Mono", Menlo, Consolas, "PingFang SC",
     "Microsoft YaHei", monospace;
-  --font-interface: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-interface:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", sans-serif;
 }
 
 // 页脚链接清空后不留下空列表占位
@@ -78,7 +83,35 @@ article {
 .page-header .content-meta {
   margin-top: 0.2rem;
   font-size: 0.82rem;
-  opacity: 0.6;
+  opacity: 0.75;
+}
+
+// 成长阶段由笔记的 maturity 属性生成，在笔记和列表中保持同一套轻量标识
+.maturity-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.45rem;
+  padding: 0.08rem 0.4rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--tertiary) 10%, transparent);
+  color: var(--darkgray);
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.maturity-badge.maturity-growing {
+  color: var(--tertiary);
+}
+
+.maturity-badge.maturity-tree {
+  color: var(--secondary);
+}
+
+.recent-notes .maturity-badge {
+  display: none;
 }
 
 // 工具栏图标统一尺寸，保证间距视觉一致
@@ -127,12 +160,27 @@ article {
   margin: 0;
   font-size: 0.72rem;
   line-height: 1.35;
+  color: var(--darkgray);
+  opacity: 0.72;
 }
 
-// 列表项：日期与标题并排时（grid 两列）按文本基线对齐
-// 组件默认 align-items: stretch 会让字号较小的日期落在标题基线之下
+.sidebar .garden-link-desc {
+  color: var(--darkgray);
+  opacity: 0.72;
+}
+
+// 列表项：日期作为次级信息，保留整行中文日期，避免窄列把「日」挤到下一行
 .page-listing li.section-li > .section {
   align-items: baseline;
+  grid-template-columns: max-content minmax(0, 1fr) max-content;
+  column-gap: 0.8rem;
+}
+
+.page-listing li.section-li > .section > .meta {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  white-space: nowrap;
 }
 
 // 列表项里的标签：并排排布，去掉列表符号，改为浅绿色
@@ -191,8 +239,217 @@ article .markdown-rendered a.tag-link {
   color: var(--gray);
 }
 
+// 单一归档页已有标题和年份计数，不重复显示英文组件提示
+.center .bases-table-wrapper > .bases-view-meta,
+.center .bases-table-group-property {
+  display: none;
+}
+
 // 移动端：标题栏留在顶部，其余侧边栏内容移到正文下方
 @media all and ($mobile) {
+  // 笔记正文：保留阅读字号，收紧过宽的引文与列表缩进
+  .center h1.article-title {
+    font-size: 1.55rem;
+    line-height: 1.35;
+  }
+
+  .center article p,
+  .center article li,
+  .center article blockquote,
+  .center article td {
+    font-size: 0.96rem;
+    line-height: 1.7;
+  }
+
+  .center article blockquote {
+    margin: 1rem 0;
+    padding-left: 0.8rem;
+  }
+
+  .center article ol,
+  .center article ul {
+    padding-left: 1.35rem;
+  }
+
+  // 小屏幕优先呈现首页内容；全年热力图留在桌面端浏览
+  .center .activity-heatmap {
+    display: none;
+  }
+
+  // 搜索结果保持可扫读，长笔记摘要不再占满整个弹层
+  .search > .search-container .results-container .result-card {
+    padding: 0.75rem;
+  }
+
+  .search > .search-container .results-container .result-card > h3 {
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  .search > .search-container .results-container .result-card > p.card-description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    line-height: 1.5;
+    color: var(--darkgray);
+  }
+
+  // 标签、文件夹等索引页改为单列：标题优先，日期作为次级信息
+  .center .page-listing ul.section-ul {
+    margin: 0.3rem 0 0;
+  }
+
+  .center .page-listing li.section-li {
+    margin: 0;
+    padding: 0.55rem 0;
+  }
+
+  .center .page-listing li.section-li > .section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+
+  .center .page-listing li.section-li > .section > .desc {
+    order: 0;
+    min-width: 0;
+  }
+
+  .center .page-listing li.section-li > .section > .desc h3 {
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  .center .page-listing li.section-li > .section > .meta {
+    order: 1;
+    margin: 0;
+    font-size: 0.76rem;
+  }
+
+  // 标签索引按标签分组，去掉重复的总数说明和大号标签胶囊
+  .center .popover-hint > p:has(+ div > div > h2 > .tag-link) {
+    display: none;
+  }
+
+  .center .popover-hint > div > div:has(> h2 > .tag-link) {
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--lightgray);
+  }
+
+  .center .popover-hint > div > div > h2:has(> .tag-link) {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0 0 0.25rem;
+    font-size: 1.05rem;
+    line-height: 1.4;
+  }
+
+  .center .popover-hint > div > div > h2 > .tag-link {
+    padding: 0;
+    background: none;
+    font-size: inherit;
+  }
+
+  .center .popover-hint > div > div > h2 > .list-count {
+    margin: 0;
+    font-size: 0.7rem;
+  }
+
+  .center .popover-hint > div > div:has(> h2 > .tag-link) .page-listing ul.section-ul {
+    padding-left: 1.15rem;
+  }
+
+  .center .popover-hint > div > div:has(> h2 > .tag-link) .page-listing li.section-li {
+    display: list-item;
+    list-style: disc outside;
+    padding: 0.35rem 0;
+  }
+
+  .center .popover-hint > div > div:has(> h2 > .tag-link) .page-listing li.section-li::marker {
+    color: var(--gray);
+    font-size: 0.75rem;
+  }
+
+  .center
+    .popover-hint
+    > div
+    > div:has(> h2 > .tag-link)
+    .page-listing
+    li.section-li
+    > .section
+    > .meta {
+    display: none;
+  }
+
+  // Bases 的归档表格在手机上改为纵向条目，避免日期被三列挤断
+  .center .bases-table-wrapper,
+  .center .bases-table,
+  .center .bases-table tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .center .bases-table thead {
+    display: none;
+  }
+
+  .center .bases-table tbody tr:not(.bases-table-group-header) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.15rem 0.65rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--lightgray);
+  }
+
+  .center .bases-table tbody tr:not(.bases-table-group-header) > td {
+    display: block;
+    padding: 0;
+    border: 0;
+  }
+
+  .center .bases-table tbody tr:not(.bases-table-group-header) > td:first-child {
+    flex: 0 0 100%;
+    font-size: 0.98rem;
+    line-height: 1.4;
+  }
+
+  .center .bases-table tbody tr:not(.bases-table-group-header) > td:nth-child(2) {
+    color: var(--darkgray);
+    font-size: 0.76rem;
+    opacity: 0.72;
+    white-space: nowrap;
+  }
+
+  .center .bases-table tbody tr:not(.bases-table-group-header) > td:last-child {
+    font-size: 0.76rem;
+  }
+
+  .center .bases-table tbody tr.bases-table-group-header {
+    display: block;
+  }
+
+  .center .bases-table tbody tr.bases-table-group-header > td {
+    display: block;
+    width: 100%;
+  }
+
+  .center .bases-list-group-list .bases-list-item {
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--lightgray);
+  }
+
+  .center .bases-list-group-list .bases-list-item .list-bullet {
+    display: none;
+  }
+
+  .center .bases-list-group-list .bases-list-item-properties {
+    margin: 0;
+  }
+
   .page > #quartz-body {
     grid-template-rows: auto auto auto auto auto auto auto;
     grid-template-areas:
@@ -250,4 +507,3 @@ article .markdown-rendered a.tag-link {
     max-width: 100%;
   }
 }
-

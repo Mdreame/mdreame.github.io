@@ -25,14 +25,6 @@ var css = `
 .garden-link-title {
   font-size: 0.9rem;
   font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-.garden-link-title svg {
-  width: 13px;
-  height: 13px;
-  flex-shrink: 0;
 }
 .garden-link-desc {
   font-size: 0.72rem;
@@ -58,19 +50,7 @@ var GardenLink = (userOpts) => {
         "data-router-ignore": "",
         "data-no-popover": "true",
       },
-      h("span", { class: "garden-link-title" }, [
-        h(
-          "svg",
-          { viewBox: "0 0 24 24", fill: "none", "aria-hidden": "true" },
-          h("path", {
-            d: "M12 3 L7 11 H10 L6 18 H18 L14 11 H17 Z",
-            fill: "currentColor",
-            opacity: "0.75",
-          }),
-          h("path", { d: "M12 18 V21", stroke: "currentColor", "stroke-width": "2" }),
-        ),
-        opts.label,
-      ]),
+      h("span", { class: "garden-link-title" }, opts.label),
       h("span", { class: "garden-link-desc", children: opts.desc }),
     )
 
