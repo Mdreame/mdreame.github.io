@@ -1,0 +1,34 @@
+{
+  "name": "created-content-meta",
+  "version": "1.0.0",
+  "description": "Show the note creation date below its title without changing list sorting",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./components": {
+      "import": "./dist/components/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "quartz": {
+    "name": "created-content-meta",
+    "displayName": "Created Content Meta",
+    "category": "component",
+    "version": "1.0.0",
+    "quartzVersion": ">=5.0.0",
+    "dependencies": [],
+    "defaultOrder": 20,
+    "defaultEnabled": false,
+    "components": {
+      "CreatedContentMeta": {
+        "displayName": "Created Content Meta",
+        "defaultPosition": "beforeBody",
+        "defaultPriority": 20
+      }
+    }
+  }
+}

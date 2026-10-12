@@ -1,6 +1,5 @@
 import { jsx } from "preact/jsx-runtime"
-import { execFileSync } from "node:child_process"
-import path from "node:path"
+import { creationDate } from "../../../shared/creation-date.js"
 
 const h = (type, props, ...children) =>
   jsx(type, { ...props, children: children.length === 1 ? children[0] : children })
@@ -28,31 +27,17 @@ function dayLabel(day) {
   return `${date.getUTCFullYear()}年${date.getUTCMonth() + 1}月${date.getUTCDate()}日`
 }
 
-// The date transformer falls back to filesystem birthtime when a note has no
-// `created` property. On a fresh CI checkout that would become the deploy day.
-function creationDate(file, root = process.cwd()) {
-  if (file.frontmatter?.created) return file.dates?.created ?? file.frontmatter.created
-  if (file.filePath) {
-    try {
-      const relative = path.relative(root, path.resolve(root, file.filePath))
-      const additions = execFileSync(
-        "git",
-        ["log", "--follow", "--diff-filter=A", "--format=%aI", "--", relative],
-        { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] },
-      ).trim()
-      if (additions) return additions.split("\n").at(-1)
-    } catch {
-      // A newly created, uncommitted note can still use its local file date.
-    }
-  }
-  return file.dates?.created
-}
-
 function noteDays(allFiles, start, today) {
   const days = new Map()
   for (const file of allFiles) {
     if (!file.filePath?.endsWith(".md")) continue
-    if (!file.slug || file.slug === "index" || file.slug.startsWith("tags/")) continue
+    if (
+      !file.slug ||
+      file.slug === "index" ||
+      file.slug.endsWith("/index") ||
+      file.slug.startsWith("tags/")
+    )
+      continue
     if (file.frontmatter?.draft === true || file.frontmatter?.unlisted === true) continue
     const note = {
       title: String(file.frontmatter?.title || file.slug),

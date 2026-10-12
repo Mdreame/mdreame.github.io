@@ -66,7 +66,8 @@ function collectNotes(content, opts) {
     if (!d) continue
     const slug = String(d.slug ?? "")
     if (!slug || !d.filePath) continue
-    if (slug === "index" || slug === "404" || slug === opts.slug) continue
+    if (slug === "index" || slug.endsWith("/index") || slug === "404" || slug === opts.slug)
+      continue
     if (slug.startsWith("tags/")) continue
     if (d.frontmatter?.unlisted === true) continue
     if (d.frontmatter?.draft === true) continue

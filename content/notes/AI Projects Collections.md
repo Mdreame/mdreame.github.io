@@ -11,3 +11,5 @@ modified: 2026-10-09T08:01:02.547Z
 - [A Waleable History Of Art](https://artmuseum.artfrompixels.com/)： 以馆藏视角查看著名画作
 - [stillwet](https://stillwet.art/)：AI 创作油画
 - [Seven apps. One craft.](https://getartcraft.com/apps)：AI 开源 Adobe 全家桶
+
+相关笔记：[[AI 最佳实践]]。
