@@ -2,7 +2,6 @@
 publish: true
 created: 2026-10-09T07:51:28.856Z
 modified: 2026-10-09T08:01:02.547Z
-maturity: growing
 ---
 
 #AI
