@@ -61,7 +61,8 @@ for (const file of pages) {
 
 function resolveWiki(sourceFile, target) {
   const name = decodeURIComponent(target.split("#")[0].split("|")[0].trim())
-  if (!name || name === "/tags" || name === "/garden") return null
+  if (!name) return null
+  if (name.startsWith("/")) return resolveRoute(name)
   const clean = name.replace(/^\//, "")
   if (extname(clean) && extname(clean) !== ".md") {
     const asset = resolve(root, clean)
